@@ -356,7 +356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddc7b8324100204e937cc2998f1db60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 1
+  MovementSpeed: 0.07
+  MouseSensitivity: {x: 1, y: 1}
 --- !u!136 &830808267
 CapsuleCollider:
   m_ObjectHideFlags: 0
