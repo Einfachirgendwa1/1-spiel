@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour {
 
         float yaw = Input.GetAxis("Mouse X") * MouseSensitivity.x;
         float pitch = Input.GetAxis("Mouse Y") * MouseSensitivity.y;
-        Vector3 rotation = new(yaw, pitch);
+        Vector3 rotation = new(-pitch, yaw);
 
-        transform.Rotate(rotation, Space.World);
+        transform.Rotate(rotation, Space.Self);
     }
 }
