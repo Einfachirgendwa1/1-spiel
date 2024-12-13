@@ -5,9 +5,15 @@ public class PlayerMovement : MonoBehaviour {
 
     public Vector2 MouseSensitivity = Vector2.one;
 
+    float UnterUns;
+
+    bool AufBoden() => Physics.Raycast(transform.position, Vector3.down, UnterUns);
+
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        UnterUns = GetComponent<Collider>().bounds.extents.y + 0.1F;
     }
 
     void Update() {
@@ -24,5 +30,9 @@ public class PlayerMovement : MonoBehaviour {
 
         transform.Rotate(yaw * Vector3.up, Space.World);
         transform.Rotate(pitch * Vector3.left, Space.Self);
+
+        if (Input.GetKey(KeyCode.Space) && AufBoden()) {
+            //todo
+        }
     }
 }
