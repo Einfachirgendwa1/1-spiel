@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class HandGun : MonoBehaviour
 {
 
     [SerializeField] GunData gunData;
     [SerializeField] Transform muzzle;
+    public TextMeshProUGUI ammoText;
 
     float timeSinceLastShot;
     float fireRate = 1.0f;
@@ -64,6 +66,7 @@ public class HandGun : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
 
         Debug.DrawRay(muzzle.position, transform.forward);
+        ammoText.SetText("Ammo: " + gunData.currentAmmo);
     }
 
     private void OnGunShot()

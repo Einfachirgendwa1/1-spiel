@@ -315,7 +315,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.083e-42, y: 2.524355e-29, z: 0, w: NaN}
+  m_BoundingSphereOverride: {x: 2.1175824e-22, y: 3.0092666e-36, z: 1.8189894e-12, w: 2.350989e-38}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -374,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 0506cdfc787542b4f98e8a6fa9e825f6, type: 2}
   muzzle: {fileID: 823860804}
+  ammoText: {fileID: 708938910}
   muzzleFlash: {fileID: 1297847975}
 --- !u!1 &428637526
 GameObject:
@@ -1787,7 +1788,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -1960,7 +1961,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 0.21226418, g: 0.43971515, b: 1, a: 1}
-      maxColor: {r: 0.4669811, g: 0.6991023, b: 1, a: 1}
+      maxColor: {r: 0.6367924, g: 0.9652393, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
