@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class HandGun : MonoBehaviour
+public class Gun : MonoBehaviour
 {
 
     [SerializeField] GunData gunData;
-    [SerializeField] Transform muzzle;
+    [SerializeField] Transform cam;
 
     public TextMeshProUGUI ammoText;
 
@@ -53,7 +53,7 @@ public class HandGun : MonoBehaviour
         {
             if (CanShoot())
             {
-                if (Physics.Raycast(muzzle.position, transform.forward, out RaycastHit hitInfo, gunData.maxDistance))
+                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, gunData.maxDistance))
                 {
                     IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
                     damageable?.TakeDamage(gunData.damage);
@@ -74,7 +74,6 @@ public class HandGun : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
 
-        Debug.DrawRay(muzzle.position, transform.forward);
         ammoText.SetText("Ammo: " + gunData.currentAmmo);
     }
 
