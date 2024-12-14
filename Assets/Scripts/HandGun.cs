@@ -11,6 +11,8 @@ public class HandGun : MonoBehaviour
     float timeSinceLastShot;
     float fireRate = 1.0f;
 
+    public ParticleSystem muzzleFlash;
+
     void Start()
     {
         PlayerShoot.shootInput += Shoot;
@@ -46,6 +48,8 @@ public class HandGun : MonoBehaviour
                 {
                     Debug.Log(hitInfo.transform.name);
                 }
+
+                muzzleFlash.Play();
 
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
