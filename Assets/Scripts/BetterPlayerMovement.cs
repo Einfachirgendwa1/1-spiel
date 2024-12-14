@@ -27,16 +27,16 @@ public class PlayerMovement : MonoBehaviour {
         playerRb = GetComponent<Rigidbody>();
     }
 
-    private void Update() {
+    private void FixedUpdate() {
+        grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
+
         // handle drag
         if (grounded) {
             playerRb.linearDamping = groundDrag;
         } else {
             playerRb.linearDamping = 0;
         }
-    }
 
-    private void FixedUpdate() {
         Vector3 forward = transform.rotation * Vector3.forward;
         Vector3 right = transform.rotation * Vector3.right;
 
@@ -52,23 +52,11 @@ public class PlayerMovement : MonoBehaviour {
 
         playerRb.AddForce(force, ForceMode.Force);
 
+
+
         if (Input.GetKey(jumpKey) && grounded) {
             playerRb.AddForce(transform.up * jumpForce * 10, ForceMode.Impulse);
             Debug.Log("jump");
-        }
-    }
-
-    bool CollisionWithGround(Collision collision) => (whatIsGround & (1 << collision.gameObject.layer)) != 0;
-
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Ground")) {
-            grounded = true;
-        }
-    }
-
-    void OnCollisionExit(Collision collision) {
-        if (collision.gameObject.CompareTag("Ground")) {
-            grounded = false;
         }
     }
 }
