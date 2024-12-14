@@ -18,5 +18,5 @@ MonoBehaviour:
   currentAmmo: 8
   magSize: 15
   fireRate: 240
-  reloadTime: 3
+  reloadTime: 2
   reloading: 0
