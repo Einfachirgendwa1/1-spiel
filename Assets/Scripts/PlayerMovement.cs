@@ -57,7 +57,6 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKey(jumpKey) && grounded) {
             playerRb.AddForce(transform.up * jumpForce * 10, ForceMode.Impulse);
-            Debug.Log("jump");
         }
     }
 }
