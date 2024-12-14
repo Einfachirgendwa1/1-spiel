@@ -47,6 +47,13 @@ public class PlayerMovement : MonoBehaviour {
 
         playerRb.AddRelativeForce(moveDirection.normalized * currentMoveSpeed, ForceMode.Force);
 
+        // Bewegungsgeschwindigkeit auf der XZ-Achse limitieren
+        Vector2 planeMovement = new(playerRb.linearVelocity.x, playerRb.linearVelocity.z);
+        if (planeMovement.magnitude > moveSpeed) {
+            // Wir sind zu schnell, eigentliche Geschwindigkeit bilden und anwenden
+            Vector2 limited = planeMovement.normalized * moveSpeed;
+            playerRb.linearVelocity = new Vector3(limited.x, playerRb.linearVelocity.y, limited.y);
+        }
 
         if (Input.GetKey(jumpKey) && grounded) {
             playerRb.AddForce(transform.up * jumpForce * 10, ForceMode.Impulse);
