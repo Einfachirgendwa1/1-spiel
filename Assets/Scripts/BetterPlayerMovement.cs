@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+
         grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
 
         // handle drag
@@ -37,21 +38,14 @@ public class PlayerMovement : MonoBehaviour {
             playerRb.linearDamping = 0;
         }
 
-        Vector3 forward = transform.rotation * Vector3.forward;
-        Vector3 right = transform.rotation * Vector3.right;
+        Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
-        // calculate movement direction
-        Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
-
-        // calculate force
-        Vector3 force = moveSpeed * 500f * moveDirection.normalized;
-        // in air, apply air multiplier
+        float currentMoveSpeed = moveSpeed * 500f;
         if (!grounded) {
-            force *= airMultiplier;
+            currentMoveSpeed *= airMultiplier;
         }
 
-        playerRb.AddForce(force, ForceMode.Force);
-
+        playerRb.AddRelativeForce(moveDirection.normalized * currentMoveSpeed, ForceMode.Force);
 
 
         if (Input.GetKey(jumpKey) && grounded) {
