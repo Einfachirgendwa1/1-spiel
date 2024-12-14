@@ -28,23 +28,27 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-
+        // Raycast nach unten um zu testen ob wir auf etwas stehen
+        // Zum Beispiel auf Männer
         grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
 
-        // handle drag
+        // drag handhaben (ich habe keine Ahnung was drag ist)
         if (grounded) {
             playerRb.linearDamping = groundDrag;
         } else {
             playerRb.linearDamping = 0;
         }
 
+        // Richtung in die wir uns bewegen wollen
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
-        float currentMoveSpeed = moveSpeed * 500f;
+        // Bewegungsgeschwindigkeit berechnen
+        float currentMoveSpeed = moveSpeed * 500;
         if (!grounded) {
             currentMoveSpeed *= airMultiplier;
         }
 
+        // Kraft anwenden
         playerRb.AddRelativeForce(moveDirection.normalized * currentMoveSpeed, ForceMode.Force);
 
         // Bewegungsgeschwindigkeit auf der XZ-Achse limitieren
@@ -55,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
             playerRb.linearVelocity = new Vector3(limited.x, playerRb.linearVelocity.y, limited.y);
         }
 
+        // Springen wenn wir springen wollen
         if (Input.GetKey(jumpKey) && grounded) {
             playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
