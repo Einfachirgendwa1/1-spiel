@@ -20,19 +20,19 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask whatIsGround;
 
 
-    Rigidbody rb;
+    Rigidbody playerRb;
     bool grounded;
 
     private void Start() {
-        rb = GetComponent<Rigidbody>();
+        playerRb = GetComponent<Rigidbody>();
     }
 
     private void Update() {
         // handle drag
         if (grounded) {
-            rb.linearDamping = groundDrag;
+            playerRb.linearDamping = groundDrag;
         } else {
-            rb.linearDamping = 0;
+            playerRb.linearDamping = 0;
         }
     }
 
@@ -44,29 +44,30 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
 
         // calculate force
-        Vector3 force = moveSpeed * 10f * moveDirection.normalized;
+        Vector3 force = moveSpeed * 500f * moveDirection.normalized;
         // in air, apply air multiplier
         if (!grounded) {
             force *= airMultiplier;
         }
 
-        rb.AddForce(force, ForceMode.Force);
+        playerRb.AddForce(force, ForceMode.Force);
 
         if (Input.GetKey(jumpKey) && grounded) {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            playerRb.AddForce(transform.up * jumpForce * 10, ForceMode.Impulse);
+            Debug.Log("jump");
         }
     }
 
     bool CollisionWithGround(Collision collision) => (whatIsGround & (1 << collision.gameObject.layer)) != 0;
 
     void OnCollisionEnter(Collision collision) {
-        if (CollisionWithGround(collision)) {
+        if (collision.gameObject.CompareTag("Ground")) {
             grounded = true;
         }
     }
 
     void OnCollisionExit(Collision collision) {
-        if (CollisionWithGround(collision)) {
+        if (collision.gameObject.CompareTag("Ground")) {
             grounded = false;
         }
     }

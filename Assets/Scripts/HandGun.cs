@@ -8,13 +8,14 @@ public class HandGun : MonoBehaviour
     [SerializeField] Transform muzzle;
 
     float timeSinceLastShot;
+    float fireRate = 1.0f;
 
     void Start()
     {
         PlayerShoot.shootInput += Shoot;
     }
 
-    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > fireRate / (gunData.fireRate / 60f);
     private void Shoot()
     {
         if (gunData.currentAmmo > 0)

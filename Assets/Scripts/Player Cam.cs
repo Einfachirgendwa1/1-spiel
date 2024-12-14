@@ -24,6 +24,7 @@ public class PlayerCam : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
+        // ist yRotation + mouseX richtig oder is da was vertauscht bzw. falsch benannt?
         yRotation += mouseX;
 
         xRotation -= mouseY;
