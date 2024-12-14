@@ -12,6 +12,8 @@ public class Gun : MonoBehaviour
     public TextMeshProUGUI ammoText;
 
     AudioSource gunAudio;
+    Animator pistolAnimator;
+
     public AudioClip shootSound;
     public AudioClip reloadSound;
 
@@ -26,6 +28,7 @@ public class Gun : MonoBehaviour
         PlayerShoot.reloadInput += StartReload;
 
         gunAudio = GetComponent<AudioSource>();
+        pistolAnimator = GetComponent<Animator>();
     }
 
     public void StartReload()
@@ -33,6 +36,7 @@ public class Gun : MonoBehaviour
         if (!gunData.reloading)
         {
             StartCoroutine(Reload());
+            pistolAnimator.SetTrigger("Reload");
         }
     }
 
@@ -61,6 +65,7 @@ public class Gun : MonoBehaviour
 
                 muzzleFlash.Play();
                 gunAudio.PlayOneShot(shootSound, 1.0f);
+                pistolAnimator.SetTrigger("Shoot");
 
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
