@@ -7,9 +7,13 @@ public class PlayerCam : MonoBehaviour {
     float xRotation;
     float yRotation;
 
+    Transform player;
+
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        player = transform.parent.parent;
     }
 
     void Update() {
@@ -24,6 +28,6 @@ public class PlayerCam : MonoBehaviour {
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         // rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        player.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
 }
