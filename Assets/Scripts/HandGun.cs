@@ -8,7 +8,12 @@ public class HandGun : MonoBehaviour
 
     [SerializeField] GunData gunData;
     [SerializeField] Transform muzzle;
+
     public TextMeshProUGUI ammoText;
+
+    AudioSource gunAudio;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
 
     float timeSinceLastShot;
     float fireRate = 1.0f;
@@ -19,6 +24,8 @@ public class HandGun : MonoBehaviour
     {
         PlayerShoot.shootInput += Shoot;
         PlayerShoot.reloadInput += StartReload;
+
+        gunAudio = GetComponent<AudioSource>();
     }
 
     public void StartReload()
@@ -52,6 +59,7 @@ public class HandGun : MonoBehaviour
                 }
 
                 muzzleFlash.Play();
+                gunAudio.PlayOneShot(shootSound, 1.0f);
 
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
