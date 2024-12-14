@@ -7061,6 +7061,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: 46df32d95ff78b343a4d9fa4f56043f9, type: 3}
+      propertyPath: m_Name
+      value: Barrel
+      objectReference: {fileID: 0}
     - target: {fileID: -7146521406498821007, guid: 46df32d95ff78b343a4d9fa4f56043f9, type: 3}
       propertyPath: m_Name
       value: Slide
@@ -7124,6 +7128,10 @@ PrefabInstance:
     - target: {fileID: -678588488315902003, guid: 46df32d95ff78b343a4d9fa4f56043f9, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: 46df32d95ff78b343a4d9fa4f56043f9, type: 3}
+      propertyPath: m_Name
+      value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 46df32d95ff78b343a4d9fa4f56043f9, type: 3}
       propertyPath: m_Name
