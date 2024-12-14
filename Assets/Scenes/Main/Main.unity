@@ -595,11 +595,9 @@ MonoBehaviour:
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
-  playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1025
-  orientation: {fileID: 509947553}
 --- !u!114 &830808273
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
@@ -17,34 +16,18 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
-    [Header("Ground Check")]
-    public float playerHeight;
+    [Header("Collision")]
     public LayerMask whatIsGround;
-    bool grounded;
 
-    public Transform orientation;
-
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
 
     Rigidbody rb;
+    bool grounded;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-
-        readyToJump = true;
     }
 
     private void Update() {
-        // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        MyInput();
-        SpeedControl();
-
         // handle drag
         if (grounded) {
             rb.linearDamping = groundDrag;
@@ -54,26 +37,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        MovePlayer();
-    }
+        Vector3 forward = transform.rotation * Vector3.forward;
+        Vector3 right = transform.rotation * Vector3.right;
 
-    private void MyInput() {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded) {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
-    }
-
-    private void MovePlayer() {
         // calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
+
         // calculate force
         Vector3 force = moveSpeed * 10f * moveDirection.normalized;
         // in air, apply air multiplier
@@ -82,22 +51,23 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         rb.AddForce(force, ForceMode.Force);
-    }
 
-    private void SpeedControl() {
-        Vector3 flatVel = new(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-        // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed) {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        if (Input.GetKey(jumpKey) && grounded) {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-    private void Jump() {
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    bool CollisionWithGround(Collision collision) => (whatIsGround & (1 << collision.gameObject.layer)) != 0;
+
+    void OnCollisionEnter(Collision collision) {
+        if (CollisionWithGround(collision)) {
+            grounded = true;
+        }
     }
-    private void ResetJump() {
-        readyToJump = true;
+
+    void OnCollisionExit(Collision collision) {
+        if (CollisionWithGround(collision)) {
+            grounded = false;
+        }
     }
 }
