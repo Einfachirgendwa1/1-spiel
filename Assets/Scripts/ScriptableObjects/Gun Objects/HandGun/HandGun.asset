@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Zappomat 3000
   damage: 15
   maxDistance: 200
-  currentAmmo: 15
+  currentAmmo: 999996381
   magSize: 15
-  fireRate: 240
+  fireRate: 1e+19
   reloadTime: 3
   reloading: 0

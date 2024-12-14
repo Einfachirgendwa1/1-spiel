@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class HandGun : MonoBehaviour
@@ -13,8 +14,27 @@ public class HandGun : MonoBehaviour
     void Start()
     {
         PlayerShoot.shootInput += Shoot;
+        PlayerShoot.reloadInput += StartReload;
     }
 
+    public void StartReload()
+    {
+        if (!gunData.reloading)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+    private IEnumerator Reload()
+    {
+        gunData.reloading = true;
+
+        yield return new WaitForSeconds(gunData.reloadTime);
+
+        gunData.currentAmmo = gunData.magSize;
+
+        gunData.reloading = false;
+    }
     private bool CanShoot() => !gunData.reloading && timeSinceLastShot > fireRate / (gunData.fireRate / 60f);
     private void Shoot()
     {
