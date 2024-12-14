@@ -5362,7 +5362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &397381184
 Transform:
   m_ObjectHideFlags: 0
@@ -6598,7 +6598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1135699402
 Transform:
   m_ObjectHideFlags: 0
@@ -6633,7 +6633,7 @@ MonoBehaviour:
   ammoText: {fileID: 708938910}
   shootSound: {fileID: 0}
   reloadSound: {fileID: 0}
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 207132477}
 --- !u!1 &1191377455
 GameObject:
   m_ObjectHideFlags: 0
