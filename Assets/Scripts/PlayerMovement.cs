@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if (Input.GetKey(jumpKey) && grounded) {
-            playerRb.AddForce(transform.up * jumpForce * 10, ForceMode.Impulse);
+            playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }
