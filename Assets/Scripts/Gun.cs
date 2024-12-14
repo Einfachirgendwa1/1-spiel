@@ -31,9 +31,11 @@ public class Gun : MonoBehaviour
         pistolAnimator = GetComponent<Animator>();
     }
 
+    private void OnDisable() => gunData.reloading = false;
+
     public void StartReload()
     {
-        if (!gunData.reloading)
+        if (!gunData.reloading && this.gameObject.activeSelf)
         {
             StartCoroutine(Reload());
             pistolAnimator.SetTrigger("Reload");
