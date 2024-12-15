@@ -36,8 +36,6 @@ public class PlayerMovement : MonoBehaviour {
         // Je weniger, desto träger.
         float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
 
-        print(changeFactor);
-
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 veloChange = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
         veloChange.y = playerRb.linearVelocity.y;
