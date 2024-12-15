@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour {
     public float movePercentageGround;
     public float movePercentageAir;
 
-    [HideInInspector] public float walkSpeed;
-    [HideInInspector] public float sprintSpeed;
-
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
@@ -19,7 +16,6 @@ public class PlayerMovement : MonoBehaviour {
 
 
     Rigidbody playerRb;
-    bool grounded;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -28,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate() {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
-        grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
+        bool grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
@@ -38,7 +34,9 @@ public class PlayerMovement : MonoBehaviour {
         // Wir versuchen nun also unsere aktuelle velocity an die moveDirection anzunähern.
         // Jedoch hängt die Trägheit des Spielers davon ab, ob wir in der Luft oder auf dem Boden sind.
         // Je weniger, desto träger.
-        float changeFactor = 100 / (grounded ? movePercentageGround : movePercentageAir);
+        float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
+
+        print(changeFactor);
 
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 veloChange = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
