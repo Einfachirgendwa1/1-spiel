@@ -16,15 +16,17 @@ public class PlayerMovement : MonoBehaviour {
 
 
     Rigidbody playerRb;
+    float raycastLength;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
+        raycastLength = GetComponent<CapsuleCollider>().height / 2 + 0.1f;
     }
 
     private void FixedUpdate() {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
-        bool grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
+        bool grounded = Physics.Raycast(transform.position, Vector3.down, raycastLength, whatIsGround);
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
