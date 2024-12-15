@@ -37,11 +37,10 @@ public class PlayerMovement : MonoBehaviour {
         float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
 
         // Jetzt berechnen wir die tatsächliche velocity
-        Vector3 veloChange = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
-        veloChange.y = playerRb.linearVelocity.y;
+        Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
+        newVelocity.y = playerRb.linearVelocity.y;
 
-        // ... und setzen sie
-        playerRb.linearVelocity = veloChange;
+        playerRb.linearVelocity = newVelocity;
 
         // Springen wenn wir springen wollen
         if (Input.GetKey(jumpKey) && grounded) {
