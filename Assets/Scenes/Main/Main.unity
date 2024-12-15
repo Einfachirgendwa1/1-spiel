@@ -6240,10 +6240,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26f25a7d339c13459d8e74d24cda4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 230
+  uncrouchedMoveSpeed: 10
+  jumpForce: 400
   movePercentageGround: 100
   movePercentageAir: 50
+  uncrouchedScale: {x: 1, y: 1, z: 1}
   crouchedScale: {x: 1, y: 0.5, z: 1}
   crouchedMoveSpeed: 3
   jumpKey: 32
