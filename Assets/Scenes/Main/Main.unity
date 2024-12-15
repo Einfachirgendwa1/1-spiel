@@ -315,7 +315,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.0098084e-28, y: 1.928607e-39, z: 1.886e-42, w: 3172.3918}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: 1.01e-43}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -412,7 +412,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.134e-42, y: 2.524355e-29, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.8183428e-38, y: 1.9190696e-35, z: 6.776265e-19, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -5398,7 +5398,7 @@ MonoBehaviour:
   cam: {fileID: 963194228}
   ammoText: {fileID: 708938910}
   shootSound: {fileID: 8300000, guid: 08f78eba48bb21c44ac5a74ca84efc83, type: 3}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: 6a32a0d49cd240b4cb9934adf37a49a5, type: 3}
   muzzleFlash: {fileID: 1297847975}
 --- !u!82 &397381186
 AudioSource:
@@ -6639,7 +6639,7 @@ MonoBehaviour:
   cam: {fileID: 963194228}
   ammoText: {fileID: 708938910}
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 207132477}
 --- !u!82 &1135699404
 AudioSource:

@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(Reload());
             pistolAnimator.SetTrigger("Reload");
+            gunAudio.PlayOneShot(reloadSound, 1);
         }
     }
 
