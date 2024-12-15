@@ -4,11 +4,9 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Movement")]
     public float moveSpeed;
 
-    public float groundDrag;
-
     public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
+    public float movePercentageGround;
+    public float movePercentageAir;
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
@@ -28,36 +26,26 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        // Raycast nach unten um zu testen ob wir auf etwas stehen
-        // Zum Beispiel auf Männer
+        // Raycast nach unten um zu testen ob wir auf etwas stehen.
+        // Zum Beispiel auf Männer.
         grounded = Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f, whatIsGround);
 
-        // drag handhaben (ich habe keine Ahnung was drag ist)
-        if (grounded) {
-            playerRb.linearDamping = groundDrag;
-        } else {
-            playerRb.linearDamping = 0;
-        }
-
-        // Richtung in die wir uns bewegen wollen
+        // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
+        // Richtung in die wir uns *wirklich* bewegen wollen.
+        moveDirection = (transform.rotation * moveDirection).normalized;
 
-        // Bewegungsgeschwindigkeit berechnen
-        float currentMoveSpeed = moveSpeed * 500;
-        if (!grounded) {
-            currentMoveSpeed *= airMultiplier;
-        }
+        // Wir versuchen nun also unsere aktuelle velocity an die moveDirection anzunähern.
+        // Jedoch hängt die Trägheit des Spielers davon ab, ob wir in der Luft oder auf dem Boden sind.
+        // Je weniger, desto träger.
+        float changeFactor = 100 / (grounded ? movePercentageGround : movePercentageAir);
 
-        // Kraft anwenden
-        playerRb.AddRelativeForce(moveDirection.normalized * currentMoveSpeed, ForceMode.Force);
+        // Jetzt berechnen wir die tatsächliche velocity
+        Vector3 veloChange = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
+        veloChange.y = playerRb.linearVelocity.y;
 
-        // Bewegungsgeschwindigkeit auf der XZ-Achse limitieren
-        Vector2 planeMovement = new(playerRb.linearVelocity.x, playerRb.linearVelocity.z);
-        if (planeMovement.magnitude > moveSpeed) {
-            // Wir sind zu schnell, eigentliche Geschwindigkeit bilden und anwenden
-            Vector2 limited = planeMovement.normalized * moveSpeed;
-            playerRb.linearVelocity = new Vector3(limited.x, playerRb.linearVelocity.y, limited.y);
-        }
+        // ... und setzen sie
+        playerRb.linearVelocity = veloChange;
 
         // Springen wenn wir springen wollen
         if (Input.GetKey(jumpKey) && grounded) {
