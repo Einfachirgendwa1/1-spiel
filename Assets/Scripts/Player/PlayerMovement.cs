@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody playerRb;
     CapsuleCollider capsuleCollider;
     float currentSpeed;
+    bool grounded = false;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -52,12 +53,20 @@ public class PlayerMovement : MonoBehaviour {
             position.y += capsuleCollider.height / 4;
             transform.position = position;
         }
+
+        // Springen wenn wir springen wollen
+        if (Input.GetKeyDown(jumpKey) && grounded) {
+            playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            print("springen");
+        }
     }
+
+    float RaycastLength() => capsuleCollider.height * transform.localScale.y / 2 + 0.05F;
 
     private void FixedUpdate() {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
-        bool grounded = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.height * transform.localScale.y, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, RaycastLength(), whatIsGround);
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
@@ -74,10 +83,5 @@ public class PlayerMovement : MonoBehaviour {
         newVelocity.y = playerRb.linearVelocity.y;
 
         playerRb.linearVelocity = newVelocity;
-
-        // Springen wenn wir springen wollen
-        if (Input.GetKey(jumpKey) && grounded) {
-            playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
     }
 }
