@@ -6241,10 +6241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  groundDrag: 5
   jumpForce: 230
-  jumpCooldown: 0.25
-  airMultiplier: 0.2
+  movePercentageGround: 100
+  movePercentageAir: 50
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
