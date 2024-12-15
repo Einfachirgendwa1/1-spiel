@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour {
     [SerializeField] private Transform[] weapons;
-    [SerializeField] private KeyCode[] keys = { KeyCode.Alpha1, KeyCode.Alpha2 };
+    [SerializeField] private KeyCode[] keys;
     private int selectedWeapon = 0;
 
     private void Select(int newWeaponIndex) {
