@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour {
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+
+        currentSpeed = uncrouchedMoveSpeed;
     }
 
     private void Update() {
@@ -57,7 +59,6 @@ public class PlayerMovement : MonoBehaviour {
         // Springen wenn wir springen wollen
         if (Input.GetKeyDown(jumpKey) && grounded) {
             playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            print("springen");
         }
     }
 
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
+
         // Richtung in die wir uns *wirklich* bewegen wollen.
         moveDirection = (transform.rotation * moveDirection).normalized;
 
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour {
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
         newVelocity.y = playerRb.linearVelocity.y;
+
 
         playerRb.linearVelocity = newVelocity;
     }
