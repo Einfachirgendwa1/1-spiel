@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class WeaponSwitching : MonoBehaviour {
+public class WeaponSwitching : MonoBehaviour
+{
 
     [SerializeField] private Transform[] weapons;
 
@@ -11,18 +12,22 @@ public class WeaponSwitching : MonoBehaviour {
     private int selectedWeapon;
     private float timeSinceLastSwitch;
 
-    private void SetWeapons() {
+    private void SetWeapons()
+    {
         weapons = new Transform[transform.childCount];
 
-        for (int i = 0; i < transform.childCount; i++) {
+        for (int i = 0; i < transform.childCount; i++)
+        {
             weapons[i] = transform.GetChild(i);
         }
 
-        keys ??= new KeyCode[weapons.Length];
+        //keys ??= new KeyCode[weapons.Length];
     }
 
-    private void Select(int weaponIndex) {
-        for (int i = 0; i < weapons.Length; i++) {
+    private void Select(int weaponIndex)
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
             weapons[i].gameObject.SetActive(i == weaponIndex);
         }
 
@@ -31,11 +36,13 @@ public class WeaponSwitching : MonoBehaviour {
         OnWeaponSelected();
     }
 
-    private void OnWeaponSelected() {
+    private void OnWeaponSelected()
+    {
         print("Selected new Weapon");
     }
 
-    void Start() {
+    void Start()
+    {
         SetWeapons();
         Select(selectedWeapon);
 
@@ -44,11 +51,14 @@ public class WeaponSwitching : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         int previousSelectedWeapon = selectedWeapon;
 
-        for (int i = 0; i < keys.Length; i++) {
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
+        for (int i = 0; i < keys.Length; i++)
+        {
+            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime)
+            {
                 selectedWeapon = i;
             }
 

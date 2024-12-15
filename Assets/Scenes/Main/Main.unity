@@ -6244,8 +6244,6 @@ MonoBehaviour:
   jumpForce: 230
   movePercentageGround: 100
   movePercentageAir: 50
-  walkSpeed: 0
-  sprintSpeed: 0
   jumpKey: 32
   whatIsGround:
     serializedVersion: 2
@@ -12816,7 +12814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons: []
   keys: 3100000032000000
-  switchTime: 0.5
+  switchTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
