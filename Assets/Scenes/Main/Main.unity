@@ -421,37 +421,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!1 &146567312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 146567313}
-  m_Layer: 0
-  m_Name: Obj
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &146567313
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146567312}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1263594240}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207132474
 GameObject:
   m_ObjectHideFlags: 0
@@ -6240,10 +6209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26f25a7d339c13459d8e74d24cda4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  uncrouchedMoveSpeed: 10
   jumpForce: 230
   movePercentageGround: 100
-  movePercentageAir: 50
+  movePercentageAir: 20
+  uncrouchedScale: {x: 1, y: 1, z: 1}
   crouchedScale: {x: 1, y: 0.5, z: 1}
   crouchedMoveSpeed: 3
   jumpKey: 32
@@ -7158,6 +7128,7 @@ GameObject:
   - component: {fileID: 1263594245}
   - component: {fileID: 1263594244}
   - component: {fileID: 1263594247}
+  - component: {fileID: 1263594248}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -7177,8 +7148,7 @@ Transform:
   m_LocalPosition: {x: 7.47, y: 1.0779998, z: 8.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 146567313}
+  m_Children: []
   m_Father: {fileID: 720136537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1263594242
@@ -7395,6 +7365,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &1263594248
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263594239}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1297847972
 GameObject:
   m_ObjectHideFlags: 0
