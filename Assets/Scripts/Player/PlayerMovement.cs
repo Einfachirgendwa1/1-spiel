@@ -8,25 +8,40 @@ public class PlayerMovement : MonoBehaviour {
     public float movePercentageGround;
     public float movePercentageAir;
 
+    [Header("Crouching")]
+    public Vector3 crouchedScale;
+    public float crouchedMoveSpeed;
+
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode crouchKey = KeyCode.C;
 
     [Header("Collision")]
     public LayerMask whatIsGround;
 
 
     Rigidbody playerRb;
-    float raycastLength;
+    CapsuleCollider capsuleCollider;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
-        raycastLength = GetComponent<CapsuleCollider>().height / 2 + 0.1f;
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
+
+    float RaycastLength() => capsuleCollider.height / 2 + 0.1F;
 
     private void FixedUpdate() {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
-        bool grounded = Physics.Raycast(transform.position, Vector3.down, raycastLength, whatIsGround);
+        bool grounded = Physics.Raycast(transform.position, Vector3.down, RaycastLength(), whatIsGround);
+        bool crouching = Input.GetKey(crouchKey);
+
+        if (crouching) {
+            transform.localScale = crouchedScale;
+        }
+
+        transform.localScale = crouching ? crouchedScale : new(1, 1, 1);
+        float current_speed = crouching ? crouchedMoveSpeed : moveSpeed;
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
@@ -39,7 +54,7 @@ public class PlayerMovement : MonoBehaviour {
         float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
 
         // Jetzt berechnen wir die tatsächliche velocity
-        Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * moveSpeed;
+        Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * current_speed;
         newVelocity.y = playerRb.linearVelocity.y;
 
         playerRb.linearVelocity = newVelocity;
@@ -48,5 +63,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(jumpKey) && grounded) {
             playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
+
     }
 }

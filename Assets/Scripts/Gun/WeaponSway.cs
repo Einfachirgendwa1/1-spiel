@@ -1,15 +1,12 @@
-using System;
 using UnityEngine;
 
-public class WeaponSway : MonoBehaviour
-{
+public class WeaponSway : MonoBehaviour {
 
     [Header("Sway Settings")]
     [SerializeField] private float smooth;
     [SerializeField] private float multiplier;
 
-    private void Update()
-    {
+    private void Update() {
         // get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
         float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
