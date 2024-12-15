@@ -34,11 +34,8 @@ public class PlayerMovement : MonoBehaviour {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
         bool grounded = Physics.Raycast(transform.position, Vector3.down, RaycastLength(), whatIsGround);
+        // Wenn wir crouchen wollen, crouchen
         bool crouching = Input.GetKey(crouchKey);
-
-        if (crouching) {
-            transform.localScale = crouchedScale;
-        }
 
         transform.localScale = crouching ? crouchedScale : new(1, 1, 1);
         float current_speed = crouching ? crouchedMoveSpeed : moveSpeed;

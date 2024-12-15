@@ -6245,7 +6245,7 @@ MonoBehaviour:
   movePercentageGround: 100
   movePercentageAir: 50
   crouchedScale: {x: 1, y: 0.5, z: 1}
-  crouchedMoveSpeed: 0
+  crouchedMoveSpeed: 3
   jumpKey: 32
   crouchKey: 99
   whatIsGround:
