@@ -2,8 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class GunScriptV2 : MonoBehaviour
-{
+public class GunScriptV2 : MonoBehaviour {
     //basic gun properties
     public int magazinSize = 15;
     public int ammunition = 15;
@@ -21,8 +20,7 @@ public class GunScriptV2 : MonoBehaviour
     public TextMeshProUGUI ammunitionText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    void Start() {
         gunAudio = GetComponent<AudioSource>();
         //pistolAnimator = GetComponent<Animator>();
 
@@ -30,11 +28,10 @@ public class GunScriptV2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        ammunitionText.SetText("Ammo: " + ammunition);
         //shooting
-        if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0)
-        {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
             Shoot();
             ammunition -= 1;
             ammunitionText.SetText("Ammo: " + ammunition);
@@ -42,20 +39,17 @@ public class GunScriptV2 : MonoBehaviour
         }
 
         //reloading
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-           StartCoroutine(Reload()); 
+        if (Input.GetKeyDown(KeyCode.R)) {
+            StartCoroutine(Reload());
         }
     }
 
-    void Shoot()
-    {
+    void Shoot() {
         muzzleFlash.Play();
         gunAudio.PlayOneShot(shootSound, 1.0f);
     }
 
-    IEnumerator Reload()
-    {
+    IEnumerator Reload() {
         gunAudio.PlayOneShot(reloadSound, 1.0f);
         yield return new WaitForSeconds(reloadTime);
         ammunition = magazinSize;
