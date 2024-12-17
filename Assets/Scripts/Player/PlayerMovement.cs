@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    float RaycastLength() => capsuleCollider.height * transform.localScale.y / 2 + 0.05F;
+    float RaycastLength() => capsuleCollider.height * transform.localScale.y / 2 + 0.3F;
 
     private void FixedUpdate() {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
-        newVelocity.y = playerRb.linearVelocity.y;
+        newVelocity.y = grounded ? 0 : playerRb.linearVelocity.y;
 
 
         playerRb.linearVelocity = newVelocity;

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -59,7 +60,7 @@ public class EnemyBehaviour : MonoBehaviour {
         agent.SetDestination(player.position);
     }
 
-    private void AttackPlayer() {
+    private IEnumerator AttackPlayer() {
         // enemy stops
         agent.SetDestination(transform.position);
 
@@ -70,6 +71,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+            yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
 
