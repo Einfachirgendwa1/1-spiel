@@ -13208,6 +13208,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1333199829}
+    - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: sightRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4130683519831023909, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_Name
       value: TestEnemy
