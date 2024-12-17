@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour {
         // Raycast nach unten um zu testen ob wir auf etwas stehen.
         // Zum Beispiel auf Männer.
         grounded = Physics.Raycast(transform.position, Vector3.down, RaycastLength(), whatIsGround);
+        print($"Grounded check hat {grounded} ergeben.");
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
