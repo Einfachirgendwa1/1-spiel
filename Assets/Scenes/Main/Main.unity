@@ -13920,6 +13920,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
+    - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
+    - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: audioSource2
       value: 
       objectReference: {fileID: 0}
