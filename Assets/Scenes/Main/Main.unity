@@ -6860,7 +6860,7 @@ GameObject:
   - component: {fileID: 1098194749}
   - component: {fileID: 1098194748}
   - component: {fileID: 1098194747}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
