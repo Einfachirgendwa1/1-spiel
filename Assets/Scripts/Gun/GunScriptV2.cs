@@ -34,7 +34,8 @@ public class GunScriptV2 : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        ammunitionText.SetText("Ammo: " + ammunition);
+
         //shooting
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
             Shoot(); 
