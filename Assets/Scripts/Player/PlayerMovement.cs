@@ -89,8 +89,10 @@ public class PlayerMovement : MonoBehaviour {
 
     bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
 
+    bool IsGround(Collision collision) => InLayerMask(collision.gameObject.layer, whatIsGround) && collision.GetContact(0).point.y < transform.position.y;
+
     private void OnCollisionEnter(Collision collision) {
-        if (InLayerMask(collision.gameObject.layer, whatIsGround)) {
+        if (IsGround(collision)) {
             groundCollisions++;
         }
     }
