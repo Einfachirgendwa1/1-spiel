@@ -2,16 +2,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DebugPrinterBehaviour : MonoBehaviour {
+public class Printer : MonoBehaviour {
+    [HideInInspector] public static Printer behaviour;
     [HideInInspector] public Dictionary<int, string> clientValueMap = new();
 
-    int count = 0;
+    static int count = 0;
     TextMeshProUGUI textMeshPro;
 
-    public DebugPrinter NewPrinter() => new(count++, this);
+    public static DebugPrinter NewPrinter() => new(count++, behaviour);
 
     private void Start() {
         textMeshPro = GetComponent<TextMeshProUGUI>();
+        behaviour = this;
     }
 
     private void Update() {
@@ -24,10 +26,10 @@ public class DebugPrinterBehaviour : MonoBehaviour {
 }
 
 public class DebugPrinter {
-    readonly DebugPrinterBehaviour behaviour;
+    readonly Printer behaviour;
     readonly int index;
 
-    public DebugPrinter(int index, DebugPrinterBehaviour behaviour) {
+    public DebugPrinter(int index, Printer behaviour) {
         this.index = index;
         this.behaviour = behaviour;
     }
