@@ -67,6 +67,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
         if (!alreadyAttacked) {
             //Attack Code
+            yield return new WaitForSeconds(3);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
