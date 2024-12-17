@@ -33,9 +33,7 @@ public class GunScriptV2 : MonoBehaviour {
         //shooting
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
             Shoot();
-            ammunition -= 1;
-            ammunitionText.SetText("Ammo: " + ammunition);
-            Debug.Log("ShootV2");
+            ammunition--;
         }
 
         //reloading
@@ -54,6 +52,5 @@ public class GunScriptV2 : MonoBehaviour {
         yield return new WaitForSeconds(reloadTime);
         ammunition = magazinSize;
         ammunitionText.SetText("Ammo: " + ammunition);
-        Debug.Log("ReloadV2");
     }
 }
