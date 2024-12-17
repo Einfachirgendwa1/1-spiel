@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody playerRb;
     CapsuleCollider capsuleCollider;
     float currentSpeed;
-    bool grounded = false;
+    int groundCollisions = 0;
     DebugPrinter printer;
 
     private void Start() {
@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour {
         currentSpeed = uncrouchedMoveSpeed;
         printer = Printer.NewPrinter();
     }
+
+    bool Grounded() => groundCollisions != 0;
 
     private void Update() {
         if (Input.GetKeyDown(crouchKey)) {
@@ -59,19 +61,13 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Springen wenn wir springen wollen
-        if (Input.GetKeyDown(jumpKey) && grounded) {
+        if (Input.GetKeyDown(jumpKey) && Grounded()) {
             playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-    float RaycastLength() => capsuleCollider.height * transform.localScale.y / 2 + 0.3F;
-
     private void FixedUpdate() {
-        // Raycast nach unten um zu testen ob wir auf etwas stehen.
-        // Zum Beispiel auf Männer.
-        grounded = Physics.Raycast(transform.position, Vector3.down, RaycastLength(), whatIsGround);
-        printer.Print($"grounded = {grounded}");
-
+        printer.Print($"Ground Collisions rn: {groundCollisions}");
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
@@ -81,13 +77,27 @@ public class PlayerMovement : MonoBehaviour {
         // Wir versuchen nun also unsere aktuelle velocity an die moveDirection anzunähern.
         // Jedoch hängt die Trägheit des Spielers davon ab, ob wir in der Luft oder auf dem Boden sind.
         // Je weniger, desto träger.
-        float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
+        float changeFactor = (Grounded() ? movePercentageGround : movePercentageAir) / 100;
 
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
-        newVelocity.y = grounded ? 0 : playerRb.linearVelocity.y;
+        newVelocity.y = Grounded() ? 0 : playerRb.linearVelocity.y;
 
 
         playerRb.linearVelocity = newVelocity;
+    }
+
+    bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
+
+    private void OnCollisionEnter(Collision collision) {
+        if (InLayerMask(collision.gameObject.layer, whatIsGround)) {
+            groundCollisions++;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        if (InLayerMask(collision.gameObject.layer, whatIsGround)) {
+            groundCollisions--;
+        }
     }
 }
