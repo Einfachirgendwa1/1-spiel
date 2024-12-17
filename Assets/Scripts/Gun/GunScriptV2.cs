@@ -37,8 +37,7 @@ public class GunScriptV2 : MonoBehaviour {
         
         //shooting
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
-            Shoot();
-            
+            Shoot(); 
         }
 
         //reloading
@@ -52,6 +51,7 @@ public class GunScriptV2 : MonoBehaviour {
         ammunition--;
 
         RaycastHit hit;
+
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);

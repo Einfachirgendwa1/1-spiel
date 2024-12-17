@@ -442,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &299621967
 Transform:
   m_ObjectHideFlags: 0
@@ -595,10 +595,13 @@ MonoBehaviour:
   ammunition: 31
   firerate: 240
   reloadTime: 2
+  range: 100
+  damage: 10
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 1757049166}
   ammunitionText: {fileID: 708938910}
+  cam: {fileID: 0}
 --- !u!1 &331020374 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 481d245f427f4994b870311baaf04180, type: 3}
@@ -779,10 +782,13 @@ MonoBehaviour:
   ammunition: 15
   firerate: 1
   reloadTime: 2
+  range: 100
+  damage: 10
   shootSound: {fileID: 8300000, guid: e196615aab553a14ab4e1aeb462c195c, type: 3}
   reloadSound: {fileID: 8300000, guid: 6a32a0d49cd240b4cb9934adf37a49a5, type: 3}
   muzzleFlash: {fileID: 459419179}
   ammunitionText: {fileID: 708938910}
+  cam: {fileID: 963194227}
 --- !u!1 &428637526
 GameObject:
   m_ObjectHideFlags: 0
@@ -13001,7 +13007,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047746745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d74a560dd135f1e40ab8bec0701a7295, type: 3}
   m_Name: 
