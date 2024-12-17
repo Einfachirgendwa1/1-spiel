@@ -6,8 +6,11 @@ public class GunScriptV2 : MonoBehaviour {
     //basic gun properties
     public int magazinSize = 15;
     public int ammunition = 15;
+
     public float firerate = 1.0f;
     public float reloadTime = 2.0f;
+    public float range = 100.0f;
+    public float damage = 10.0f;
 
     AudioSource gunAudio;
     //Animator pistolAnimator;
@@ -19,6 +22,8 @@ public class GunScriptV2 : MonoBehaviour {
 
     public TextMeshProUGUI ammunitionText;
 
+    public Camera cam; //used to have an origin point for the raycast
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         gunAudio = GetComponent<AudioSource>();
@@ -29,11 +34,11 @@ public class GunScriptV2 : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        ammunitionText.SetText("Ammo: " + ammunition);
+        
         //shooting
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
             Shoot();
-            ammunition--;
+            
         }
 
         //reloading
@@ -43,6 +48,16 @@ public class GunScriptV2 : MonoBehaviour {
     }
 
     void Shoot() {
+        ammunitionText.SetText("Ammo: " + ammunition);
+        ammunition--;
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+        {
+            Debug.Log(hit.transform.name);
+        }
+
+        //fx
         muzzleFlash.Play();
         gunAudio.PlayOneShot(shootSound, 1.0f);
     }
