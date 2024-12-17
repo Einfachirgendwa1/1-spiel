@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class WeaponSwitching : MonoBehaviour {
     [SerializeField] private Transform[] weapons;
     [SerializeField] private KeyCode[] keys;
