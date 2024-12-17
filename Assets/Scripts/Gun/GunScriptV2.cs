@@ -47,8 +47,8 @@ public class GunScriptV2 : MonoBehaviour {
     }
 
     void Shoot() {
-        ammunitionText.SetText("Ammo: " + ammunition);
         ammunition--;
+        ammunitionText.SetText("Ammo: " + ammunition);
 
         RaycastHit hit;
 
