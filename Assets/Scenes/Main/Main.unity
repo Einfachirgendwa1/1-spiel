@@ -13412,15 +13412,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_Height
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_WalkableMask
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: audioSource2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Mass
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
