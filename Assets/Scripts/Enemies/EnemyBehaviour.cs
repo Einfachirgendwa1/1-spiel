@@ -30,10 +30,10 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void SearchWalkPoint() {
         //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomY = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.z + randomZ);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y + randomY);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) {
             walkPointSet = true;
@@ -77,13 +77,6 @@ public class EnemyBehaviour : MonoBehaviour {
         alreadyAttacked = false;
     }
 
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-    }
-
     void Start() {
 
     }
@@ -94,8 +87,12 @@ public class EnemyBehaviour : MonoBehaviour {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        if (!playerInSightRange && !playerInAttackRange) {
+            Patroling();
+        } else if (playerInSightRange && !playerInAttackRange) {
+            ChasePlayer();
+        } else {
+            AttackPlayer();
+        }
     }
 }
