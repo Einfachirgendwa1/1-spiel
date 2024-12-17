@@ -50,16 +50,23 @@ public class GunScriptV2 : MonoBehaviour {
         ammunition--;
         ammunitionText.SetText("Ammo: " + ammunition);
 
+        //fx
+        muzzleFlash.Play();
+        gunAudio.PlayOneShot(shootSound, 1.0f);
+
         RaycastHit hit;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-        }
 
-        //fx
-        muzzleFlash.Play();
-        gunAudio.PlayOneShot(shootSound, 1.0f);
+            Target target = hit.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+            }
+
+        } 
     }
 
     IEnumerator Reload() {
