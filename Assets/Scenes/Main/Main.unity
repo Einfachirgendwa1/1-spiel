@@ -596,7 +596,7 @@ MonoBehaviour:
   firerate: 240
   reloadTime: 2
   range: 100
-  damage: 10
+  damage: 30
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 1757049166}
