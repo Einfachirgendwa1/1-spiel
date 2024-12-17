@@ -13360,11 +13360,11 @@ PrefabInstance:
       objectReference: {fileID: 1333199829}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: sightRange
-      value: 100
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: attackRange
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4130683519831023909, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_Name
@@ -13409,6 +13409,14 @@ PrefabInstance:
     - target: {fileID: 6418566448703471952, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Height
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_WalkableMask
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: audioSource2
