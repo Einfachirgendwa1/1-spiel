@@ -596,7 +596,7 @@ MonoBehaviour:
   firerate: 240
   reloadTime: 2
   range: 100
-  damage: 10
+  damage: 30
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 1757049166}
@@ -5876,7 +5876,7 @@ Transform:
   m_GameObject: {fileID: 589987877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -200, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5889,12 +5889,12 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589987877}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Color: {r: 0.3726415, g: 0.912624, b: 1, a: 1}
+  m_Intensity: 1.5
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5932,13 +5932,13 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: 1.01e-43}
+  m_BoundingSphereOverride: {x: 1.0532e-41, y: 0, z: 6.337072e-10, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -6646,7 +6646,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 830808270}
-  - component: {fileID: 830808267}
   - component: {fileID: 830808271}
   - component: {fileID: 830808272}
   - component: {fileID: 830808273}
@@ -6657,29 +6656,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &830808267
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830808265}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &830808270
 Transform:
   m_ObjectHideFlags: 0
@@ -7739,7 +7715,7 @@ Transform:
   m_GameObject: {fileID: 1757049163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0165, z: 0.7347}
+  m_LocalPosition: {x: 0, y: 0.137, z: 0.725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11668,7 +11644,7 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 1
-    ratio: 0
+    ratio: 1
     light: {fileID: 589987879}
     randomDistribution: 1
     color: 1
@@ -13360,11 +13336,11 @@ PrefabInstance:
       objectReference: {fileID: 1333199829}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: sightRange
-      value: 100
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: attackRange
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4130683519831023909, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_Name
@@ -13410,9 +13386,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_WalkableMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445398616674501713, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7454481470779142323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: audioSource2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Mass
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883765252893267159, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

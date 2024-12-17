@@ -8,7 +8,7 @@ public class Target : MonoBehaviour, IDamageable {
     public void TakeDamage(float damage) {
         health -= damage;
         if (health <= 0) {
-            audioSource2.Play();
+            //audioSource2.Play();
             Destroy(gameObject);
         }
         audioSource1.Play();

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -60,7 +59,7 @@ public class EnemyBehaviour : MonoBehaviour {
         agent.SetDestination(player.position);
     }
 
-    private IEnumerator AttackPlayer() {
+    private void AttackPlayer() {
         // enemy stops
         agent.SetDestination(transform.position);
 
@@ -72,7 +71,6 @@ public class EnemyBehaviour : MonoBehaviour {
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
-            yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
 
@@ -87,8 +85,8 @@ public class EnemyBehaviour : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //check for attack and sight range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInSightRange = (transform.position - player.position).magnitude <= sightRange;
+        playerInAttackRange = (transform.position - player.position).magnitude <= attackRange;
 
         if (!playerInSightRange && !playerInAttackRange) {
             Patroling();
