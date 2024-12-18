@@ -42,10 +42,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void Patroling() {
         if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet) {
-            agent.SetDestination(walkPoint);
-        }
+        else agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
