@@ -34,7 +34,7 @@ public class GunScriptV2 : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        ammunitionText.SetText("Ammo: " + ammunition);
+        //ammunitionText.SetText("Ammo: " + ammunition);
 
         //shooting
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
@@ -76,4 +76,11 @@ public class GunScriptV2 : MonoBehaviour {
         ammunition = magazinSize;
         ammunitionText.SetText("Ammo: " + ammunition);
     }
+
+    /*public void UpdateAmmunitonText()
+    {
+        ammunitionText.SetText("Ammo: " + ammunition);
+    }
+    */
+
 }

@@ -9,6 +9,7 @@ public class WeaponSwitching : MonoBehaviour {
         weapons[selectedWeapon].gameObject.SetActive(false);
         weapons[newWeaponIndex].gameObject.SetActive(true);
         selectedWeapon = newWeaponIndex;
+        weapons[newWeaponIndex].gameObject.GetComponent<GunScriptV2>().ammunitionText.SetText("Ammo: " + weapons[newWeaponIndex].gameObject.GetComponent<GunScriptV2>().ammunition);
     }
 
     void Start() {
