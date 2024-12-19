@@ -87,13 +87,13 @@ public class EnemyBehaviour : MonoBehaviour {
 
         if (!playerInSightRange && !playerInAttackRange) {
             Patroling();
-            print("Enemy is now Patroling");
+            //print("Enemy is now Patroling");
         } else if (playerInSightRange && !playerInAttackRange) {
             ChasePlayer();
-            print("Enemy is now Chasing");
+            //print("Enemy is now Chasing");
         } else {
             AttackPlayer();
-            print("Enemy is now Attacking");
+            //print("Enemy is now Attacking");
         }
     }
 }
