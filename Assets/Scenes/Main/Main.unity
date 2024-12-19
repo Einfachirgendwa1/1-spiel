@@ -13661,7 +13661,7 @@ PrefabInstance:
       objectReference: {fileID: 1333199829}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: sightRange
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3269366785679100323, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: attackRange
