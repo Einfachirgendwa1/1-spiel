@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     [Header("Movement")]
     public float uncrouchedMoveSpeed = 10;
-    public float jumpForce = 230;
+    public float jumpForce = 400;
     public float movePercentageGround = 100;
     public float movePercentageAir = 30;
 
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     float currentSpeed;
     int groundCollisions = 0;
     DebugPrinter printer;
-    List<int> groundIds = new();
+    readonly List<int> groundIds = new();
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Springen wenn wir springen wollen
         if (Input.GetKeyDown(jumpKey) && Grounded()) {
-            playerRb.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
