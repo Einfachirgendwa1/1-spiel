@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     float currentSpeed;
     int groundCollisions = 0;
     DebugPrinter printer;
+    List<int> groundIds = new();
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         printer.Print($"Ground Collisions rn: {groundCollisions}");
+
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
@@ -93,12 +96,13 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if (IsGround(collision)) {
+            groundIds.Add(collision.gameObject.GetInstanceID());
             groundCollisions++;
         }
     }
 
     private void OnCollisionExit(Collision collision) {
-        if (InLayerMask(collision.gameObject.layer, whatIsGround)) {
+        if (InLayerMask(collision.gameObject.layer, whatIsGround) && groundIds.Remove(collision.gameObject.GetInstanceID())) {
             groundCollisions--;
         }
     }
