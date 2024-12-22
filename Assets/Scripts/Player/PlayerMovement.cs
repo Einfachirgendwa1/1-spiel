@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour {
     DebugPrinter printer;
     readonly List<int> groundIds = new();
 
+    [SerializeField] bool isOnGround;
+
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -69,6 +71,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        isOnGround = Grounded();
         printer.Print($"Ground Collisions rn: {groundCollisions}");
 
         // Richtung in die wir uns bewegen wollen.
