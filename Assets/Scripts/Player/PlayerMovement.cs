@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
-        newVelocity.y = Grounded() ? 0 : playerRb.linearVelocity.y;
+        //newVelocity.y = Grounded() ? 0 : playerRb.linearVelocity.y;
 
 
         playerRb.linearVelocity = newVelocity;
