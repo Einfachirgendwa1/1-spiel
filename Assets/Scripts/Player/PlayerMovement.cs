@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour {
 
         // Springen wenn wir springen wollen
         if (Input.GetKeyDown(jumpKey) && Grounded()) {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            Jump();
         }
     }
 
@@ -93,6 +94,11 @@ public class PlayerMovement : MonoBehaviour {
         playerRb.linearVelocity = newVelocity;
     }
 
+    void Jump()
+    {
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+    
     bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
 
     bool IsGround(Collision collision) => InLayerMask(collision.gameObject.layer, whatIsGround) && collision.GetContact(0).point.y < transform.position.y;
