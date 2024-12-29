@@ -65,9 +65,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        RaycastHit raycasthit;
-        grounded = Physics.Raycast(transform.position, Vector3.down, out raycasthit, 1.5F, whatIsGround);
-
+        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.5F, whatIsGround);
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
