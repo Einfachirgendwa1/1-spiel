@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
@@ -26,21 +25,15 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody playerRb;
     CapsuleCollider capsuleCollider;
     float currentSpeed;
-    int groundCollisions = 0;
-    DebugPrinter printer;
-    readonly List<int> groundIds = new();
 
-    [SerializeField] bool isOnGround;
+    [SerializeField] bool grounded;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         currentSpeed = uncrouchedMoveSpeed;
-        printer = Printer.NewPrinter();
     }
-
-    bool Grounded() => groundCollisions != 0;
 
     private void Update() {
         if (Input.GetKeyDown(crouchKey)) {
@@ -65,26 +58,27 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Springen wenn wir springen wollen
-        if (Input.GetKeyDown(jumpKey) && Grounded()) {
+        if (Input.GetKeyDown(jumpKey) && grounded) {
             //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             Jump();
         }
     }
 
     private void FixedUpdate() {
-        isOnGround = Grounded();
-        printer.Print($"Ground Collisions rn: {groundCollisions}");
+        RaycastHit raycasthit;
+        grounded = Physics.Raycast(transform.position, Vector3.down, out raycasthit, 1.5F, whatIsGround);
+
 
         // Richtung in die wir uns bewegen wollen.
         Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
         // Richtung in die wir uns *wirklich* bewegen wollen.
-        moveDirection = (transform.rotation * moveDirection).normalized;
+        moveDirection = Vector3.ProjectOnPlane((transform.rotation * moveDirection).normalized, raycasthit.normal);
 
         // Wir versuchen nun also unsere aktuelle velocity an die moveDirection anzunähern.
         // Jedoch hängt die Trägheit des Spielers davon ab, ob wir in der Luft oder auf dem Boden sind.
         // Je weniger, desto träger.
-        float changeFactor = (Grounded() ? movePercentageGround : movePercentageAir) / 100;
+        float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
 
         // Jetzt berechnen wir die tatsächliche velocity
         Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
@@ -94,25 +88,9 @@ public class PlayerMovement : MonoBehaviour {
         playerRb.linearVelocity = newVelocity;
     }
 
-    void Jump()
-    {
+    void Jump() {
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-    
+
     bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
-
-    bool IsGround(Collision collision) => InLayerMask(collision.gameObject.layer, whatIsGround) && collision.GetContact(0).point.y < transform.position.y;
-
-    private void OnCollisionEnter(Collision collision) {
-        if (IsGround(collision)) {
-            groundIds.Add(collision.gameObject.GetInstanceID());
-            groundCollisions++;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        if (InLayerMask(collision.gameObject.layer, whatIsGround) && groundIds.Remove(collision.gameObject.GetInstanceID())) {
-            groundCollisions--;
-        }
-    }
 }
