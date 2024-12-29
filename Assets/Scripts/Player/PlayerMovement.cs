@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour {
         playerRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
+        playerRb.linearDamping = 6f;
+
         currentSpeed = uncrouchedMoveSpeed;
     }
 
@@ -59,36 +61,16 @@ public class PlayerMovement : MonoBehaviour {
 
         // Springen wenn wir springen wollen
         if (Input.GetKeyDown(jumpKey) && grounded) {
-            //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            Jump();
+            playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
 
     private void FixedUpdate() {
         grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.5F, whatIsGround);
 
-        // Richtung in die wir uns bewegen wollen.
-        Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
-
-        // Richtung in die wir uns *wirklich* bewegen wollen.
+        Vector3 moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         moveDirection = Vector3.ProjectOnPlane((transform.rotation * moveDirection).normalized, raycasthit.normal);
 
-        // Wir versuchen nun also unsere aktuelle velocity an die moveDirection anzunähern.
-        // Jedoch hängt die Trägheit des Spielers davon ab, ob wir in der Luft oder auf dem Boden sind.
-        // Je weniger, desto träger.
-        float changeFactor = (grounded ? movePercentageGround : movePercentageAir) / 100;
-
-        // Jetzt berechnen wir die tatsächliche velocity
-        Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
-        //newVelocity.y = Grounded() ? 0 : playerRb.linearVelocity.y;
-
-
-        playerRb.linearVelocity = newVelocity;
+        playerRb.AddForce(moveDirection.normalized * currentSpeed, ForceMode.Acceleration);
     }
-
-    void Jump() {
-        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
-
-    bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
 }
