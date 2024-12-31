@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Springen wenn wir springen wollen
         if (Input.GetKeyDown(jumpKey) && grounded) {
-            playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            Jump();
         }
     }
 
@@ -72,5 +72,10 @@ public class PlayerMovement : MonoBehaviour {
         moveDirection = Vector3.ProjectOnPlane((transform.rotation * moveDirection).normalized, raycasthit.normal);
 
         playerRb.AddForce(moveDirection.normalized * currentSpeed, ForceMode.Acceleration);
+    }
+
+    void Jump()
+    {
+        playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 }
