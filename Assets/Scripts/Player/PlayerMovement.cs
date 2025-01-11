@@ -66,10 +66,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        RaycastHit raycasthit;
-        grounded = Physics.Raycast(transform.position, Vector3.down, out raycasthit, 1.5F, whatIsGround);
-
-
+        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.5F, whatIsGround);
+       
         Vector3 moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         moveDirection = Vector3.ProjectOnPlane((transform.rotation * moveDirection).normalized, raycasthit.normal);
 
