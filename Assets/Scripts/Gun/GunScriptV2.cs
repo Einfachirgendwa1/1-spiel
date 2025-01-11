@@ -12,6 +12,17 @@ public class GunScriptV2 : MonoBehaviour {
     public float range = 100.0f;
     public float damage = 10.0f;
 
+    public bool isAutomatic;
+
+    //funktional values
+    public float timeSinceLastShot; 
+
+    bool isReloading;
+    bool fireButtonUp = true;
+
+
+
+
     AudioSource gunAudio;
     //Animator pistolAnimator;
 
@@ -30,19 +41,29 @@ public class GunScriptV2 : MonoBehaviour {
         //pistolAnimator = GetComponent<Animator>();
 
         ammunitionText.SetText("Ammo: " + ammunition);
+        timeSinceLastShot = 1.0f / (firerate / 60);
     }
 
     // Update is called once per frame
     void Update() {
+        timeSinceLastShot += Time.deltaTime;
         //ammunitionText.SetText("Ammo: " + ammunition);
 
         //shooting
-        if (Input.GetKeyDown(KeyCode.Mouse0) && ammunition > 0) {
+        if (Input.GetKey(KeyCode.Mouse0) && CanShoot()) {
+            fireButtonUp = false;
             Shoot(); 
         }
 
-        //reloading
-        if (Input.GetKeyDown(KeyCode.R)) {
+        //important for semi automatic:
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            fireButtonUp = true;
+        }
+
+            //reloading
+            if (Input.GetKeyDown(KeyCode.R) && !isReloading) {
+            isReloading = true;
             StartCoroutine(Reload());
         }
     }
@@ -67,14 +88,43 @@ public class GunScriptV2 : MonoBehaviour {
                 target.TakeDamage(damage);
             }
 
-        } 
+        }
+
+        timeSinceLastShot = 0;
     }
 
+    bool CanShoot()
+    {
+        if (isAutomatic)
+        {
+            if (ammunition > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else 
+        {
+            if (ammunition > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60) && fireButtonUp)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+            
+        }
+    }
     IEnumerator Reload() {
         gunAudio.PlayOneShot(reloadSound, 1.0f);
         yield return new WaitForSeconds(reloadTime);
         ammunition = magazinSize;
         ammunitionText.SetText("Ammo: " + ammunition);
+        isReloading = false;
     }
 
     /*public void UpdateAmmunitonText()

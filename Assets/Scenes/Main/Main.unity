@@ -1349,10 +1349,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazinSize: 31
   ammunition: 31
-  firerate: 240
+  firerate: 300
   reloadTime: 2
   range: 100
   damage: 30
+  isAutomatic: 1
+  timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 1757049166}
@@ -2159,10 +2161,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazinSize: 15
   ammunition: 15
-  firerate: 1
+  firerate: 100
   reloadTime: 2
   range: 100
   damage: 10
+  isAutomatic: 0
+  timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e196615aab553a14ab4e1aeb462c195c, type: 3}
   reloadSound: {fileID: 8300000, guid: 6a32a0d49cd240b4cb9934adf37a49a5, type: 3}
   muzzleFlash: {fileID: 459419179}
@@ -8978,7 +8982,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1025
-  grounded: 0
+  isOnGround: 0
 --- !u!114 &830808273
 MonoBehaviour:
   m_ObjectHideFlags: 0
