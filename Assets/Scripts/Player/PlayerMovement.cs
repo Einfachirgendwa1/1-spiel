@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
@@ -25,8 +26,11 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody playerRb;
     CapsuleCollider capsuleCollider;
     float currentSpeed;
+    int groundCollisions = 0;
+    DebugPrinter printer;
+    readonly List<int> groundIds = new();
 
-    [SerializeField] bool grounded;
+    [SerializeField] bool isOnGround;
 
     private void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -35,7 +39,10 @@ public class PlayerMovement : MonoBehaviour {
         playerRb.linearDamping = 6f;
 
         currentSpeed = uncrouchedMoveSpeed;
+        printer = Printer.NewPrinter();
     }
+
+    bool Grounded() => groundCollisions != 0;
 
     private void Update() {
         if (Input.GetKeyDown(crouchKey)) {
@@ -60,22 +67,36 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Springen wenn wir springen wollen
-        if (Input.GetKeyDown(jumpKey) && grounded) {
+        /*if (Input.GetKeyDown(jumpKey) && isOnGround) {
+            //playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             Jump();
-        }
+        }*/
     }
 
     private void FixedUpdate() {
-        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.5F, whatIsGround);
-       
-        Vector3 moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+        RaycastHit raycasthit;
+        isOnGround = Physics.Raycast(transform.position, Vector3.down, out raycasthit, 1.5F, whatIsGround);
+
+
+        // Richtung in die wir uns bewegen wollen.
+        Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
+
+        // Richtung in die wir uns *wirklich* bewegen wollen.
         moveDirection = Vector3.ProjectOnPlane((transform.rotation * moveDirection).normalized, raycasthit.normal);
 
-        playerRb.AddForce(moveDirection.normalized * currentSpeed, ForceMode.Acceleration);
+        float changeFactor = (isOnGround ? movePercentageGround : movePercentageAir) / 100;
+
+        Vector3 newVelocity = Vector3.Lerp(playerRb.linearVelocity.normalized, moveDirection, changeFactor) * currentSpeed;
+
+        playerRb.linearVelocity = newVelocity;
     }
 
-    void Jump()
-    {
-        playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }
+        
+
+    /*void Jump() {
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }*/
+      
+
+    bool InLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
 }
