@@ -1347,9 +1347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73656bde72de746a5706f2f5565366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amunition: 100
   magazinSize: 31
-  ammunition: 31
-  firerate: 300
+  ammunitionInGun: 15
+  firerate: 500
   reloadTime: 2
   range: 100
   damage: 30
@@ -2159,9 +2160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73656bde72de746a5706f2f5565366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amunition: 100
   magazinSize: 15
-  ammunition: 15
-  firerate: 100
+  ammunitionInGun: 15
+  firerate: 250
   reloadTime: 2
   range: 100
   damage: 10
@@ -8643,7 +8645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &748827625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9673,7 +9675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &972219201
 RectTransform:
   m_ObjectHideFlags: 0

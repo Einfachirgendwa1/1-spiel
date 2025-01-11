@@ -2,10 +2,13 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class GunScriptV2 : MonoBehaviour {
+public class GunScriptV2 : MonoBehaviour
+{
+
+    public int amunition = 100;
     //basic gun properties
     public int magazinSize = 15;
-    public int ammunition = 15;
+    public int ammunitionInGun;
 
     public float firerate = 1.0f;
     public float reloadTime = 2.0f;
@@ -15,7 +18,7 @@ public class GunScriptV2 : MonoBehaviour {
     public bool isAutomatic;
 
     //funktional values
-    public float timeSinceLastShot; 
+    public float timeSinceLastShot;
 
     bool isReloading;
     bool fireButtonUp = true;
@@ -36,23 +39,27 @@ public class GunScriptV2 : MonoBehaviour {
     public Camera cam; //used to have an origin point for the raycast
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
+    void Start()
+    {
         gunAudio = GetComponent<AudioSource>();
         //pistolAnimator = GetComponent<Animator>();
 
-        ammunitionText.SetText("Ammo: " + ammunition);
+        ammunitionInGun = magazinSize;
+        ammunitionText.SetText("Ammo: " + ammunitionInGun);
         timeSinceLastShot = 1.0f / (firerate / 60);
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         timeSinceLastShot += Time.deltaTime;
         //ammunitionText.SetText("Ammo: " + ammunition);
 
         //shooting
-        if (Input.GetKey(KeyCode.Mouse0) && CanShoot()) {
+        if (Input.GetKey(KeyCode.Mouse0) && CanShoot())
+        {
             fireButtonUp = false;
-            Shoot(); 
+            Shoot();
         }
 
         //important for semi automatic:
@@ -61,16 +68,18 @@ public class GunScriptV2 : MonoBehaviour {
             fireButtonUp = true;
         }
 
-            //reloading
-            if (Input.GetKeyDown(KeyCode.R) && !isReloading) {
+        //reloading
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        {
             isReloading = true;
             StartCoroutine(Reload());
         }
     }
 
-    void Shoot() {
-        ammunition--;
-        ammunitionText.SetText("Ammo: " + ammunition);
+    void Shoot()
+    {
+        ammunitionInGun--;
+        ammunitionText.SetText("Ammo: " + ammunitionInGun);
 
         //fx
         muzzleFlash.Play();
@@ -97,7 +106,7 @@ public class GunScriptV2 : MonoBehaviour {
     {
         if (isAutomatic)
         {
-            if (ammunition > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60))
+            if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60))
             {
                 return true;
             }
@@ -106,24 +115,37 @@ public class GunScriptV2 : MonoBehaviour {
                 return false;
             }
         }
-        else 
+        else
         {
-            if (ammunition > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60) && fireButtonUp)
+            if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60) && fireButtonUp)
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
-            
+
         }
     }
-    IEnumerator Reload() {
+    IEnumerator Reload()
+    {
         gunAudio.PlayOneShot(reloadSound, 1.0f);
         yield return new WaitForSeconds(reloadTime);
-        ammunition = magazinSize;
-        ammunitionText.SetText("Ammo: " + ammunition);
+
+        if (amunition > 0) {
+            if (magazinSize - ammunitionInGun <= amunition)
+            {
+                amunition -= (magazinSize - ammunitionInGun);
+                ammunitionInGun += magazinSize - ammunitionInGun;
+            }
+            else
+            {
+                ammunitionInGun += amunition;
+            }
+        }
+        
+        ammunitionText.SetText("Ammo: " + ammunitionInGun);
         isReloading = false;
     }
 
