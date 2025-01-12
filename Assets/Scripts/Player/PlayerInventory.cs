@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class Interact : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
+    public int amunition = 100;
+
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,10 +16,5 @@ public class Interact : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void Interaction()
-    {
-        Debug.Log("Interaction");
     }
 }

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+interface IInteractable
+{
+    public void Interact();
+}
 public class PlayerInteraction : MonoBehaviour
 {
     public Camera playerCamera;
@@ -9,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("PlayerInteraction is running");
+
     }
 
     // Update is called once per frame
@@ -21,12 +25,9 @@ public class PlayerInteraction : MonoBehaviour
             RaycastHit interacion;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out interacion , distance, ~(1<<6)))
             {
-                Debug.Log("player interact " + interacion.transform.name);
-                Interact target = interacion.transform.GetComponent<Interact>();
-                if (target != null)
+                if (interacion.collider.gameObject.TryGetComponent(out IInteractable interactObj))
                 {
-                    
-                    target.Interaction();
+                    interactObj.Interact();
                 }
             }
         }

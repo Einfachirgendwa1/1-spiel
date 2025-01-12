@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunScriptV2 : MonoBehaviour
 {
 
-    public int amunition = 100;
+
     //basic gun properties
     public int magazinSize = 15;
     public int ammunitionInGun;
@@ -38,11 +38,13 @@ public class GunScriptV2 : MonoBehaviour
 
     public Camera cam; //used to have an origin point for the raycast
 
+    PlayerInventory playerInventory;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gunAudio = GetComponent<AudioSource>();
-        //pistolAnimator = GetComponent<Animator>();
+        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 
         ammunitionInGun = magazinSize;
         ammunitionText.SetText("Ammo: " + ammunitionInGun);
@@ -71,88 +73,98 @@ public class GunScriptV2 : MonoBehaviour
         //reloading
         if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
-            isReloading = true;
-            StartCoroutine(Reload());
-        }
-    }
-
-    void Shoot()
-    {
-        ammunitionInGun--;
-        ammunitionText.SetText("Ammo: " + ammunitionInGun);
-
-        //fx
-        muzzleFlash.Play();
-        gunAudio.PlayOneShot(shootSound, 1.0f);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
-
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
+            if (playerInventory.amunition > 0)
             {
-                target.TakeDamage(damage);
-            }
-
-        }
-
-        timeSinceLastShot = 0;
-    }
-
-    bool CanShoot()
-    {
-        if (isAutomatic)
-        {
-            if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60))
-            {
-                return true;
+                isReloading = true;
+                StartCoroutine(Reload());
             }
             else
             {
-                return false;
-            }
-        }
-        else
-        {
-            if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60) && fireButtonUp)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                // sound, nachricht das player keinen ammo hat
             }
 
         }
     }
-    IEnumerator Reload()
-    {
-        gunAudio.PlayOneShot(reloadSound, 1.0f);
-        yield return new WaitForSeconds(reloadTime);
 
-        if (amunition > 0) {
-            if (magazinSize - ammunitionInGun <= amunition)
+        void Shoot()
+        {
+            ammunitionInGun--;
+            ammunitionText.SetText("Ammo: " + ammunitionInGun);
+
+            //fx
+            muzzleFlash.Play();
+            gunAudio.PlayOneShot(shootSound, 1.0f);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
             {
-                amunition -= (magazinSize - ammunitionInGun);
+                Debug.Log(hit.transform.name);
+
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
+
+            }
+
+            timeSinceLastShot = 0;
+        }
+
+        bool CanShoot()
+        {
+            if (isAutomatic)
+            {
+                if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (ammunitionInGun > 0 && !isReloading && timeSinceLastShot >= 1.0f / (firerate / 60) && fireButtonUp)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        IEnumerator Reload()
+        {
+            gunAudio.PlayOneShot(reloadSound, 1.0f);
+            yield return new WaitForSeconds(reloadTime);
+
+
+            if (magazinSize - ammunitionInGun <= playerInventory.amunition)
+            {
+                playerInventory.amunition -= (magazinSize - ammunitionInGun);
                 ammunitionInGun += magazinSize - ammunitionInGun;
             }
             else
             {
-                ammunitionInGun += amunition;
+                ammunitionInGun += playerInventory.amunition;
+                playerInventory.amunition = 0;
             }
+
+
+            ammunitionText.SetText("Ammo: " + ammunitionInGun);
+            isReloading = false;
         }
-        
-        ammunitionText.SetText("Ammo: " + ammunitionInGun);
-        isReloading = false;
-    }
 
-    /*public void UpdateAmmunitonText()
-    {
-        ammunitionText.SetText("Ammo: " + ammunition);
-    }
-    */
+        /*public void UpdateAmmunitonText()
+        {
+            ammunitionText.SetText("Ammo: " + ammunition);
+        }
+        */
 
-}
+    }
