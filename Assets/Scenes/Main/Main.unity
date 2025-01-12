@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02f770327a5d5745bf4ba32452bf56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammunitionInChest: 50
 --- !u!65 &246279426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1468,10 +1469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73656bde72de746a5706f2f5565366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amunition: 100
   magazinSize: 31
   ammunitionInGun: 15
-  firerate: 500
+  firerate: 550
   reloadTime: 2
   range: 100
   damage: 30
@@ -2281,7 +2281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73656bde72de746a5706f2f5565366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amunition: 100
   magazinSize: 15
   ammunitionInGun: 15
   firerate: 250
@@ -8300,6 +8299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02f770327a5d5745bf4ba32452bf56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammunitionInChest: 50
 --- !u!1 &688876382
 GameObject:
   m_ObjectHideFlags: 0
@@ -9028,6 +9028,7 @@ GameObject:
   - component: {fileID: 830808271}
   - component: {fileID: 830808272}
   - component: {fileID: 830808274}
+  - component: {fileID: 830808275}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -9119,6 +9120,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 963194227}
   distance: 2
+--- !u!114 &830808275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830808265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279d8883fcef8944db7453e3602b7197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amunition: 100
 --- !u!1001 &845013448
 PrefabInstance:
   m_ObjectHideFlags: 0

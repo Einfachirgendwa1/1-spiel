@@ -3,6 +3,7 @@ using UnityEngine;
 public class AmmoChest : MonoBehaviour, IInteractable
 {
     public int ammunitionInChest = 20;
+    bool hasInteracted = false;
     PlayerInventory playerInventory;
 
     void Start() 
@@ -11,7 +12,11 @@ public class AmmoChest : MonoBehaviour, IInteractable
     }
  public void Interact()
     {
-        Debug.Log("chest interaction");
-        playerInventory.amunition += ammunitionInChest;
+        if (!hasInteracted)
+        {
+            Debug.Log("chest interaction");
+            playerInventory.amunition += ammunitionInChest;
+            hasInteracted = true;
+        }
     }
 }
