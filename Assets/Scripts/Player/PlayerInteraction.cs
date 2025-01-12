@@ -4,9 +4,8 @@ public class PlayerInteraction : MonoBehaviour
 {
     public Camera playerCamera;
 
-    [SerializeField] float distance = 1f;
+    [SerializeField] float distance = 2f;
 
-    [SerializeField] Vector3 offset = new Vector3(0, 0, 0.6f);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
         {
  
             RaycastHit interacion;
-            if (Physics.Raycast(playerCamera.transform.position + offset, playerCamera.transform.forward, out interacion , distance))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out interacion , distance, ~(1<<6)))
             {
                 Debug.Log("player interact " + interacion.transform.name);
                 Interact target = interacion.transform.GetComponent<Interact>();
