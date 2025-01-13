@@ -71,9 +71,9 @@ public class GunScriptV2 : MonoBehaviour
         }
 
         //reloading
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading &&  ammunitionInGun != magazinSize)
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
-            if (playerInventory.amunition > 0)
+            if (playerInventory.amunition > 0 && ammunitionInGun != magazinSize)
             {
                 isReloading = true;
                 StartCoroutine(Reload());
