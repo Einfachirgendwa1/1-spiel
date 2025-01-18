@@ -39,10 +39,12 @@ public class GunScriptV2 : MonoBehaviour
     public Camera cam; //used to have an origin point for the raycast
 
     PlayerInventory playerInventory;
+    GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = this.transform.parent.gameObject;
         gunAudio = GetComponent<AudioSource>();
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 
@@ -54,35 +56,37 @@ public class GunScriptV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeSinceLastShot += Time.deltaTime;
-        //ammunitionText.SetText("Ammo: " + ammunition);
+        if (player = GameObject.Find("Player")) {
+            timeSinceLastShot += Time.deltaTime;
+            //ammunitionText.SetText("Ammo: " + ammunition);
 
-        //shooting
-        if (Input.GetKey(KeyCode.Mouse0) && CanShoot())
-        {
-            fireButtonUp = false;
-            Shoot();
-        }
-
-        //important for semi automatic:
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            fireButtonUp = true;
-        }
-
-        //reloading
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
-        {
-            if (playerInventory.amunition > 0 && ammunitionInGun != magazinSize)
+            //shooting
+            if (Input.GetKey(KeyCode.Mouse0) && CanShoot())
             {
-                isReloading = true;
-                StartCoroutine(Reload());
-            }
-            else
-            {
-                // sound, nachricht das player keinen ammo hat
+                fireButtonUp = false;
+                Shoot();
             }
 
+            //important for semi automatic:
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                fireButtonUp = true;
+            }
+
+            //reloading
+            if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+            {
+                if (playerInventory.amunition > 0 && ammunitionInGun != magazinSize)
+                {
+                    isReloading = true;
+                    StartCoroutine(Reload());
+                }
+                else
+                {
+                    // sound, nachricht das player keinen ammo hat
+                }
+
+            }
         }
     }
 

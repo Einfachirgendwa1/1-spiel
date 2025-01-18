@@ -6,6 +6,8 @@ public class EnemyShootBehavior : MonoBehaviour
     bool reloadButton = false;
     
     float timer = 0;
+    float timeBetweenShotsMin = 0.5f;
+    float timeBetweenShotsMax = 2;
     GunScriptV2 gun;
     EnemyPlayerDetection playerDetection;
 
@@ -23,11 +25,26 @@ public class EnemyShootBehavior : MonoBehaviour
         {
             if (gun.ammunitionInGun != 0)
             {
-
+                reloadButton = false;
+                if (gun.isAutomatic)
+                {
+                       leftClick = true;
+                }
+                else if (!gun.isAutomatic)
+                {
+                    leftClick = true;
+                    timer = 0;
+                    while (timer < 0)
+                    {
+                        timer += Time.deltaTime;
+                    }
+                    leftClick = false;
+                }
             }
             else
             {
-                //nachladen
+                leftClick = false;
+                reloadButton = true;
             }
         }
     }
