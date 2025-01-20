@@ -44,7 +44,7 @@ public class GunScriptV2 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = this.transform.parent.gameObject;
+        player = this.transform.root.gameObject;
         gunAudio = GetComponent<AudioSource>();
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 
@@ -56,7 +56,8 @@ public class GunScriptV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player = GameObject.Find("Player")) {
+        if (player = GameObject.Find("Player"))
+        {
             timeSinceLastShot += Time.deltaTime;
             //ammunitionText.SetText("Ammo: " + ammunition);
 
@@ -86,6 +87,11 @@ public class GunScriptV2 : MonoBehaviour
                     // sound, nachricht das player keinen ammo hat
                 }
 
+            }
+
+            if (player = GameObject.Find("EnemyV2"))
+            {
+                Debug.Log("its the enemy baby");
             }
         }
     }
