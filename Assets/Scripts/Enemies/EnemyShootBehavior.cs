@@ -14,7 +14,7 @@ public class EnemyShootBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gun = this.transform.GetChild(-1).GetComponentInChildren<GunScriptV2>();
+        gun = this.transform.GetChild(transform.childCount -1).GetComponentInChildren<GunScriptV2>();
         playerDetection = GetComponent<EnemyPlayerDetection>();
     }
 
