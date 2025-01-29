@@ -2,50 +2,80 @@ using UnityEngine;
 
 public class EnemyShootBehavior : MonoBehaviour
 {
-    bool leftClick = false;
+    bool fireButton = false;
     bool reloadButton = false;
-    
+    public bool enemyIsReloading;
+
+
     float timer = 0;
     float timeBetweenShotsMin = 0.5f;
     float timeBetweenShotsMax = 2;
-    GunScriptV2 gun;
+    public GunScriptV2 gun;
     EnemyPlayerDetection playerDetection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gun = this.transform.GetChild(transform.childCount -1).GetComponentInChildren<GunScriptV2>();
+        gun = this.transform.GetChild(transform.childCount -1).GetComponentInChildren<GunScriptV2>(); //scheint nicht zu funktionieren
         playerDetection = GetComponent<EnemyPlayerDetection>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        gun.timeSinceLastShot += Time.deltaTime;
+
         if (playerDetection.canSeePlayer)
         {
-            if (gun.ammunitionInGun != 0)
+            if (CanShoot())
             {
-                reloadButton = false;
                 if (gun.isAutomatic)
                 {
-                       leftClick = true;
+                       gun.Shoot();
                 }
                 else if (!gun.isAutomatic)
                 {
-                    leftClick = true;
+                    fireButton = true;
+                    gun.Shoot();
                     timer = 0;
-                    while (timer < 0)
+                    while (timer < 1.0f / (gun.firerate / 60) + 0.5f)
                     {
                         timer += Time.deltaTime;
                     }
-                    leftClick = false;
+                    fireButton = false;
                 }
+            }
+        }
+        if (gun.ammunitionInGun == 0)
+        {
+            gun.Reload();
+        }
+    }
+
+    bool CanShoot()
+    {
+        if (gun.isAutomatic)
+        {
+            if (gun.ammunitionInGun > 0 && !enemyIsReloading && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60))
+            {
+                return true;
             }
             else
             {
-                leftClick = false;
-                reloadButton = true;
+                return false;
             }
+        }
+        else
+        {
+            if (gun.ammunitionInGun > 0 && !enemyIsReloading && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60) && !fireButton)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

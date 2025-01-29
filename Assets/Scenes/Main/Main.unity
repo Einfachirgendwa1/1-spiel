@@ -10060,7 +10060,6 @@ GameObject:
   - component: {fileID: 625657829}
   - component: {fileID: 625657832}
   - component: {fileID: 625657831}
-  - component: {fileID: 625657833}
   - component: {fileID: 625657834}
   m_Layer: 0
   m_Name: AR_V2
@@ -10205,18 +10204,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &625657833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625657828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 786832dcbe2dd5048b8864069ad4c6ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &625657834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12465,6 +12452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d2f7597a12cc44985133b1ed1cc5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 0}
+  playerIsReloading: 0
 --- !u!1001 &842236851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12889,6 +12878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8999617a4203bf4e87e3b4182854be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyIsReloading: 0
+  gun: {fileID: 0}
 --- !u!1001 &876868184
 PrefabInstance:
   m_ObjectHideFlags: 0
