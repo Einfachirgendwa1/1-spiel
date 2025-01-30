@@ -2678,7 +2678,6 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
   muzzleFlash: {fileID: 1757049166}
-  ammunitionText: {fileID: 708938910}
   cam: {fileID: 963194227}
 --- !u!1001 &304198781
 PrefabInstance:
@@ -3618,7 +3617,6 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: e196615aab553a14ab4e1aeb462c195c, type: 3}
   reloadSound: {fileID: 8300000, guid: 6a32a0d49cd240b4cb9934adf37a49a5, type: 3}
   muzzleFlash: {fileID: 459419179}
-  ammunitionText: {fileID: 708938910}
   cam: {fileID: 963194227}
 --- !u!1001 &407451766
 PrefabInstance:
@@ -10067,7 +10065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &625657829
 Transform:
   m_ObjectHideFlags: 0
@@ -10226,8 +10224,7 @@ MonoBehaviour:
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
-  muzzleFlash: {fileID: 1757049166}
-  ammunitionText: {fileID: 708938910}
+  muzzleFlash: {fileID: 1082322151}
   cam: {fileID: 963194227}
 --- !u!1001 &629473421
 PrefabInstance:
@@ -12453,6 +12450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
+  ammunitionText: {fileID: 708938910}
   playerIsReloading: 0
 --- !u!1001 &842236851
 PrefabInstance:
@@ -12717,6 +12715,7 @@ GameObject:
   - component: {fileID: 876770873}
   - component: {fileID: 876770874}
   - component: {fileID: 876770875}
+  - component: {fileID: 876770876}
   m_Layer: 0
   m_Name: EnemyV2
   m_TagString: Untagged
@@ -12880,6 +12879,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyIsReloading: 0
   gun: {fileID: 0}
+--- !u!114 &876770876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876770868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279d8883fcef8944db7453e3602b7197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amunition: 100
 --- !u!1001 &876868184
 PrefabInstance:
   m_ObjectHideFlags: 0

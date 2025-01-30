@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using static UnityEngine.Android.AndroidGame;
+using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     WeaponSwitching gunSwitching;
     public GunScriptV2 gun; //in weapun switching assignet
     PlayerInventory playerInventory;
+    public TextMeshProUGUI ammunitionText;
 
     //funktional values
     public bool playerIsReloading;
@@ -19,6 +21,7 @@ public class PlayerShoot : MonoBehaviour
     {
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
         gun.timeSinceLastShot = 1.0f / (gun.firerate / 60);
+        ammunitionText.SetText("Ammo: " + gun.ammunitionInGun);
         //gunSwitching = 
         //gun = gunSwitching.weapons[gunSwitching.selectedWeapon].gameObject.GetComponent<GunScriptV2>();
     }
@@ -35,6 +38,7 @@ public class PlayerShoot : MonoBehaviour
         {
             fireButtonUp = false;
             gun.Shoot();
+            ammunitionText.SetText("Ammo: " + gun.ammunitionInGun);
         }
 
         //important for semi automatic:

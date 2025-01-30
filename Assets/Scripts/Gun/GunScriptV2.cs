@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class GunScriptV2 : MonoBehaviour
 
     public ParticleSystem muzzleFlash;
 
-    public TextMeshProUGUI ammunitionText;
+    
 
     public Camera cam; //used to have an origin point for the raycast
 
@@ -48,10 +49,11 @@ public class GunScriptV2 : MonoBehaviour
     {
         gunUser = this.transform.root.gameObject;
         gunAudio = GetComponent<AudioSource>();
-        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
+        playerInventory = gunUser.GetComponent<PlayerInventory>();
 
         ammunitionInGun = magazinSize;
-        ammunitionText.SetText("Ammo: " + ammunitionInGun);
+        
+
 
         playerShoot = gunUser.GetComponent<PlayerShoot>();
         enemyShoot = gunUser.GetComponent<EnemyShootBehavior>();
@@ -107,7 +109,6 @@ public class GunScriptV2 : MonoBehaviour
     public void Shoot()
     {
         ammunitionInGun--;
-        ammunitionText.SetText("Ammo: " + ammunitionInGun);
 
         //fx
         muzzleFlash.Play();
@@ -160,10 +161,11 @@ public class GunScriptV2 : MonoBehaviour
 */
     public IEnumerator Reload()
     {
+        
         gunAudio.PlayOneShot(reloadSound, 1.0f);
         yield return new WaitForSeconds(reloadTime);
 
-
+       
         if (magazinSize - ammunitionInGun <= playerInventory.amunition)
         {
             playerInventory.amunition -= (magazinSize - ammunitionInGun);
@@ -175,16 +177,27 @@ public class GunScriptV2 : MonoBehaviour
             playerInventory.amunition = 0;
         }
 
+        
 
-        ammunitionText.SetText("Ammo: " + ammunitionInGun);
-        if (gunUser = GameObject.Find("Player"))
+        /*if (gunUser = GameObject.Find("Player"))
         {
             playerShoot.playerIsReloading = false;
+            playerShoot.ammunitionText.SetText("Ammo: " + playerShoot.gun.ammunitionInGun);
         }
         else if (gunUser = GameObject.Find("EnemyV2"))
         {
             enemyShoot.enemyIsReloading = false;
+        }*/
+        try
+        {
+            playerShoot.playerIsReloading = false;
+            playerShoot.ammunitionText.SetText("Ammo: " + playerShoot.gun.ammunitionInGun);
         }
+        catch (NullReferenceException)
+        {
+            enemyShoot.enemyIsReloading = false;
+        }
+
     }
 }
 

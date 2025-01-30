@@ -46,9 +46,10 @@ public class EnemyShootBehavior : MonoBehaviour
                 }
             }
         }
-        if (gun.ammunitionInGun == 0)
+        if (gun.ammunitionInGun == 0 && !enemyIsReloading)
         {
-            gun.Reload();
+            enemyIsReloading = true;
+            StartCoroutine(gun.Reload());
         }
     }
 
