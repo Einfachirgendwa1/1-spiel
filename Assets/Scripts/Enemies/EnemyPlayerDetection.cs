@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyPlayerDetection : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class EnemyPlayerDetection : MonoBehaviour
     {
         playerReference = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+    }
+
+    private void Update()
+    {
+        TurnToPlayer();
     }
 
     IEnumerator FOVRoutine()
@@ -61,5 +67,19 @@ public class EnemyPlayerDetection : MonoBehaviour
             canSeePlayer = false;
         }
 
+    }
+
+    void TurnToPlayer()
+    {
+        // warum funktioniert das nicht???
+        Vector3 directionToPlayer = (playerReference.transform.position - transform.position).normalized;
+        if (canSeePlayer)
+        {
+            transform.rotation = Quaternion.Euler(0f, directionToPlayer.y, 0f);  
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 0, 0f);
+        }
     }
 }
