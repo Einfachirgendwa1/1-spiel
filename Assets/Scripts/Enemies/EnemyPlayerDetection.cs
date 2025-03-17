@@ -22,11 +22,6 @@ public class EnemyPlayerDetection : MonoBehaviour
         StartCoroutine(FOVRoutine());
     }
 
-    private void Update()
-    {
-        TurnToPlayer();
-    }
-
     IEnumerator FOVRoutine()
     {
         float delay = 0.2f;
@@ -55,6 +50,7 @@ public class EnemyPlayerDetection : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
                     canSeePlayer = true;
+                    transform.LookAt(target);
                 }
                 else
                     canSeePlayer = false;
@@ -71,7 +67,7 @@ public class EnemyPlayerDetection : MonoBehaviour
 
     void TurnToPlayer()
     {
-        // warum funktioniert das nicht???
+        /*warum funktioniert das nicht???
         Vector3 directionToPlayer = (playerReference.transform.position - transform.position).normalized;
         if (canSeePlayer)
         {
@@ -80,6 +76,7 @@ public class EnemyPlayerDetection : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Euler(0f, 0, 0f);
-        }
+        }*/
+
     }
 }

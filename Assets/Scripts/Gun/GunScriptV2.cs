@@ -15,10 +15,11 @@ public class GunScriptV2 : MonoBehaviour
     public float reloadTime = 2.0f;
     public float range = 100.0f;
     public float damage = 10.0f;
+    public float weaponSpray; [Range(0f, 1f)]
 
     public bool isAutomatic;
 
-    //funktional values
+    //functional values
     public float timeSinceLastShot;
 
     //public bool isReloading;
@@ -39,7 +40,7 @@ public class GunScriptV2 : MonoBehaviour
 
     
 
-    public Camera cam; //used to have an origin point for the raycast
+    public GameObject cam; //used to have an origin point for the raycast
 
     PlayerInventory playerInventory;
     GameObject gunUser;
@@ -57,6 +58,15 @@ public class GunScriptV2 : MonoBehaviour
 
         playerShoot = gunUser.GetComponent<PlayerShoot>();
         enemyShoot = gunUser.GetComponent<EnemyShootBehavior>();
+        try
+        {
+            cam = gunUser.transform.GetChild(0).gameObject;
+        }
+        catch (NullReferenceException)
+        {
+            cam = gunUser.transform.GetChild(0).gameObject;
+        }
+        
     }
 
     // Update is called once per frame
@@ -114,6 +124,9 @@ public class GunScriptV2 : MonoBehaviour
         muzzleFlash.Play();
         gunAudio.PlayOneShot(shootSound, 1.0f);
 
+        //Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0); //der weapon spray wert wird als wert im bogenmaﬂ interpretiert.
+                                                                                                                                                                 // er wird ins gradmaﬂ umgerechnet. das ergebniss wird durch 4 geteielt
+                                                                                                                                                                 // um einen maximalen spray von 45∞ zu erhalten (90 w‰ren unrealistisch)
         RaycastHit hit;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
@@ -121,9 +134,14 @@ public class GunScriptV2 : MonoBehaviour
             Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
+            HealthManager player = hit.transform.GetComponent<HealthManager>();
             if (target != null)
             {
                 target.TakeDamage(damage);
+            }
+            else if (player != null)
+            {
+                player.GetHurt(damage);
             }
 
         }
