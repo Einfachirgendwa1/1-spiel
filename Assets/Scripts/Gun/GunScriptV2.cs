@@ -15,7 +15,8 @@ public class GunScriptV2 : MonoBehaviour
     public float reloadTime = 2.0f;
     public float range = 100.0f;
     public float damage = 10.0f;
-    public float weaponSpray; [Range(0f, 1f)]
+    [Range(-1f, 1f)]
+    public float weaponSpray; 
 
     public bool isAutomatic;
 
@@ -124,14 +125,17 @@ public class GunScriptV2 : MonoBehaviour
         muzzleFlash.Play();
         gunAudio.PlayOneShot(shootSound, 1.0f);
 
-        //Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0); //der weapon spray wert wird als wert im bogenmaﬂ interpretiert.
+        // Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0).normalized; //der weapon spray wert wird als wert im bogenmaﬂ interpretiert.
                                                                                                                                                                  // er wird ins gradmaﬂ umgerechnet. das ergebniss wird durch 4 geteielt
                                                                                                                                                                  // um einen maximalen spray von 45∞ zu erhalten (90 w‰ren unrealistisch)
         RaycastHit hit;
+       //float i = UnityEngine.Random.Range(-weaponSpray, weaponSpray);
+       float i = 0;
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(i*45, Vector3.up)* cam.transform.forward, out hit, range))  //cam.transform.forward
         {
             Debug.Log(hit.transform.name);
+            Debug.DrawLine(cam.transform.position, Quaternion.AngleAxis(i*45, Vector3.up) * cam.transform.forward,Color.red, 2.5f);
 
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
@@ -145,6 +149,9 @@ public class GunScriptV2 : MonoBehaviour
             }
 
         }
+        
+
+        
 
         timeSinceLastShot = 0;
     }
@@ -177,6 +184,8 @@ public class GunScriptV2 : MonoBehaviour
     }
 
 */
+
+   
     public IEnumerator Reload()
     {
         
