@@ -10226,10 +10226,10 @@ MonoBehaviour:
   reloadTime: 2
   range: 100
   damage: 30
-  weaponSprayX: 0
-  weaponSprayY: 0
-  maxSpray: 0
-  isAutomatic: 1
+  weaponSprayX: 0.05
+  weaponSprayY: 0.05
+  maxSpray: 10
+  isAutomatic: 0
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
   reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}

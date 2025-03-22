@@ -136,11 +136,21 @@ public class GunScriptV2 : MonoBehaviour
         RaycastHit hit;
         float x = UnityEngine.Random.Range(-weaponSprayX, weaponSprayX);
         float y = UnityEngine.Random.Range(-weaponSprayY, weaponSprayY);
+        float shotsInaRow = 1;
+        try
+        {
+            shotsInaRow = playerShoot.shotsInARow;
+        }
+        catch (NullReferenceException) 
+        {
+            shotsInaRow = 1;
+        }
+        
 
-        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up)* Quaternion.AngleAxis(y * maxSpray, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
+        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right) * Quaternion.AngleAxis(-shotsInaRow/3, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
         {
             Debug.Log(hit.transform.name);
-            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right)* (cam.transform.forward*20), Color.red, 2f);
+            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right) * Quaternion.AngleAxis(-shotsInaRow/3, Vector3.right) * (cam.transform.forward*20), Color.red, 3f);
 
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
