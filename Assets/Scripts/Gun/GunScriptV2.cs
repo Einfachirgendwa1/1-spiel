@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class GunScriptV2 : MonoBehaviour
@@ -13,15 +12,21 @@ public class GunScriptV2 : MonoBehaviour
 
     public float firerate = 1.0f;
     public float reloadTime = 2.0f;
-    public float range = 100.0f;
+    public float range = 200.0f;
     public float damage = 10.0f;
-    [Range(-1f, 1f)]
-    public float weaponSpray; 
+    [Range(0f, 1f)]
+    public float weaponSprayX;
+    [Range(0f, 1f)]
+    public float weaponSprayY;
+    [Range(0f, 15f)]
+    public float maxSpray;
+
 
     public bool isAutomatic;
 
     //functional values
     public float timeSinceLastShot;
+    
 
     //public bool isReloading;
     PlayerShoot playerShoot;
@@ -129,13 +134,13 @@ public class GunScriptV2 : MonoBehaviour
                                                                                                                                                                  // er wird ins gradmaﬂ umgerechnet. das ergebniss wird durch 4 geteielt
                                                                                                                                                                  // um einen maximalen spray von 45∞ zu erhalten (90 w‰ren unrealistisch)
         RaycastHit hit;
-       //float i = UnityEngine.Random.Range(-weaponSpray, weaponSpray);
-       float i = 0;
+        float x = UnityEngine.Random.Range(-weaponSprayX, weaponSprayX);
+        float y = UnityEngine.Random.Range(-weaponSprayY, weaponSprayY);
 
-        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(i*45, Vector3.up)* cam.transform.forward, out hit, range))  //cam.transform.forward
+        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up)* Quaternion.AngleAxis(y * maxSpray, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
         {
             Debug.Log(hit.transform.name);
-            Debug.DrawLine(cam.transform.position, Quaternion.AngleAxis(i*45, Vector3.up) * cam.transform.forward,Color.red, 2.5f);
+            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right)* (cam.transform.forward*20), Color.red, 2f);
 
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
@@ -219,6 +224,7 @@ public class GunScriptV2 : MonoBehaviour
         {
             playerShoot.playerIsReloading = false;
             playerShoot.ammunitionText.SetText("Ammo: " + playerShoot.gun.ammunitionInGun);
+            playerShoot.shotsInARow = 0;
         }
         catch (NullReferenceException)
         {

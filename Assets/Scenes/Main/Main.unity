@@ -2673,7 +2673,7 @@ MonoBehaviour:
   reloadTime: 2
   range: 100
   damage: 30
-  weaponSpray: 0.5
+  weaponSpray: 1
   isAutomatic: 1
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}

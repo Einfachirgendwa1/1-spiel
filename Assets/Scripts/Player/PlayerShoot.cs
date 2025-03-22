@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using static UnityEngine.Android.AndroidGame;
 using TMPro;
+using System.Threading;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerShoot : MonoBehaviour
     public TextMeshProUGUI ammunitionText;
 
     //funktional values
+    public float shotsInARow = 0;
     public bool playerIsReloading;
     bool fireButtonUp = true;
     public Camera cam;
@@ -39,6 +41,7 @@ public class PlayerShoot : MonoBehaviour
         {
             fireButtonUp = false;
             gun.Shoot();
+            shotsInARow += 1;
             ammunitionText.SetText("Ammo: " + gun.ammunitionInGun);
         }
 
@@ -46,6 +49,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             fireButtonUp = true;
+            
         }
 
         //reloading
@@ -60,6 +64,16 @@ public class PlayerShoot : MonoBehaviour
             {
                 // sound, nachricht das player keinen ammo hat
             }
+        }
+
+        //decreases the ShotsInARow variable to make the spray work on semi automatic guns
+        if (shotsInARow >= 0.3 && fireButtonUp)
+        {
+            shotsInARow -= Time.deltaTime * shotsInARow * 0.90f;
+        }
+        else if ( shotsInARow < 0.3f)
+        {
+            shotsInARow = 0;
         }
     }
 
