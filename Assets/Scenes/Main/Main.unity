@@ -2673,7 +2673,9 @@ MonoBehaviour:
   reloadTime: 2
   range: 100
   damage: 30
-  weaponSpray: 1
+  weaponSprayX: 0.06
+  weaponSprayY: 0.06
+  maxSpray: 10
   isAutomatic: 1
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
@@ -3613,7 +3615,9 @@ MonoBehaviour:
   reloadTime: 2
   range: 100
   damage: 10
-  weaponSpray: 1
+  weaponSprayX: 0
+  weaponSprayY: 0
+  maxSpray: 0
   isAutomatic: 0
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e196615aab553a14ab4e1aeb462c195c, type: 3}
@@ -10222,7 +10226,9 @@ MonoBehaviour:
   reloadTime: 2
   range: 100
   damage: 30
-  weaponSpray: 1
+  weaponSprayX: 0
+  weaponSprayY: 0
+  maxSpray: 0
   isAutomatic: 1
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
@@ -12455,6 +12461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
   ammunitionText: {fileID: 708938910}
+  shotsInARow: 0
   playerIsReloading: 0
   cam: {fileID: 0}
 --- !u!114 &830808277
