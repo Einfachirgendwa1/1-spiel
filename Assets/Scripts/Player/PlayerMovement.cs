@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce = 400;
     public float movePercentageGround = 100;
     public float movePercentageAir = 30;
+    public float maxSpeed = 10;
 
     [Header("Collision")]
     public LayerMask whatIsGround;
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        Debug.Log(playerRb.linearVelocity.magnitude);
+
         bool grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.5F, whatIsGround);
         Vector3 plane = raycasthit.normal;
 
