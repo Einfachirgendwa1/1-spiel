@@ -13930,7 +13930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   acceleration: 0.2
-  jumpForce: 5
+  jumpForce: 75
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1025
@@ -15324,8 +15324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4186c6c281bf9f24f8cc8d300c4bc1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 1000
-  sensY: 1000
+  sensX: 350
+  sensY: 350
 --- !u!1 &972219200
 GameObject:
   m_ObjectHideFlags: 0

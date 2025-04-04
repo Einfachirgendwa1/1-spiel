@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Update() {
         if (Input.GetKey(KeyCode.Space) && grounded) {
-            playerRb.AddForce(new(0, jumpForce, 0), ForceMode.VelocityChange);
+            playerRb.AddForce(new(0, jumpForce, 0), ForceMode.Impulse);
             grounded = false;
         }
     }
