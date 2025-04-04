@@ -13929,9 +13929,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  jumpForce: 230
-  movePercentageGround: 100
-  movePercentageAir: 20
+  acceleration: 0.2
+  jumpForce: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1025
