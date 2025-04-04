@@ -64,14 +64,8 @@ public class GunScriptV2 : MonoBehaviour
 
         playerShoot = gunUser.GetComponent<PlayerShoot>();
         enemyShoot = gunUser.GetComponent<EnemyShootBehavior>();
-        try
-        {
-            cam = gunUser.transform.GetChild(0).gameObject;
-        }
-        catch (NullReferenceException)
-        {
-            cam = gunUser.transform.GetChild(0).gameObject;
-        }
+       
+        cam = gunUser.transform.GetChild(0).gameObject;
         
     }
 
