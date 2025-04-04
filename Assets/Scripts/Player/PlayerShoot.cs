@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
 {
     //public int amunition = 100;
     WeaponSwitching gunSwitching;
-    public GunScriptV2 gun; //in weapun switching assignet
+    public GunScriptV2 gun; //in weapun switching assignet in l. 21
     PlayerInventory playerInventory;
     public TextMeshProUGUI ammunitionText;
 
