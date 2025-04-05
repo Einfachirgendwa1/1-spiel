@@ -19,8 +19,7 @@ public class GunScriptV2 : MonoBehaviour
     [Range(0f, 1f)]
     public float weaponSprayY;
     [Range(0f, 15f)]
-    public float maxSpray;
-
+    public float recoil;
 
     public bool isAutomatic;
 
@@ -141,10 +140,10 @@ public class GunScriptV2 : MonoBehaviour
         }
         
 
-        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right) * Quaternion.AngleAxis(-shotsInaRow/3, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
+        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) * Quaternion.AngleAxis(shotsInaRow*recoil, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
         {
             Debug.Log(hit.transform.name);
-            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x * maxSpray, Vector3.up) * Quaternion.AngleAxis(y * maxSpray, Vector3.right) * Quaternion.AngleAxis(-shotsInaRow/3, Vector3.right) * (cam.transform.forward*20), Color.red, 3f);
+            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) * Quaternion.AngleAxis(shotsInaRow*recoil, Vector3.right) * (cam.transform.forward*20), Color.red, 4f);
 
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
