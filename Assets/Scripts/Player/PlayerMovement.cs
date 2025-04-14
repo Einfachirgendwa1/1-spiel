@@ -3,8 +3,6 @@ using UnityEngine;
 public class PlayerMovement : Movement.Movement {
     [Header("Movement")] public float movementSpeed = 20;
 
-    public float acceleration = 0.1F;
-
     public float jumpForce = 4;
 
     [Header("Collision")] public LayerMask whatIsGround;
@@ -14,7 +12,6 @@ public class PlayerMovement : Movement.Movement {
 
     public void Start() {
         rigidbody = GetComponent<Rigidbody>();
-        movementAcceleration = acceleration;
     }
 
     public void Update() {

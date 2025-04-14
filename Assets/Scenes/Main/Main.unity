@@ -13928,11 +13928,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26f25a7d339c13459d8e74d24cda4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementAcceleration: 20
+  movementAcceleration: 0.1
   grounded: 1
   rigidbody: {fileID: 0}
   movementSpeed: 10
-  acceleration: 0.2
   jumpForce: 75
   whatIsGround:
     serializedVersion: 2

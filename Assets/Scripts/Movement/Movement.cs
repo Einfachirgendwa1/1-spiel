@@ -31,5 +31,9 @@ namespace Movement {
         }
 
         protected abstract Vector3 MovementDirection(Vector3 plane);
+
+        protected Vector3 Towards(Vector3 point) {
+            return point - transform.position;
+        }
     }
 }
