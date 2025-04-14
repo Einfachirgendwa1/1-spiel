@@ -131,7 +131,6 @@ public class GunScriptV2 : MonoBehaviour {
                 Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * cam.transform.forward, out hit,
                 range)) //cam.transform.forward
         {
-            Debug.Log(hit.transform.name);
             Debug.DrawRay(cam.transform.position,
                 Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
                 Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * (cam.transform.forward * 20), Color.red,

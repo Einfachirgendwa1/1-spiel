@@ -37,6 +37,5 @@ public class WeaponSwitching : MonoBehaviour {
         weapons[weaponIndex].gameObject.GetComponent<GunScriptV2>().timeSinceLastShot
             = 1.0f / (weapons[weaponIndex].gameObject.GetComponent<GunScriptV2>().firerate / 60);
         weapons[weaponIndex].root.GetComponent<PlayerShoot>().gun = weapons[weaponIndex].GetComponent<GunScriptV2>();
-        Debug.Log("gun is assinget");
     }
 }

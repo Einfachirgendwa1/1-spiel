@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2316615007474347643}
   - component: {fileID: 9053684390083029725}
   - component: {fileID: 1060252969484921789}
+  - component: {fileID: 8873184979358005329}
   m_Layer: 0
   m_Name: EnemyV2
   m_TagString: Untagged
@@ -320,13 +321,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a4901bd2f6477199a1c9ab0ac21271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementAcceleration: 20
-  grounded: 1
-  rigidbody: {fileID: 0}
-  acceleration: 20
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
+--- !u!195 &8873184979358005329
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154720572634413384}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3706317273570672164
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,7 +5507,7 @@ MonoBehaviour:
   damage: 30
   weaponSprayX: 0.06
   weaponSprayY: 0.06
-  maxSpray: 10
+  recoil: 0
   isAutomatic: 1
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}

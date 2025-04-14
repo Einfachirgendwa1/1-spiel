@@ -33,36 +33,34 @@ namespace Enemies {
         }
 
         private void FieldOfViewCheck() {
-            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
-
-            foreach (Collider rangeCheck in rangeChecks) {
-                Transform target = rangeCheck.transform;
-                Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-                float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-                if (!(angleToTarget < angle / 2)) {
-                    continue;
-                }
-
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                canSeePlayer = !Physics.Raycast(
-                    transform.position,
-                    directionToTarget,
-                    distanceToTarget,
-                    obstructionMask
-                );
-                state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
-
-                if (!canSeePlayer) {
-                    continue;
-                }
-
-                transform.LookAt(target);
+            Collider[] rangeChecks = new Collider[1];
+            if (Physics.OverlapSphereNonAlloc(transform.position, radius, rangeChecks, targetMask) == 0) {
+                canSeePlayer = false;
                 return;
             }
 
-            canSeePlayer = false;
+            Collider rangeCheck = rangeChecks[0];
+            Transform target = rangeCheck.transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+            if (!(angleToTarget < angle / 2)) {
+                return;
+            }
+
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+            canSeePlayer = !Physics.Raycast(
+                transform.position,
+                directionToTarget,
+                distanceToTarget,
+                obstructionMask
+            );
+            state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
+
+            if (canSeePlayer) {
+                transform.LookAt(target);
+            }
         }
     }
 }

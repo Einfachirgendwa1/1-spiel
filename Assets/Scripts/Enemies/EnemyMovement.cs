@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Assertions;
 
 namespace Enemies {
     [Serializable]
     public class Path {
+        public static Path empty = new(new Vector3[] { });
         private readonly Vector3[] points;
         private int index;
 
@@ -27,18 +29,28 @@ namespace Enemies {
         }
     }
 
-    public class EnemyMovement : Movement.Movement {
-        public LayerMask whatIsGround;
-        public Path patrollingPath;
+    public class EnemyMovement : MonoBehaviour {
+        public Path patrollingPath = Path.empty;
 
+        private NavMeshAgent agent;
         private EnemyPlayerDetection detection;
-
         private Vector3? target;
-        protected override LayerMask WhatIsGround => whatIsGround;
 
         private void Start() {
             detection = GetComponent<EnemyPlayerDetection>();
-            rigidbody = GetComponent<Rigidbody>();
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        private void Update() {
+            agent.destination = GetTargetPoint();
+        }
+
+        private Vector3 GetTargetPoint() {
+            return detection.state switch {
+                EnemyState.Patrolling => FollowPath(patrollingPath),
+                EnemyState.Attacking  => AttackPlayer(),
+                _                     => throw new ArgumentOutOfRangeException()
+            };
         }
 
         private Vector3 FollowPath(Path path) {
@@ -46,7 +58,7 @@ namespace Enemies {
 
             // we have no points to go to, so we just stand there doing nothing
             if (target == null) {
-                return Vector3.zero;
+                return transform.position;
             }
 
             Vector3 distance = target.Value - transform.position;
@@ -55,15 +67,7 @@ namespace Enemies {
                 Assert.IsTrue(target.HasValue);
             }
 
-            return Towards(target.Value);
-        }
-
-        protected override Vector3 MovementDirection(Vector3 plane) {
-            return detection.state switch {
-                EnemyState.Patrolling => FollowPath(patrollingPath),
-                EnemyState.Attacking  => AttackPlayer(),
-                _                     => throw new ArgumentOutOfRangeException()
-            };
+            return target.Value;
         }
 
         private Vector3 AttackPlayer() {
@@ -72,8 +76,8 @@ namespace Enemies {
             float distanceToPlayer = distance.magnitude;
 
             return distanceToPlayer switch {
-                > 7.5F => Towards(playerPosition),
-                _      => Vector3.zero
+                > 4 => playerPosition,
+                _   => transform.position
             };
         }
     }
