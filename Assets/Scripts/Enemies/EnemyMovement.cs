@@ -48,15 +48,11 @@ namespace Enemies {
         }
 
         protected override Vector3 MovementDirection(Vector3 plane) {
-            switch (detection.state) {
-                case EnemyState.Patrolling:
-                    return FollowPath(patrollingPath);
-                case EnemyState.Attacking:
-                    return AttackPlayer();
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
+            return detection.state switch {
+                EnemyState.Patrolling => FollowPath(patrollingPath),
+                EnemyState.Attacking => AttackPlayer(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         private Vector3 AttackPlayer() {
