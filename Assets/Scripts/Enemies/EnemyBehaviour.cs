@@ -2,24 +2,22 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public NavMeshAgent agent;
 
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    //Patroling
+    // Patrolling
     public Vector3 walkPoint;
-    bool walkPointSet;
+    private bool walkPointSet;
     public float walkPointRange;
 
-    //Attacking
+    // Attacking
     public float timeBetweenAttacks;
-    bool alreadyAttacked;
+    private bool alreadyAttacked;
 
-    //States
+    // States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
@@ -40,7 +38,7 @@ public class EnemyBehaviour : MonoBehaviour {
         }
     }
 
-    private void Patroling() {
+    private void Patrolling() {
         if (!walkPointSet) SearchWalkPoint();
         else agent.SetDestination(walkPoint);
 
@@ -62,21 +60,15 @@ public class EnemyBehaviour : MonoBehaviour {
 
         transform.LookAt(player);
 
-        if (!alreadyAttacked) {
-            //Attack Code
+        if (alreadyAttacked) return;
+        //Attack Code
 
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-        }
+        alreadyAttacked = true;
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
 
     private void ResetAttack() {
         alreadyAttacked = false;
-    }
-
-    void Start() {
-
     }
 
     // Update is called once per frame
@@ -86,14 +78,11 @@ public class EnemyBehaviour : MonoBehaviour {
         playerInAttackRange = (transform.position - player.position).magnitude <= attackRange;
 
         if (!playerInSightRange && !playerInAttackRange) {
-            Patroling();
-            //print("Enemy is now Patroling");
+            Patrolling();
         } else if (playerInSightRange && !playerInAttackRange) {
             ChasePlayer();
-            //print("Enemy is now Chasing");
         } else {
             AttackPlayer();
-            //print("Enemy is now Attacking");
         }
     }
 }

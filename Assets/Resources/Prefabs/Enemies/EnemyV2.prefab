@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3751510791316448788}
   - component: {fileID: 2316615007474347643}
   - component: {fileID: 9053684390083029725}
+  - component: {fileID: 1060252969484921789}
   m_Layer: 0
   m_Name: EnemyV2
   m_TagString: Untagged
@@ -167,6 +168,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   canSeePlayer: 0
+  state: 0
 --- !u!114 &4041411442364221636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +308,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1060252969484921789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154720572634413384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a4901bd2f6477199a1c9ab0ac21271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAcceleration: 20
+  grounded: 1
+  rigidbody: {fileID: 0}
+  acceleration: 20
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3706317273570672164
 GameObject:
   m_ObjectHideFlags: 0

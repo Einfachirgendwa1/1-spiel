@@ -1,82 +1,64 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class EnemyPlayerDetection : MonoBehaviour
-{
-    public float radius;
-    [Range(0, 360)]
-    public float angle;
-
-    public GameObject playerReference;
-
-    public LayerMask targetMask;
-    public LayerMask obstructionMask;
-
-    public bool canSeePlayer;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        playerReference = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(FOVRoutine());
+namespace Enemies {
+    public enum EnemyState {
+        Patrolling,
+        Attacking
     }
 
-    IEnumerator FOVRoutine()
-    {
-        float delay = 0.2f;
-        WaitForSeconds wait = new WaitForSeconds(delay);
+    public class EnemyPlayerDetection : MonoBehaviour {
+        public float radius;
 
-        while (true)
-        {
-            yield return wait;
-            FieldOfViewCheck();
+        [Range(0, 360)] public float angle;
+
+        public GameObject playerReference;
+
+        public LayerMask targetMask;
+        public LayerMask obstructionMask;
+
+        public bool canSeePlayer;
+        public EnemyState state = EnemyState.Patrolling;
+
+        private void Start() {
+            playerReference = GameObject.FindGameObjectWithTag("Player");
+            StartCoroutine(FOVRoutine());
         }
-    }
 
-    void FieldOfViewCheck()
-    {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+        private IEnumerator FOVRoutine() {
+            while (true) {
+                yield return new WaitForSeconds(0.2f);
+                FieldOfViewCheck();
+            }
+        }
 
-        if (rangeChecks.Length != 0)
-        {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+        private void FieldOfViewCheck() {
+            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
-            {
+            foreach (Collider rangeCheck in rangeChecks) {
+                Transform target = rangeCheck.transform;
+                Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+                float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+                if (!(angleToTarget < angle / 2)) continue;
+
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                {
-                    canSeePlayer = true;
-                    transform.LookAt(target);
-                }
-                else
-                    canSeePlayer = false;
+                canSeePlayer = !Physics.Raycast(
+                    transform.position,
+                    directionToTarget,
+                    distanceToTarget,
+                    obstructionMask
+                );
+                state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
+
+                if (!canSeePlayer) continue;
+
+                transform.LookAt(target);
+                return;
             }
-            else
-                canSeePlayer = false;
-        }
-        else if (canSeePlayer)
-        {
+
             canSeePlayer = false;
         }
-
-    }
-
-    void TurnToPlayer()
-    {
-        /*warum funktioniert das nicht???
-        Vector3 directionToPlayer = (playerReference.transform.position - transform.position).normalized;
-        if (canSeePlayer)
-        {
-            transform.rotation = Quaternion.Euler(0f, directionToPlayer.y, 0f);  
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0f, 0, 0f);
-        }*/
-
     }
 }

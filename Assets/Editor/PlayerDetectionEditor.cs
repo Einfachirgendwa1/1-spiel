@@ -1,21 +1,10 @@
+using Enemies;
 using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(EnemyPlayerDetection))]
 public class PlayerDetectionEditor : Editor
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnSceneGUI()
     {
         EnemyPlayerDetection fov = (EnemyPlayerDetection)target;
@@ -29,11 +18,9 @@ public class PlayerDetectionEditor : Editor
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle01 * fov.radius);
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle02 * fov.radius);
 
-        if (fov.canSeePlayer)
-        {
-            Handles.color = Color.green;
-            Handles.DrawLine(fov.transform.position, fov.playerReference.transform.position);
-        }
+        if (!fov.canSeePlayer) return;
+        Handles.color = Color.green;
+        Handles.DrawLine(fov.transform.position, fov.playerReference.transform.position);
     }
 
     Vector3 DirectionFromAngle(float eulerY, float angleInDegrees)

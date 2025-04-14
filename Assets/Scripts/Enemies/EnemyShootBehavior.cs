@@ -1,82 +1,36 @@
+using Enemies;
 using UnityEngine;
 
-public class EnemyShootBehavior : MonoBehaviour
-{
-    bool fireButton = false;
-    bool reloadButton = false;
+public class EnemyShootBehavior : MonoBehaviour {
     public bool enemyIsReloading;
-
-
-    float timer = 0;
-    float timeBetweenShotsMin = 0.5f;
-    float timeBetweenShotsMax = 2;
     public GunScriptV2 gun;
-    EnemyPlayerDetection playerDetection;
+    private bool fireButton;
+    private EnemyPlayerDetection playerDetection;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        gun = this.transform.GetChild(transform.childCount -1).GetComponentInChildren<GunScriptV2>(); //scheint nicht zu funktionieren
+    private float timer;
+
+    private void Start() {
+        gun = transform.GetChild(transform.childCount - 1)
+            .GetComponentInChildren<GunScriptV2>();
         playerDetection = GetComponent<EnemyPlayerDetection>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
         gun.timeSinceLastShot += Time.deltaTime;
 
-        if (playerDetection.canSeePlayer)
-        {
-            if (CanShoot())
-            {
-                if (gun.isAutomatic)
-                {
-                       gun.Shoot();
-                }
-                else if (!gun.isAutomatic)
-                {
-                    fireButton = true;
-                    gun.Shoot();
-                    timer = 0;
-                    while (timer < 1.0f / (gun.firerate / 60) + 0.5f)
-                    {
-                        timer += Time.deltaTime;
-                    }
-                    fireButton = false;
-                }
-            }
-        }
-        if (gun.ammunitionInGun == 0 && !enemyIsReloading)
-        {
+        if (playerDetection.canSeePlayer && CanShoot()) gun.Shoot();
+
+
+        if (gun.ammunitionInGun == 0 && !enemyIsReloading) {
             enemyIsReloading = true;
             StartCoroutine(gun.Reload());
         }
     }
 
-    bool CanShoot()
-    {
-        if (gun.isAutomatic)
-        {
-            if (gun.ammunitionInGun > 0 && !enemyIsReloading && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if (gun.ammunitionInGun > 0 && !enemyIsReloading && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60) && !fireButton)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
+    private bool CanShoot() {
+        return gun.ammunitionInGun > 0 
+               && !enemyIsReloading 
+               && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60) 
+               && (!gun.isAutomatic || !fireButton);
     }
 }
