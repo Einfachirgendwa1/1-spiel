@@ -4,12 +4,12 @@ public class PlayerCam : MonoBehaviour {
     public float sensX;
     public float sensY;
 
-    float xRotation;
-    float yRotation;
+    private Transform player;
 
-    Transform player;
+    private float xRotation;
+    private float yRotation;
 
-    void Start() {
+    private void Start() {
         // Cursor verstecken und im Fenster locken
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -18,7 +18,7 @@ public class PlayerCam : MonoBehaviour {
         player = transform.parent.parent;
     }
 
-    void Update() {
+    private void Update() {
         // Maus Input lesen und anpassen
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;

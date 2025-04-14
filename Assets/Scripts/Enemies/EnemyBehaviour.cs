@@ -10,20 +10,37 @@ public class EnemyBehaviour : MonoBehaviour {
 
     // Patrolling
     public Vector3 walkPoint;
-    private bool walkPointSet;
     public float walkPointRange;
 
     // Attacking
     public float timeBetweenAttacks;
-    private bool alreadyAttacked;
 
     // States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+    private bool alreadyAttacked;
+    private bool walkPointSet;
 
     private void Awake() {
         player = GameObject.Find("PlayerObj").transform;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    // Update is called once per frame
+    private void Update() {
+        //check for attack and sight range
+        playerInSightRange = (transform.position - player.position).magnitude <= sightRange;
+        playerInAttackRange = (transform.position - player.position).magnitude <= attackRange;
+
+        if (!playerInSightRange && !playerInAttackRange) {
+            Patrolling();
+        }
+        else if (playerInSightRange && !playerInAttackRange) {
+            ChasePlayer();
+        }
+        else {
+            AttackPlayer();
+        }
     }
 
     private void SearchWalkPoint() {
@@ -39,8 +56,12 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     private void Patrolling() {
-        if (!walkPointSet) SearchWalkPoint();
-        else agent.SetDestination(walkPoint);
+        if (!walkPointSet) {
+            SearchWalkPoint();
+        }
+        else {
+            agent.SetDestination(walkPoint);
+        }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -60,7 +81,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
         transform.LookAt(player);
 
-        if (alreadyAttacked) return;
+        if (alreadyAttacked) {
+            return;
+        }
         //Attack Code
 
         alreadyAttacked = true;
@@ -69,20 +92,5 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void ResetAttack() {
         alreadyAttacked = false;
-    }
-
-    // Update is called once per frame
-    void Update() {
-        //check for attack and sight range
-        playerInSightRange = (transform.position - player.position).magnitude <= sightRange;
-        playerInAttackRange = (transform.position - player.position).magnitude <= attackRange;
-
-        if (!playerInSightRange && !playerInAttackRange) {
-            Patrolling();
-        } else if (playerInSightRange && !playerInAttackRange) {
-            ChasePlayer();
-        } else {
-            AttackPlayer();
-        }
     }
 }

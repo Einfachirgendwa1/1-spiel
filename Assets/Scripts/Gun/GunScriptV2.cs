@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class GunScriptV2 : MonoBehaviour
-{
-
-
+public class GunScriptV2 : MonoBehaviour {
     //basic gun properties
     public int magazinSize = 15;
     public int ammunitionInGun;
@@ -14,28 +12,17 @@ public class GunScriptV2 : MonoBehaviour
     public float reloadTime = 2.0f;
     public float range = 200.0f;
     public float damage = 10.0f;
-    [Range(0f, 1f)]
-    public float weaponSprayX;
-    [Range(0f, 1f)]
-    public float weaponSprayY;
-    [Range(0f, 15f)]
-    public float recoil;
+
+    [Range(0f, 1f)] public float weaponSprayX;
+
+    [Range(0f, 1f)] public float weaponSprayY;
+
+    [Range(0f, 15f)] public float recoil;
 
     public bool isAutomatic;
 
     //functional values
     public float timeSinceLastShot;
-    
-
-    //public bool isReloading;
-    PlayerShoot playerShoot;
-    EnemyShootBehavior enemyShoot;
-
-
-
-
-
-    AudioSource gunAudio;
     //Animator pistolAnimator;
 
     public AudioClip shootSound;
@@ -43,34 +30,37 @@ public class GunScriptV2 : MonoBehaviour
 
     public ParticleSystem muzzleFlash;
 
-    
 
     public GameObject cam; //used to have an origin point for the raycast
+    private EnemyShootBehavior enemyShoot;
 
-    PlayerInventory playerInventory;
-    GameObject gunUser;
+
+    private AudioSource gunAudio;
+    private GameObject gunUser;
+
+    private PlayerInventory playerInventory;
+
+
+    //public bool isReloading;
+    private PlayerShoot playerShoot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        gunUser = this.transform.root.gameObject;
+    private void Start() {
+        gunUser = transform.root.gameObject;
         gunAudio = GetComponent<AudioSource>();
         playerInventory = gunUser.GetComponent<PlayerInventory>();
 
         ammunitionInGun = magazinSize;
-        
 
 
         playerShoot = gunUser.GetComponent<PlayerShoot>();
         enemyShoot = gunUser.GetComponent<EnemyShootBehavior>();
-       
+
         cam = gunUser.transform.GetChild(0).gameObject;
-        
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
         /*
         if (player = GameObject.Find("Player"))
         {
@@ -104,7 +94,7 @@ public class GunScriptV2 : MonoBehaviour
                 }
 
             }
-        
+
 
         if (gunUser = GameObject.Find("EnemyV2"))
         {
@@ -114,52 +104,49 @@ public class GunScriptV2 : MonoBehaviour
     }
 
 
-
-    public void Shoot()
-    {
+    public void Shoot() {
         ammunitionInGun--;
 
         //fx
         muzzleFlash.Play();
         gunAudio.PlayOneShot(shootSound, 1.0f);
 
-        // Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0).normalized; //der weapon spray wert wird als wert im bogenmaß interpretiert.
-                                                                                                                                                                 // er wird ins gradmaß umgerechnet. das ergebniss wird durch 4 geteielt
-                                                                                                                                                                 // um einen maximalen spray von 45° zu erhalten (90 wären unrealistisch)
+        // Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0).normalized; //der weapon spray wert wird als wert im bogenmaï¿½ interpretiert.
+        // er wird ins gradmaï¿½ umgerechnet. das ergebniss wird durch 4 geteielt
+        // um einen maximalen spray von 45ï¿½ zu erhalten (90 wï¿½ren unrealistisch)
         RaycastHit hit;
-        float x = UnityEngine.Random.Range(-weaponSprayX, weaponSprayX);
-        float y = UnityEngine.Random.Range(-weaponSprayY, weaponSprayY);
+        float x = Random.Range(-weaponSprayX, weaponSprayX);
+        float y = Random.Range(-weaponSprayY, weaponSprayY);
         float shotsInaRow = 1;
-        try
-        {
+        try {
             shotsInaRow = playerShoot.shotsInARow;
         }
-        catch (NullReferenceException) 
-        {
+        catch (NullReferenceException) {
             shotsInaRow = 1;
         }
-        
 
-        if (Physics.Raycast(cam.transform.position, Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) * Quaternion.AngleAxis(shotsInaRow*recoil, Vector3.right) * cam.transform.forward, out hit, range))  //cam.transform.forward
+
+        if (Physics.Raycast(cam.transform.position,
+                Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
+                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * cam.transform.forward, out hit,
+                range)) //cam.transform.forward
         {
             Debug.Log(hit.transform.name);
-            Debug.DrawRay(cam.transform.position, Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) * Quaternion.AngleAxis(shotsInaRow*recoil, Vector3.right) * (cam.transform.forward*20), Color.red, 4f);
+            Debug.DrawRay(cam.transform.position,
+                Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
+                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * (cam.transform.forward * 20), Color.red,
+                4f);
 
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
-            if (target != null)
-            {
+            if (target != null) {
                 target.TakeDamage(damage);
             }
-            else if (player != null)
-            {
+            else if (player != null) {
                 player.GetHurt(damage);
             }
-
         }
-        
 
-        
 
         timeSinceLastShot = 0;
     }
@@ -193,26 +180,21 @@ public class GunScriptV2 : MonoBehaviour
 
 */
 
-   
-    public IEnumerator Reload()
-    {
-        
+
+    public IEnumerator Reload() {
         gunAudio.PlayOneShot(reloadSound, 1.0f);
         yield return new WaitForSeconds(reloadTime);
 
-       
-        if (magazinSize - ammunitionInGun <= playerInventory.amunition)
-        {
-            playerInventory.amunition -= (magazinSize - ammunitionInGun);
+
+        if (magazinSize - ammunitionInGun <= playerInventory.amunition) {
+            playerInventory.amunition -= magazinSize - ammunitionInGun;
             ammunitionInGun += magazinSize - ammunitionInGun;
         }
-        else
-        {
+        else {
             ammunitionInGun += playerInventory.amunition;
             playerInventory.amunition = 0;
         }
 
-        
 
         /*if (gunUser = GameObject.Find("Player"))
         {
@@ -223,17 +205,14 @@ public class GunScriptV2 : MonoBehaviour
         {
             enemyShoot.enemyIsReloading = false;
         }*/
-        try
-        {
+        try {
             playerShoot.playerIsReloading = false;
             playerShoot.ammunitionText.SetText("Ammo: " + playerShoot.gun.ammunitionInGun);
             playerShoot.shotsInARow = 0;
         }
-        catch (NullReferenceException)
-        {
+        catch (NullReferenceException) {
             enemyShoot.enemyIsReloading = false;
         }
-
     }
 }
 

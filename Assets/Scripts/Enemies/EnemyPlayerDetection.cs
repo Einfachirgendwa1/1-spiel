@@ -40,7 +40,9 @@ namespace Enemies {
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
 
                 float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-                if (!(angleToTarget < angle / 2)) continue;
+                if (!(angleToTarget < angle / 2)) {
+                    continue;
+                }
 
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -52,7 +54,9 @@ namespace Enemies {
                 );
                 state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
 
-                if (!canSeePlayer) continue;
+                if (!canSeePlayer) {
+                    continue;
+                }
 
                 transform.LookAt(target);
                 return;

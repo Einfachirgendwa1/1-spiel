@@ -18,7 +18,9 @@ public class EnemyShootBehavior : MonoBehaviour {
     private void Update() {
         gun.timeSinceLastShot += Time.deltaTime;
 
-        if (playerDetection.canSeePlayer && CanShoot()) gun.Shoot();
+        if (playerDetection.canSeePlayer && CanShoot()) {
+            gun.Shoot();
+        }
 
 
         if (gun.ammunitionInGun == 0 && !enemyIsReloading) {
@@ -28,9 +30,9 @@ public class EnemyShootBehavior : MonoBehaviour {
     }
 
     private bool CanShoot() {
-        return gun.ammunitionInGun > 0 
-               && !enemyIsReloading 
-               && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60) 
+        return gun.ammunitionInGun > 0
+               && !enemyIsReloading
+               && gun.timeSinceLastShot >= 1.0f / (gun.firerate / 60)
                && (!gun.isAutomatic || !fireButton);
     }
 }

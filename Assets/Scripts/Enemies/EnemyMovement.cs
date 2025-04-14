@@ -3,30 +3,33 @@ using UnityEngine;
 
 namespace Enemies {
     public class Path {
-        private Vector3[] points;
         private int index;
+        private readonly Vector3[] points;
 
         public Path(Vector3[] points) {
             this.points = points;
-            this.index = 0;
+            index = 0;
         }
 
         public Vector3? NextPoint() {
-            if (points.Length == 0) return null;
+            if (points.Length == 0) {
+                return null;
+            }
+
             index = index++ % points.Length;
             return points[index];
         }
     }
-    
+
     public class EnemyMovement : Movement.Movement {
         public int acceleration = 20;
-        
-        private readonly Path patrollingPath = new Path(new Vector3[] {});
-        private Vector3? target;
-        
-        private EnemyPlayerDetection detection;
-        
+
         public LayerMask whatIsGround;
+
+        private readonly Path patrollingPath = new(new Vector3[] { });
+
+        private EnemyPlayerDetection detection;
+        private Vector3? target;
         protected override LayerMask WhatIsGround => whatIsGround;
 
         private void Start() {
@@ -37,8 +40,10 @@ namespace Enemies {
 
         private Vector3 FollowPath(Path path) {
             target ??= path.NextPoint();
-            if (target == null) return Vector3.zero;
-            
+            if (target == null) {
+                return Vector3.zero;
+            }
+
             Vector3 distance = target.Value - transform.position;
             if (distance.magnitude < 0.1f) {
                 target = path.NextPoint();

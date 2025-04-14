@@ -1,19 +1,16 @@
 using UnityEngine;
 
-public class AmmoChest : MonoBehaviour, IInteractable
-{
+public class AmmoChest : MonoBehaviour, IInteractable {
     public int ammunitionInChest = 20;
-    bool hasInteracted = false;
-    PlayerInventory playerInventory;
+    private bool hasInteracted;
+    private PlayerInventory playerInventory;
 
-    void Start() 
-    {
+    private void Start() {
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
     }
- public void Interact()
-    {
-        if (!hasInteracted)
-        {
+
+    public void Interact() {
+        if (!hasInteracted) {
             Debug.Log("chest interaction");
             playerInventory.amunition += ammunitionInChest;
             hasInteracted = true;

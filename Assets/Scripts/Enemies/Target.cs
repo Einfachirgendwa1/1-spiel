@@ -1,27 +1,23 @@
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDamageable
-{
+public class Target : MonoBehaviour, IDamageable {
     [SerializeField] private float health = 100f;
-
-    AudioSource enemyAudio;
     [SerializeField] private AudioClip hurtSound;
     [SerializeField] private AudioClip deathSound;
 
-    void Start()
-    {
+    private AudioSource enemyAudio;
+
+    private void Start() {
         enemyAudio = GetComponent<AudioSource>();
     }
 
-    public void TakeDamage(float damage)
-    {
+    public void TakeDamage(float damage) {
         health -= damage;
-        if (health <= 0)
-        {
+        if (health <= 0) {
             enemyAudio.PlayOneShot(deathSound);
             Destroy(gameObject);
         }
+
         enemyAudio.PlayOneShot(hurtSound);
     }
-
 }
