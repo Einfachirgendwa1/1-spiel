@@ -5,35 +5,11 @@ using UnityEngine.Assertions;
 
 namespace Enemies {
     [Serializable]
-    public class Path {
-        public static Path empty = new(new Vector3[] { });
-        private readonly Vector3[] points;
-        private int index;
-
-        public Path(Vector3[] points) {
-            this.points = points;
-            index = 0;
-        }
-
-        /// <summary>
-        ///     Returns the next point in the path.
-        /// </summary>
-        /// <returns>Next point in the path or null if the path has no points.</returns>
-        public Vector3? NextPoint() {
-            if (points.Length == 0) {
-                return null;
-            }
-
-            index = index++ % points.Length;
-            return points[index];
-        }
-    }
-
     public class EnemyMovement : MonoBehaviour {
-        public Path patrollingPath = Path.empty;
-
         private NavMeshAgent agent;
         private EnemyPlayerDetection detection;
+        private Transform[] patrollingPath;
+        private int patrollingPathHead;
         private Vector3? target;
 
         private void Start() {
@@ -42,19 +18,15 @@ namespace Enemies {
         }
 
         private void Update() {
-            agent.destination = GetTargetPoint();
-        }
-
-        private Vector3 GetTargetPoint() {
-            return detection.state switch {
-                EnemyState.Patrolling => FollowPath(patrollingPath),
+            agent.destination = detection.state switch {
+                EnemyState.Patrolling => FollowPatrollingPath(),
                 EnemyState.Attacking  => AttackPlayer(),
                 _                     => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private Vector3 FollowPath(Path path) {
-            target ??= path.NextPoint();
+        private Vector3 FollowPatrollingPath() {
+            // target ??= path.NextPoint();
 
             // we have no points to go to, so we just stand there doing nothing
             if (target == null) {
@@ -63,7 +35,7 @@ namespace Enemies {
 
             Vector3 distance = target.Value - transform.position;
             if (distance.magnitude < 0.1f) {
-                target = path.NextPoint();
+                // target = path.NextPoint();
                 Assert.IsTrue(target.HasValue);
             }
 
