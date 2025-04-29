@@ -1,9 +1,9 @@
 ﻿using System;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Enemies {
-
     [Serializable]
     public class EnemyMovement : MonoBehaviour {
         private NavMeshAgent agent;
@@ -18,25 +18,13 @@ namespace Enemies {
         }
 
         private void Update() {
-
-            agent.destination = GetTargetPoint();
-        }
-
-        private Vector3 GetTargetPoint() {
-            return detection.state switch {
-                EnemyState.Patrolling => FollowPath(),
-
             agent.destination = detection.state switch {
                 EnemyState.Patrolling => FollowPatrollingPath(),
 
-                EnemyState.Attacking  => AttackPlayer(),
-                _                     => throw new ArgumentOutOfRangeException()
+                EnemyState.Attacking => AttackPlayer(),
+                _                    => throw new ArgumentOutOfRangeException()
             };
         }
-
-
-        private Vector3 FollowPath() {
-            return Vector3.zero;
 
         private Vector3 FollowPatrollingPath() {
             // target ??= path.NextPoint();
