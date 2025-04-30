@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,39 +8,48 @@ namespace Enemies {
     public class EnemyMovement : MonoBehaviour {
         private NavMeshAgent agent;
         private EnemyPlayerDetection detection;
-        private Transform[] patrollingPath;
+        private List<Vector3> patrollingPath = new();
         private int patrollingPathHead;
         private Vector3? target;
 
         private void Start() {
             detection = GetComponent<EnemyPlayerDetection>();
             agent = GetComponent<NavMeshAgent>();
+
+            Transform child = transform.Find("Path");
+            if (child != null) {
+                foreach (Transform child2 in child) {
+                    patrollingPath.Add(child2.position);
+                }
+            }
+
+            if (patrollingPath.Count != 0) {
+                target = patrollingPath[0];
+            }
         }
 
         private void Update() {
             agent.destination = detection.state switch {
                 EnemyState.Patrolling => FollowPatrollingPath(),
-
-                EnemyState.Attacking => AttackPlayer(),
-                _                    => throw new ArgumentOutOfRangeException()
+                EnemyState.Attacking  => AttackPlayer(),
+                _                     => throw new ArgumentOutOfRangeException()
             };
         }
 
         private Vector3 FollowPatrollingPath() {
-            // target ??= path.NextPoint();
-
             // we have no points to go to, so we just stand there doing nothing
             if (target == null) {
                 return transform.position;
             }
 
             Vector3 distance = target.Value - transform.position;
-            if (distance.magnitude < 0.1f) {
-                // target = path.NextPoint();
-                Assert.IsTrue(target.HasValue);
+            if (distance.magnitude < 0.5f) {
+                patrollingPathHead = (patrollingPathHead + 1) % patrollingPath.Count;
+                target = patrollingPath[patrollingPathHead];
+                Debug.Log($"Head is now {patrollingPathHead} (Count is {patrollingPath.Count})");
             }
 
-            return target.Value;
+            return target!.Value;
         }
 
         private Vector3 AttackPlayer() {

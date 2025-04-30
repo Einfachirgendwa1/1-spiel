@@ -15,6 +15,11 @@ public class EnemyShootBehavior : MonoBehaviour {
     }
 
     private void Update() {
+        if (gun == null) {
+            Debug.LogError("Gun is null!");
+            return;
+        }
+
         gun.timeSinceLastShot += Time.deltaTime;
 
         if (playerDetection.canSeePlayer && CanShoot()) {
