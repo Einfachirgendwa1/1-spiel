@@ -10,8 +10,7 @@ public class EnemyShootBehavior : MonoBehaviour {
     private float timer;
 
     private void Start() {
-        gun = transform.GetChild(transform.childCount - 1)
-            .GetComponentInChildren<GunScriptV2>();
+        gun = transform.Find("Weapon Holder").GetComponentInChildren<GunScriptV2>();
         playerDetection = GetComponent<EnemyPlayerDetection>();
     }
 
