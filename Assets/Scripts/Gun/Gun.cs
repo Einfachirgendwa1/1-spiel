@@ -58,11 +58,13 @@ namespace Gun {
 
             Vector3 direction = weaponSpray * recoilOffset * Cam.transform.forward;
 
-            Physics.Raycast(transform.position, direction, out RaycastHit hit, range);
+            bool hitSomething = Physics.Raycast(transform.position, direction, out RaycastHit hit, range);
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null) {
-                target.TakeDamage(damage);
+            if (hitSomething) {
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null) {
+                    target.TakeDamage(damage);
+                }
             }
 
             float secondsPerShot = 1f / shotsPerSecond;

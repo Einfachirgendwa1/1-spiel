@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Enemies {
     public class Target : MonoBehaviour {
-        [SerializeField] private float health = 100f;
-        [SerializeField] private AudioClip hurtSound;
-        [SerializeField] private AudioClip deathSound;
+        public float health;
+        public AudioClip hurtSound;
+        public AudioClip deathSound;
 
         private AudioSource audioSource;
 
@@ -16,11 +16,14 @@ namespace Enemies {
             health -= damage;
 
             if (health <= 0) {
-                audioSource.PlayOneShot(deathSound);
-                Destroy(this);
-            }
+                if (deathSound != null) {
+                    audioSource.PlayOneShot(deathSound);
+                }
 
-            audioSource.PlayOneShot(hurtSound);
+                Destroy(gameObject);
+            } else if (hurtSound != null) {
+                audioSource.PlayOneShot(hurtSound);
+            }
         }
     }
 }
