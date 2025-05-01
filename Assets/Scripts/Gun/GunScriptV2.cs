@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -114,21 +115,19 @@ public class GunScriptV2 : MonoBehaviour {
         // Vector3 spray = new Vector3 (UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180/Mathf.PI/4), UnityEngine.Random.Range(0, weaponSpray * Mathf.PI * 180 / Mathf.PI / 4), 0).normalized; //der weapon spray wert wird als wert im bogenma� interpretiert.
         // er wird ins gradma� umgerechnet. das ergebniss wird durch 4 geteielt
         // um einen maximalen spray von 45� zu erhalten (90 w�ren unrealistisch)
-        RaycastHit hit;
         float x = Random.Range(-weaponSprayX, weaponSprayX);
         float y = Random.Range(-weaponSprayY, weaponSprayY);
         float shotsInaRow = 1;
         try {
             shotsInaRow = playerShoot.shotsInARow;
-        }
-        catch (NullReferenceException) {
+        } catch (NullReferenceException) {
             shotsInaRow = 1;
         }
 
 
         if (Physics.Raycast(cam.transform.position,
                 Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
-                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * cam.transform.forward, out hit,
+                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * cam.transform.forward, out RaycastHit hit,
                 range)) //cam.transform.forward
         {
             Debug.DrawRay(cam.transform.position,
@@ -140,8 +139,7 @@ public class GunScriptV2 : MonoBehaviour {
             HealthManager player = hit.transform.GetComponent<HealthManager>();
             if (target != null) {
                 target.TakeDamage(damage);
-            }
-            else if (player != null) {
+            } else if (player != null) {
                 player.GetHurt(damage);
             }
         }
@@ -188,8 +186,7 @@ public class GunScriptV2 : MonoBehaviour {
         if (magazinSize - ammunitionInGun <= playerInventory.amunition) {
             playerInventory.amunition -= magazinSize - ammunitionInGun;
             ammunitionInGun += magazinSize - ammunitionInGun;
-        }
-        else {
+        } else {
             ammunitionInGun += playerInventory.amunition;
             playerInventory.amunition = 0;
         }
@@ -208,8 +205,7 @@ public class GunScriptV2 : MonoBehaviour {
             playerShoot.playerIsReloading = false;
             playerShoot.ammunitionText.SetText("Ammo: " + playerShoot.gun.ammunitionInGun);
             playerShoot.shotsInARow = 0;
-        }
-        catch (NullReferenceException) {
+        } catch (NullReferenceException) {
             enemyShoot.enemyIsReloading = false;
         }
     }

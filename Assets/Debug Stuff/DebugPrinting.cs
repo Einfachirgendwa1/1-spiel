@@ -3,13 +3,11 @@ using TMPro;
 using UnityEngine;
 
 public class Printer : MonoBehaviour {
-    [HideInInspector] public static Printer behaviour;
-    [HideInInspector] public Dictionary<int, string> clientValueMap = new();
+    public static Printer behaviour;
 
-    static int count = 0;
-    TextMeshProUGUI textMeshPro;
-
-    public static DebugPrinter NewPrinter() => new(count++, behaviour);
+    private static int count;
+    public Dictionary<int, string> clientValueMap = new();
+    private TextMeshProUGUI textMeshPro;
 
     private void Start() {
         textMeshPro = GetComponent<TextMeshProUGUI>();
@@ -21,13 +19,18 @@ public class Printer : MonoBehaviour {
         for (int index = 0; index < count; index++) {
             futureText += clientValueMap[index];
         }
+
         textMeshPro.text = futureText;
+    }
+
+    public static DebugPrinter NewPrinter() {
+        return new DebugPrinter(count++, behaviour);
     }
 }
 
 public class DebugPrinter {
-    readonly Printer behaviour;
-    readonly int index;
+    private readonly Printer behaviour;
+    private readonly int index;
 
     public DebugPrinter(int index, Printer behaviour) {
         this.index = index;

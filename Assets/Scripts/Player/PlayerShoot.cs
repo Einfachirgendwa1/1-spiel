@@ -56,8 +56,7 @@ public class PlayerShoot : MonoBehaviour {
         //decreases the ShotsInARow variable to make the spray work on semi automatic guns
         if (shotsInARow >= 0.3 && fireButtonUp) {
             shotsInARow -= Time.deltaTime * shotsInARow * 0.90f;
-        }
-        else if (shotsInARow < 0.3f) {
+        } else if (shotsInARow < 0.3f) {
             shotsInARow = 0;
         }
     }
