@@ -763,7 +763,8 @@ MonoBehaviour:
   range: 200
   reloadTimeMillis: 2000
   magazineSize: 12
-  shotsPerSecond: 1
+  shotsPerSecond: 3
+  firingLineMillis: 500
   weaponSprayX: 0
   weaponSprayY: 0
   recoil: 0

@@ -8,11 +8,13 @@ namespace Gun {
     public abstract class Guns : MonoBehaviour {
         public List<Gun> guns;
         public GameObject cam;
+        public GameObject weaponHolder;
 
-        private int currentGunIdx;
+        [NonSerialized] public int CurrentGunIdx;
         private bool reloading;
+        [NonSerialized] public bool SwitchingWeapon;
 
-        public Gun CurrentGun => guns[currentGunIdx];
+        public Gun CurrentGun => guns[CurrentGunIdx];
 
         public void Start() {
             // Wir haben nur prefabs, keine wirklichen GameObjects, daher müssen wir die zuerst instanziieren
@@ -26,29 +28,33 @@ namespace Gun {
         }
 
         private void InstantiateGuns() {
-            GameObject weaponHolder = GameObject.Find("Camera Holder/Weapon Holder");
+            weaponHolder = GameObject.Find("Camera Holder/Weapon Holder");
 
             guns = guns.Select(gun => Instantiate(gun, weaponHolder.transform)).ToList();
         }
 
         public void SelectGun(int index) {
             if (index < guns.Count) {
-                currentGunIdx = index;
+                CurrentGunIdx = index;
                 RefreshGuns();
             }
         }
 
         public void Shoot() {
-            StartCoroutine(CurrentGun.Shoot());
+            if (!SwitchingWeapon) {
+                StartCoroutine(CurrentGun.Shoot());
+            }
         }
 
         public void Reload() {
-            StartCoroutine(CurrentGun.Reload());
+            if (!SwitchingWeapon) {
+                StartCoroutine(CurrentGun.Reload());
+            }
         }
 
         private void DeactivateInactiveGuns() {
             for (int i = 0; i < guns.Count; i++) {
-                if (i != currentGunIdx) {
+                if (i != CurrentGunIdx) {
                     guns[i].gameObject.SetActive(false);
                 }
             }
