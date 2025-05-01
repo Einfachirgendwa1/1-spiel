@@ -3,13 +3,10 @@ using UnityEngine;
 
 namespace Player {
     public class PlayerGuns : Guns {
-        public override void Update() {
-            base.Update();
-
+        public void Update() {
             SelectGunOnKeypress();
             ShootOnKeypress();
             ReloadOnKeypress();
-            RotateGun();
         }
 
         private void SelectGunOnKeypress() {

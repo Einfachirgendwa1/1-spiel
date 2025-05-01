@@ -63,9 +63,6 @@ namespace Gun {
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) {
                 target.TakeDamage(damage);
-                Debug.Log("Hit something!");
-            } else {
-                Debug.Log("Miss");
             }
 
             float secondsPerShot = 1f / shotsPerSecond;

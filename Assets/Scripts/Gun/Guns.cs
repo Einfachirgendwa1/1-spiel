@@ -8,10 +8,8 @@ namespace Gun {
     public abstract class Guns : MonoBehaviour {
         public List<Gun> guns;
         public GameObject cam;
-        public Vector3 gunHolderPos;
 
         private int currentGunIdx;
-        private GameObject gunParent;
         private bool reloading;
 
         public Gun CurrentGun => guns[currentGunIdx];
@@ -27,15 +25,10 @@ namespace Gun {
             RefreshGuns();
         }
 
-        public virtual void Update() {
-            gunParent.transform.localPosition = gunHolderPos;
-        }
-
         private void InstantiateGuns() {
-            gunParent = new GameObject("Guns");
-            gunParent.transform.SetParent(transform);
+            GameObject weaponHolder = GameObject.Find("Camera Holder/Weapon Holder");
 
-            guns = guns.Select(gun => Instantiate(gun, gunParent.transform)).ToList();
+            guns = guns.Select(gun => Instantiate(gun, weaponHolder.transform)).ToList();
         }
 
         public void SelectGun(int index) {
@@ -64,22 +57,6 @@ namespace Gun {
         private void RefreshGuns() {
             DeactivateInactiveGuns();
             CurrentGun.gameObject.SetActive(true);
-        }
-
-        public void RotateGun() {
-            float mouseX = Input.GetAxisRaw("Mouse X") * 4;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * 4;
-
-            Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
-            Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
-
-            Quaternion targetRotation = rotationX * rotationY;
-
-            CurrentGun.transform.localRotation = Quaternion.Slerp(
-                CurrentGun.transform.localRotation,
-                targetRotation,
-                8 * Time.deltaTime
-            );
         }
     }
 }

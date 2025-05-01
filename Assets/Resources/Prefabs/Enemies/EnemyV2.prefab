@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 4274634277195534219}
   - component: {fileID: 7105891568724108513}
   - component: {fileID: 83905111857176184}
-  - component: {fileID: 4041411442364221636}
-  - component: {fileID: 3751510791316448788}
   - component: {fileID: 2316615007474347643}
   - component: {fileID: 9053684390083029725}
   - component: {fileID: 1060252969484921789}
@@ -170,33 +168,6 @@ MonoBehaviour:
     m_Bits: 512
   canSeePlayer: 0
   state: 0
---- !u!114 &4041411442364221636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2154720572634413384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8999617a4203bf4e87e3b4182854be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyIsReloading: 0
-  gun: {fileID: 0}
---- !u!114 &3751510791316448788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2154720572634413384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279d8883fcef8944db7453e3602b7197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amunition: 100
 --- !u!114 &2316615007474347643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5343,7 +5314,6 @@ GameObject:
   - component: {fileID: 8719447076234581416}
   - component: {fileID: 9108125517133542937}
   - component: {fileID: 6199238239514848169}
-  - component: {fileID: 3611679066663690269}
   m_Layer: 0
   m_Name: AR_V2
   m_TagString: Untagged
@@ -5487,33 +5457,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3611679066663690269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7075612144487665173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe73656bde72de746a5706f2f5565366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magazinSize: 31
-  ammunitionInGun: 15
-  firerate: 550
-  reloadTime: 2
-  range: 100
-  damage: 30
-  weaponSprayX: 0.06
-  weaponSprayY: 0.06
-  recoil: 0
-  isAutomatic: 1
-  timeSinceLastShot: 0
-  shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}
-  reloadSound: {fileID: 8300000, guid: 0eb673dc31e22fd4a8f158be386c8053, type: 3}
-  muzzleFlash: {fileID: 4488542571028994460}
-  cam: {fileID: 0}
 --- !u!1 &7636176973976090125
 GameObject:
   m_ObjectHideFlags: 0
