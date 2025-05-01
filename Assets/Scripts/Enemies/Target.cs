@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Enemies {
-    public class Target : MonoBehaviour, IDamageable {
+    public class Target : MonoBehaviour {
         [SerializeField] private float health = 100f;
         [SerializeField] private AudioClip hurtSound;
         [SerializeField] private AudioClip deathSound;
