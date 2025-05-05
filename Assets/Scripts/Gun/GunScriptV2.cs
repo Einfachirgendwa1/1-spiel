@@ -139,7 +139,7 @@ public class GunScriptV2 : MonoBehaviour {
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
             if (target != null) {
-                target.TakeDamage(damage);
+                target.TakeDamage(hit, damage);
             }
             else if (player != null) {
                 player.GetHurt(damage);
