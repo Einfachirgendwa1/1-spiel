@@ -3,16 +3,16 @@ using System.Collections;
 using System.Diagnostics;
 using Enemies;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 namespace Gun {
     [Serializable]
     public class Gun : MonoBehaviour {
         private static readonly int FLineColor = Shader.PropertyToID("_Color");
-
         private static Material firingLineMaterial;
 
-        public bool automatic;
+        [Header("Gun Stats")] public bool automatic;
         public int damage;
         public float range;
         public int reloadTimeMillis;
@@ -24,15 +24,18 @@ namespace Gun {
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
 
+        [Header("Scripting")] public GunCallbacks gunCallbacks;
+
         [NonSerialized] public int Ammo;
 
         [NonSerialized] public GameObject Cam;
-        [NonSerialized] public Transform FakeOrigin;
-
         private bool reloading;
-        private bool shooting;
+
+        private Finished runningAnimationFinished;
+
         private int shotsInARow;
         private int timeSinceLastShot;
+        private bool RunningAnimationFinished => runningAnimationFinished.IsFinished;
 
         private void Start() {
             if (firingLineMaterial == null) {
@@ -42,17 +45,26 @@ namespace Gun {
             Ammo = magazineSize;
         }
 
+        public void OnEquip() {
+            StartCallback(gunCallbacks.StartEquip);
+        }
+
+        public void StartCallback(Func<Finished, IEnumerator> func) {
+            Assert.IsTrue(RunningAnimationFinished);
+            StartCoroutine(func.Invoke(runningAnimationFinished));
+        }
+
         public void Init(GameObject cam) {
             Cam = cam;
         }
 
         public IEnumerator Shoot() {
-            if (shooting || reloading || Ammo == 0) {
+            if (!RunningAnimationFinished || Ammo == 0) {
                 yield break;
             }
 
-            shooting = true;
             Ammo--;
+
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
@@ -69,9 +81,9 @@ namespace Gun {
 
             Vector3 direction = weaponSpray * recoilOffset * Cam.transform.forward;
 
-            Vector3 origin = (FakeOrigin ?? transform).position;
+            Vector3 origin = transform.position;
             bool hitSomething = Physics.Raycast(origin, direction, out RaycastHit hit, range);
-            StartCoroutine(CreateFiringLine(origin, origin + direction * range));
+            StartCoroutine(CreateFiringLine(origin, hit.transform.position));
 
             if (hitSomething) {
                 Target target = hit.transform.GetComponent<Target>();
@@ -82,15 +94,15 @@ namespace Gun {
 
             float secondsPerShot = 1f / shotsPerSecond;
             yield return new WaitForSeconds(secondsPerShot);
-            shooting = false;
         }
 
         public IEnumerator Reload() {
-            if (reloading || shooting) {
+            if (!RunningAnimationFinished) {
                 yield break;
             }
 
             reloading = true;
+            StartCallback(gunCallbacks.StartReload);
             yield return new WaitForSeconds(reloadTimeMillis / 1000f);
             Ammo = magazineSize;
             reloading = false;

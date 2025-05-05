@@ -713,13 +713,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3699612562426939897}
   - component: {fileID: 2205139858756433783}
+  - component: {fileID: 4472795042717003543}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3699612562426939897
 Transform:
   m_ObjectHideFlags: 0
@@ -729,7 +730,7 @@ Transform:
   m_GameObject: {fileID: 4043241439066821443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.72, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -768,6 +769,34 @@ MonoBehaviour:
   weaponSprayX: 0
   weaponSprayY: 0
   recoil: 0
+  controller: {fileID: 9100000, guid: 5756ad09156f07b4ea690f701db79cf3, type: 2}
+  idle: {fileID: 7400000, guid: dbddf619b408ad6448b6fe39934a2608, type: 2}
+  shoot: {fileID: 7400000, guid: 99320a1739cb2684fbcc7cbffb214c66, type: 2}
+  reload: {fileID: 7400000, guid: d3b49dec38ef08b42b1d77b9c05d1630, type: 2}
+  equip: {fileID: 7400000, guid: 221ce83c8f07d4c4c9091cdf3b7c6246, type: 2}
+  unequip: {fileID: 7400000, guid: fed2ea031ee3622408f4b5a89e0b095a, type: 2}
+--- !u!95 &4472795042717003543
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043241439066821443}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2faad3bcdbfc2c8449e1c70346c8b0b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4562552105092029558
 GameObject:
   m_ObjectHideFlags: 0

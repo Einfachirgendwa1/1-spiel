@@ -109,3 +109,9 @@ MonoBehaviour:
   weaponSprayX: 1
   weaponSprayY: 1
   recoil: 0.1
+  controller: {fileID: 9100000, guid: 5756ad09156f07b4ea690f701db79cf3, type: 2}
+  idle: {fileID: 7400000, guid: d887cfe2bf5668b4281b0a5d10e01167, type: 2}
+  shoot: {fileID: 7400000, guid: e5e5f067617d35f43912811fbee578ea, type: 2}
+  reload: {fileID: 7400000, guid: 0d40a2c782b6c1b4fba5f94b6d610a67, type: 2}
+  equip: {fileID: 0}
+  unequip: {fileID: 0}
