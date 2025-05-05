@@ -3016,7 +3016,7 @@ MonoBehaviour:
   damage: 30
   weaponSprayX: 0.06
   weaponSprayY: 0.06
-  recoil: 0
+  recoil: 0.15
   isAutomatic: 1
   timeSinceLastShot: 0
   shootSound: {fileID: 8300000, guid: e87fb2e782bcac14d82191fa02c2c841, type: 3}

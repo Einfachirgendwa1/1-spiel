@@ -125,15 +125,15 @@ public class GunScriptV2 : MonoBehaviour {
             shotsInaRow = 1;
         }
 
-
+        // Recoil
         if (Physics.Raycast(cam.transform.position,
                 Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
-                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * cam.transform.forward, out hit,
+                Quaternion.AngleAxis(shotsInaRow * -recoil, Vector3.right) * cam.transform.forward, out hit,
                 range)) //cam.transform.forward
         {
             Debug.DrawRay(cam.transform.position,
                 Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
-                Quaternion.AngleAxis(shotsInaRow * recoil, Vector3.right) * (cam.transform.forward * 20), Color.red,
+                Quaternion.AngleAxis(shotsInaRow * -recoil, Vector3.right) * (cam.transform.forward * 20), Color.red,
                 4f);
 
             Target target = hit.transform.GetComponent<Target>();
