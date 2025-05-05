@@ -713,6 +713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3699612562426939897}
   - component: {fileID: 2205139858756433783}
+  - component: {fileID: 4518661708394844868}
   - component: {fileID: 4472795042717003543}
   m_Layer: 0
   m_Name: Pistol
@@ -730,7 +731,7 @@ Transform:
   m_GameObject: {fileID: 4043241439066821443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -764,17 +765,23 @@ MonoBehaviour:
   range: 200
   reloadTimeMillis: 2000
   magazineSize: 12
-  shotsPerSecond: 3
-  firingLineMillis: 500
+  firingLineMillis: 100
   weaponSprayX: 0
   weaponSprayY: 0
   recoil: 0
-  controller: {fileID: 9100000, guid: 5756ad09156f07b4ea690f701db79cf3, type: 2}
-  idle: {fileID: 7400000, guid: dbddf619b408ad6448b6fe39934a2608, type: 2}
-  shoot: {fileID: 7400000, guid: 99320a1739cb2684fbcc7cbffb214c66, type: 2}
-  reload: {fileID: 7400000, guid: d3b49dec38ef08b42b1d77b9c05d1630, type: 2}
-  equip: {fileID: 7400000, guid: 221ce83c8f07d4c4c9091cdf3b7c6246, type: 2}
-  unequip: {fileID: 7400000, guid: fed2ea031ee3622408f4b5a89e0b095a, type: 2}
+  gunCallbacks: {fileID: 4518661708394844868}
+--- !u!114 &4518661708394844868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043241439066821443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f823f0af7089431c81f4db723c6981fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4472795042717003543
 Animator:
   serializedVersion: 7

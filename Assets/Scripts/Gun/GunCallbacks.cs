@@ -3,27 +3,29 @@ using UnityEngine;
 
 namespace Gun {
     public class Finished {
-        public bool IsFinished;
+        public bool IsFinished = true;
     }
 
     public abstract class GunCallbacks : MonoBehaviour {
-        public virtual IEnumerator StartShoot(Finished finished) {
-            finished.IsFinished = true;
+        public readonly Finished Finished = new();
+
+        public virtual IEnumerator StartShoot() {
+            Finished.IsFinished = true;
             yield return null;
         }
 
-        public virtual IEnumerator StartReload(Finished finished) {
-            finished.IsFinished = true;
+        public virtual IEnumerator StartReload() {
+            Finished.IsFinished = true;
             yield return null;
         }
 
-        public virtual IEnumerator StartEquip(Finished finished) {
-            finished.IsFinished = true;
+        public virtual IEnumerator StartEquip() {
+            Finished.IsFinished = true;
             yield return null;
         }
 
-        public virtual IEnumerator StartUnequip(Finished finished) {
-            finished.IsFinished = true;
+        public virtual IEnumerator StartUnequip() {
+            Finished.IsFinished = true;
             yield return null;
         }
     }

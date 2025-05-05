@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Gun {
@@ -17,7 +18,6 @@ namespace Gun {
         public float range;
         public int reloadTimeMillis;
         public int magazineSize;
-        public int shotsPerSecond;
         public int firingLineMillis;
 
         [Range(0f, 1f)] public float weaponSprayX;
@@ -29,13 +29,10 @@ namespace Gun {
         [NonSerialized] public int Ammo;
 
         [NonSerialized] public GameObject Cam;
-        private bool reloading;
-
-        private Finished runningAnimationFinished;
 
         private int shotsInARow;
         private int timeSinceLastShot;
-        private bool RunningAnimationFinished => runningAnimationFinished.IsFinished;
+        public bool Busy => !gunCallbacks.Finished.IsFinished;
 
         private void Start() {
             if (firingLineMaterial == null) {
@@ -49,9 +46,14 @@ namespace Gun {
             StartCallback(gunCallbacks.StartEquip);
         }
 
-        public void StartCallback(Func<Finished, IEnumerator> func) {
-            Assert.IsTrue(RunningAnimationFinished);
-            StartCoroutine(func.Invoke(runningAnimationFinished));
+        public void OnUnequip() {
+            StartCallback(gunCallbacks.StartUnequip);
+        }
+
+        public void StartCallback(Func<IEnumerator> func) {
+            Assert.IsFalse(Busy);
+            gunCallbacks.Finished.IsFinished = false;
+            StartCoroutine(func.Invoke());
         }
 
         public void Init(GameObject cam) {
@@ -59,10 +61,12 @@ namespace Gun {
         }
 
         public IEnumerator Shoot() {
-            if (!RunningAnimationFinished || Ammo == 0) {
+            if (Busy || Ammo == 0) {
+                Debug.Log($"Refusing to shoot because: Busy: {Busy} || Ammo == 0: {Ammo}");
                 yield break;
             }
 
+            StartCallback(gunCallbacks.StartShoot);
             Ammo--;
 
 
@@ -83,7 +87,8 @@ namespace Gun {
 
             Vector3 origin = transform.position;
             bool hitSomething = Physics.Raycast(origin, direction, out RaycastHit hit, range);
-            StartCoroutine(CreateFiringLine(origin, hit.transform.position));
+            Vector3 end = hitSomething ? hit.point : origin + direction * range;
+            StartCoroutine(CreateFiringLine(origin, end));
 
             if (hitSomething) {
                 Target target = hit.transform.GetComponent<Target>();
@@ -91,21 +96,16 @@ namespace Gun {
                     target.TakeDamage(damage);
                 }
             }
-
-            float secondsPerShot = 1f / shotsPerSecond;
-            yield return new WaitForSeconds(secondsPerShot);
         }
 
         public IEnumerator Reload() {
-            if (!RunningAnimationFinished) {
+            if (Busy) {
                 yield break;
             }
 
-            reloading = true;
             StartCallback(gunCallbacks.StartReload);
             yield return new WaitForSeconds(reloadTimeMillis / 1000f);
             Ammo = magazineSize;
-            reloading = false;
         }
 
         private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {

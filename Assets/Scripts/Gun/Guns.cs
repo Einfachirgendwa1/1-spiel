@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,9 +36,16 @@ namespace Gun {
 
         public void SelectGun(int index) {
             if (index < guns.Count) {
-                CurrentGunIdx = index;
-                RefreshGuns();
+                StartCoroutine(DoSelect(index));
             }
+        }
+
+        public IEnumerator DoSelect(int index) {
+            CurrentGun.OnUnequip();
+            yield return new WaitWhile(() => CurrentGun.Busy);
+            CurrentGunIdx = index;
+            RefreshGuns();
+            CurrentGun.OnEquip();
         }
 
         public void Shoot() {
