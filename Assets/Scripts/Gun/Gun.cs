@@ -4,7 +4,6 @@ using System.Diagnostics;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Gun {
@@ -43,17 +42,25 @@ namespace Gun {
         }
 
         public void OnEquip() {
-            StartCallback(gunCallbacks.StartEquip);
+            if (gunCallbacks != null) {
+                StartCallback(gunCallbacks.StartEquip);
+            }
         }
 
         public void OnUnequip() {
-            StartCallback(gunCallbacks.StartUnequip);
+            if (gunCallbacks != null) {
+                StartCallback(gunCallbacks.StartUnequip);
+            }
         }
 
         public void StartCallback(Func<IEnumerator> func) {
-            Assert.IsFalse(Busy);
-            gunCallbacks.Finished.IsFinished = false;
-            StartCoroutine(func.Invoke());
+            if (gunCallbacks != null) {
+                Assert.IsFalse(Busy);
+                gunCallbacks.Finished.IsFinished = false;
+                StartCoroutine(func.Invoke());
+            } else {
+                gunCallbacks.Finished.IsFinished = true;
+            }
         }
 
         public void Init(GameObject cam) {
@@ -62,7 +69,6 @@ namespace Gun {
 
         public IEnumerator Shoot() {
             if (Busy || Ammo == 0) {
-                Debug.Log($"Refusing to shoot because: Busy: {Busy} || Ammo == 0: {Ammo}");
                 yield break;
             }
 

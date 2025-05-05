@@ -25,5 +25,15 @@ namespace GunCallbacks {
             animator.Play("Reload");
             yield return null;
         }
+
+        public override IEnumerator StartEquip() {
+            animator.Play("Equip");
+            yield return null;
+        }
+
+        public override IEnumerator StartUnequip() {
+            animator.Play("Unequip");
+            yield return null;
+        }
     }
 }

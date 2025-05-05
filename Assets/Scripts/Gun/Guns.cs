@@ -42,7 +42,10 @@ namespace Gun {
 
         public IEnumerator DoSelect(int index) {
             CurrentGun.OnUnequip();
-            yield return new WaitWhile(() => CurrentGun.Busy);
+            if (CurrentGun.gunCallbacks != null) {
+                yield return new WaitWhile(() => CurrentGun.Busy);
+            }
+
             CurrentGunIdx = index;
             RefreshGuns();
             CurrentGun.OnEquip();
