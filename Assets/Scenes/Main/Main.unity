@@ -30671,6 +30671,26 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1561852940}
   m_SourcePrefab: {fileID: 100100000, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
+--- !u!1 &1879445265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6257248265640161392, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
+  m_PrefabInstance: {fileID: 1968586231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1879445270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879445265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1001 &1888064895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31653,7 +31673,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6257248265640161392, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1879445270}
   m_SourcePrefab: {fileID: 100100000, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
 --- !u!4 &1969572306 stripped
 Transform:
@@ -33413,6 +33436,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4130683519831023909, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6418566448703471952, guid: 9a838118246a3f44e9fce9683f4fd32d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.39
@@ -33619,6 +33646,10 @@ PrefabInstance:
     - target: {fileID: 2154720572634413384, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
       propertyPath: m_Name
       value: EnemyV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2154720572634413384, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3611679066663690269, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
       propertyPath: cam
