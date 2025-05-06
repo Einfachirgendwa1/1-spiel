@@ -135,7 +135,7 @@ public class GunScriptV2 : MonoBehaviour {
                 Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right) *
                 Quaternion.AngleAxis(shotsInaRow * -recoil, Vector3.right) * (cam.transform.forward * 20), Color.red,
                 4f);
-
+            Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             HealthManager player = hit.transform.GetComponent<HealthManager>();
             if (target != null) {

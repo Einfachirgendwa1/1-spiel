@@ -15,6 +15,7 @@ public class Target : MonoBehaviour, IDamageable {
         if (hit.transform.CompareTag("Enemy"))
         {
             health -= damage;
+            Debug.Log(hit.transform.name + "[from Target Enemy]");
         }
         else if (hit.transform.CompareTag("Head"))
         {
