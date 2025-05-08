@@ -54,7 +54,6 @@ namespace Gun {
         }
 
         public void Shoot() {
-            Debug.Log("Shooot got called !!!1!!1!");
             Ammo--;
 
 
