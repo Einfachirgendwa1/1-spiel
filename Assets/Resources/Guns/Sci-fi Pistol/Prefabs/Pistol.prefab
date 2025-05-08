@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automatic: 0
-  damage: 12
+  damage: 50
   range: 200
   magazineSize: 12
   firingLineMillis: 100
