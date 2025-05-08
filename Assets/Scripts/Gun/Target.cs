@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies {
+namespace Gun {
     public class Target : MonoBehaviour {
         public float health;
         public AudioClip hurtSound;
