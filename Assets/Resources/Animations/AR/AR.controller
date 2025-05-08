@@ -23,7 +23,7 @@ AnimatorStateMachine:
     m_Position: {x: 160, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4191610764506379150}
-    m_Position: {x: 660, y: 150, z: 0}
+    m_Position: {x: 660, y: 140, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -31,7 +31,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -100, y: -30, z: 0}
   m_EntryPosition: {x: -80, y: 150, z: 0}
-  m_ExitPosition: {x: 880, y: 150, z: 0}
+  m_ExitPosition: {x: 900, y: 140, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 3767685801459942121}
 --- !u!1101 &-8116438753302263474
@@ -151,7 +151,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cecf513a0e47aac47bb24f570a5434ae, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0d40a2c782b6c1b4fba5f94b6d610a67, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -207,7 +207,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 99320a1739cb2684fbcc7cbffb214c66, type: 2}
+  m_Motion: {fileID: 7400000, guid: e5e5f067617d35f43912811fbee578ea, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -219,7 +219,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pistol
+  m_Name: AR
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: StartShoot

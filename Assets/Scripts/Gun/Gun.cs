@@ -11,6 +11,7 @@ namespace Gun {
     public class Gun : MonoBehaviour {
         private static readonly int FLineColor = Shader.PropertyToID("_Color");
         private static readonly int AmmoId = Animator.StringToHash("Ammo");
+        private static readonly int EquippedId = Animator.StringToHash("Equipped");
         private static Material firingLineMaterial;
 
         [Header("Gun Stats")] public bool automatic;
@@ -35,6 +36,10 @@ namespace Gun {
             set => animator.SetInteger(AmmoId, value);
         }
 
+        public bool Equipped {
+            set => animator.SetBool(EquippedId, value);
+        }
+
         private void Start() {
             if (firingLineMaterial == null) {
                 firingLineMaterial = new Material(Resources.Load<Material>("Materials/FiringLine"));
@@ -55,7 +60,6 @@ namespace Gun {
 
         public void Shoot() {
             Ammo--;
-
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
@@ -83,6 +87,16 @@ namespace Gun {
                     target.TakeDamage(damage);
                 }
             }
+        }
+
+        public void SetEquipped() {
+            Equipped = true;
+            Debug.Log("Equipped is now true");
+        }
+
+        public void SetUnequipped() {
+            Equipped = false;
+            Debug.Log("Equipped is now false");
         }
 
         private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {
