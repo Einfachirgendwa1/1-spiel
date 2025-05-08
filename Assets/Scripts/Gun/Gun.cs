@@ -3,35 +3,37 @@ using System.Collections;
 using System.Diagnostics;
 using Enemies;
 using UnityEngine;
-using UnityEngine.Assertions;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Gun {
     [Serializable]
     public class Gun : MonoBehaviour {
         private static readonly int FLineColor = Shader.PropertyToID("_Color");
+        private static readonly int AmmoId = Animator.StringToHash("Ammo");
         private static Material firingLineMaterial;
 
         [Header("Gun Stats")] public bool automatic;
         public int damage;
         public float range;
-        public int reloadTimeMillis;
         public int magazineSize;
         public int firingLineMillis;
+        public Animator animator;
+
 
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
 
-        [Header("Scripting")] public GunCallbacks gunCallbacks;
-
-        [NonSerialized] public int Ammo;
-
         [NonSerialized] public GameObject Cam;
 
         private int shotsInARow;
         private int timeSinceLastShot;
-        public bool Busy => !gunCallbacks.Finished.IsFinished;
+
+        public int Ammo {
+            get => animator.GetInteger(AmmoId);
+            set => animator.SetInteger(AmmoId, value);
+        }
 
         private void Start() {
             if (firingLineMaterial == null) {
@@ -41,38 +43,18 @@ namespace Gun {
             Ammo = magazineSize;
         }
 
-        public void OnEquip() {
-            if (gunCallbacks != null) {
-                StartCallback(gunCallbacks.StartEquip);
-            }
+        public IEnumerator Toggle(int trigger) {
+            animator.SetTrigger(trigger);
+            yield return new WaitForSeconds(1f);
+            animator.ResetTrigger(trigger);
         }
 
-        public void OnUnequip() {
-            if (gunCallbacks != null) {
-                StartCallback(gunCallbacks.StartUnequip);
-            }
+        public void ResetAmmo() {
+            Ammo = magazineSize;
         }
 
-        public void StartCallback(Func<IEnumerator> func) {
-            if (gunCallbacks != null) {
-                Assert.IsFalse(Busy);
-                gunCallbacks.Finished.IsFinished = false;
-                StartCoroutine(func.Invoke());
-            } else {
-                gunCallbacks.Finished.IsFinished = true;
-            }
-        }
-
-        public void Init(GameObject cam) {
-            Cam = cam;
-        }
-
-        public IEnumerator Shoot() {
-            if (Busy || Ammo == 0) {
-                yield break;
-            }
-
-            StartCallback(gunCallbacks.StartShoot);
+        public void Shoot() {
+            Debug.Log("Shooot got called !!!1!!1!");
             Ammo--;
 
 
@@ -102,16 +84,6 @@ namespace Gun {
                     target.TakeDamage(damage);
                 }
             }
-        }
-
-        public IEnumerator Reload() {
-            if (Busy) {
-                yield break;
-            }
-
-            StartCallback(gunCallbacks.StartReload);
-            yield return new WaitForSeconds(reloadTimeMillis / 1000f);
-            Ammo = magazineSize;
         }
 
         private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {

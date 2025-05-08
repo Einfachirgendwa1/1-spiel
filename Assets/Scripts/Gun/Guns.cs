@@ -7,31 +7,36 @@ using UnityEngine;
 namespace Gun {
     [Serializable]
     public abstract class Guns : MonoBehaviour {
+        private static readonly int Equipped = Animator.StringToHash("Equipped");
+        private static readonly int ShootId = Animator.StringToHash("StartShoot");
+        private static readonly int ReloadId = Animator.StringToHash("StartReload");
+        private static readonly int EquipId = Animator.StringToHash("StartEquip");
+        private static readonly int UnequipId = Animator.StringToHash("StartUnequip");
+
         public List<Gun> guns;
         public GameObject cam;
         public GameObject weaponHolder;
 
         [NonSerialized] public int CurrentGunIdx;
         private bool reloading;
-        [NonSerialized] public bool SwitchingWeapon;
 
         public Gun CurrentGun => guns[CurrentGunIdx];
 
         public void Start() {
-            // Wir haben nur prefabs, keine wirklichen GameObjects, daher müssen wir die zuerst instanziieren
-            InstantiateGuns();
-
-            foreach (Gun gun in guns) {
-                gun.Init(cam);
-            }
-
+            InitGuns();
             RefreshGuns();
         }
 
-        private void InstantiateGuns() {
+        private void InitGuns() {
             weaponHolder = GameObject.Find("Camera Holder/Weapon Holder");
 
-            guns = guns.Select(gun => Instantiate(gun, weaponHolder.transform)).ToList();
+            List<Gun> newGuns = new();
+            foreach (Gun newGun in guns.Select(gun => Instantiate(gun, weaponHolder.transform))) {
+                newGun.Cam = cam;
+                newGuns.Add(newGun);
+            }
+
+            guns = newGuns;
         }
 
         public void SelectGun(int index) {
@@ -41,26 +46,21 @@ namespace Gun {
         }
 
         public IEnumerator DoSelect(int index) {
-            CurrentGun.OnUnequip();
-            if (CurrentGun.gunCallbacks != null) {
-                yield return new WaitWhile(() => CurrentGun.Busy);
-            }
+            StartCoroutine(CurrentGun.Toggle(UnequipId));
+            yield return new WaitWhile(() => CurrentGun.animator.GetBool(Equipped));
 
             CurrentGunIdx = index;
             RefreshGuns();
-            CurrentGun.OnEquip();
+            StartCoroutine(CurrentGun.Toggle(EquipId));
+            yield return null;
         }
 
         public void Shoot() {
-            if (!SwitchingWeapon) {
-                StartCoroutine(CurrentGun.Shoot());
-            }
+            StartCoroutine(CurrentGun.Toggle(ShootId));
         }
 
         public void Reload() {
-            if (!SwitchingWeapon) {
-                StartCoroutine(CurrentGun.Reload());
-            }
+            StartCoroutine(CurrentGun.Toggle(ReloadId));
         }
 
         private void DeactivateInactiveGuns() {
