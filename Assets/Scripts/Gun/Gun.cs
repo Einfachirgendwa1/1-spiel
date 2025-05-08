@@ -50,7 +50,7 @@ namespace Gun {
 
         public IEnumerator Toggle(int trigger) {
             animator.SetTrigger(trigger);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.2f);
             animator.ResetTrigger(trigger);
         }
 

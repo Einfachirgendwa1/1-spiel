@@ -32,8 +32,14 @@ namespace Player {
         }
 
         private void ShootOnKeypress() {
-            if (CurrentGun.automatic ? Input.GetMouseButton(0) : Input.GetMouseButtonDown(0)) {
-                Shoot();
+            if (CurrentGun.automatic) {
+                if (Input.GetMouseButton(0)) {
+                    CurrentGun.animator.SetTrigger(ShootId);
+                } else {
+                    CurrentGun.animator.ResetTrigger(ShootId);
+                }
+            } else if (Input.GetMouseButtonDown(0)) {
+                StartCoroutine(CurrentGun.Toggle(ShootId));
             }
         }
 

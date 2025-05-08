@@ -8,7 +8,7 @@ namespace Gun {
     [Serializable]
     public abstract class Guns : MonoBehaviour {
         private static readonly int Equipped = Animator.StringToHash("Equipped");
-        private static readonly int ShootId = Animator.StringToHash("StartShoot");
+        public static readonly int ShootId = Animator.StringToHash("StartShoot");
         private static readonly int ReloadId = Animator.StringToHash("StartReload");
         private static readonly int EquipId = Animator.StringToHash("StartEquip");
         private static readonly int UnequipId = Animator.StringToHash("StartUnequip");
