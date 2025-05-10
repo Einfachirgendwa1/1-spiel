@@ -9,30 +9,30 @@ public class PlayerMovement : MonoBehaviour {
 
     public float movementAcceleration = 20;
     public bool grounded = true;
-    public new Rigidbody rigidbody;
+    public Rigidbody rb;
 
     public void Start() {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Update() {
         if (Input.GetKey(KeyCode.Space) && grounded) {
-            rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             grounded = false;
         }
     }
 
     public void FixedUpdate() {
         Vector3 plane = RecheckGrounded().normal;
-        Vector3 src = rigidbody.linearVelocity;
+        Vector3 src = rb.linearVelocity;
         Vector3 dst = MovementDirection(plane);
 
         src.y = 0;
         dst.y = 0;
         Vector3 movement = MovementVector(src, dst);
 
-        movement.y = rigidbody.linearVelocity.y;
-        rigidbody.linearVelocity = movement;
+        movement.y = rb.linearVelocity.y;
+        rb.linearVelocity = movement;
     }
 
     private Vector3 MovementVector(Vector3 src, Vector3 dst) {

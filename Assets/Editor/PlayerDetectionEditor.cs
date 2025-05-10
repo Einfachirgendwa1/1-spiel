@@ -3,10 +3,8 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(EnemyPlayerDetection))]
-public class PlayerDetectionEditor : Editor
-{
-    private void OnSceneGUI()
-    {
+public class PlayerDetectionEditor : Editor {
+    private void OnSceneGUI() {
         EnemyPlayerDetection fov = (EnemyPlayerDetection)target;
         Handles.color = Color.white;
         Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.radius);
@@ -18,13 +16,15 @@ public class PlayerDetectionEditor : Editor
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle01 * fov.radius);
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle02 * fov.radius);
 
-        if (!fov.canSeePlayer) return;
+        if (!fov.canSeePlayer) {
+            return;
+        }
+
         Handles.color = Color.green;
         Handles.DrawLine(fov.transform.position, fov.playerReference.transform.position);
     }
 
-    Vector3 DirectionFromAngle(float eulerY, float angleInDegrees)
-    {
+    private Vector3 DirectionFromAngle(float eulerY, float angleInDegrees) {
         angleInDegrees += eulerY;
 
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));

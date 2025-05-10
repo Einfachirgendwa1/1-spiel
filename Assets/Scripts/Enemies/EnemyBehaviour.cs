@@ -34,11 +34,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
         if (!playerInSightRange && !playerInAttackRange) {
             Patrolling();
-        }
-        else if (playerInSightRange && !playerInAttackRange) {
+        } else if (playerInSightRange && !playerInAttackRange) {
             ChasePlayer();
-        }
-        else {
+        } else {
             AttackPlayer();
         }
     }
@@ -58,8 +56,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private void Patrolling() {
         if (!walkPointSet) {
             SearchWalkPoint();
-        }
-        else {
+        } else {
             agent.SetDestination(walkPoint);
         }
 
