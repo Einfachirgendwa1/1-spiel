@@ -67,9 +67,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: ShouldShoot
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: Ammo
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2321733935155291337}
   m_Solo: 0

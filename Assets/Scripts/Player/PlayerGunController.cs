@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Player {
-    public class PlayerGuns : Guns {
+    public class PlayerGunController : Guns {
         public void Update() {
             for (KeyCode key = KeyCode.Alpha1; key <= KeyCode.Alpha9; key++) {
                 if (Input.GetKeyDown(key)) {
