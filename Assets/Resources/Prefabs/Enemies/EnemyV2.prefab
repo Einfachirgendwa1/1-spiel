@@ -332,6 +332,7 @@ MonoBehaviour:
   - {fileID: 2205139858756433783, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
   cam: {fileID: 2154720572634413384}
   weaponHolder: {fileID: 8077628556111906356}
+  detection: {fileID: 83905111857176184}
 --- !u!1 &7636176973976090125
 GameObject:
   m_ObjectHideFlags: 0
