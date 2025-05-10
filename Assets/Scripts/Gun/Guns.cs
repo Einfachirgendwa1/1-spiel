@@ -17,19 +17,15 @@ namespace Gun {
         public Gun CurrentGun => guns[CurrentGunIdx];
 
         public void Start() {
-            InitGuns();
-            RefreshGuns();
-        }
-
-        private void InitGuns() {
             List<Gun> newGuns = new();
-
             foreach (Gun newGun in guns.Select(gun => Instantiate(gun, weaponHolder.transform))) {
                 newGun.Cam = cam;
                 newGuns.Add(newGun);
             }
 
             guns = newGuns;
+
+            RefreshGuns();
         }
 
         public void SelectGun(int index) {

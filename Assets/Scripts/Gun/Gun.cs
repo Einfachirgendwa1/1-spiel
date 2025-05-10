@@ -25,6 +25,7 @@ namespace Gun {
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
+        private int? ammoBackup;
 
         [NonSerialized] public GameObject Cam;
 
@@ -33,7 +34,10 @@ namespace Gun {
 
         public int Ammo {
             get => animator.GetInteger(AmmoId);
-            set => animator.SetInteger(AmmoId, value);
+            set {
+                ammoBackup = value;
+                animator.SetInteger(AmmoId, value);
+            }
         }
 
         public bool ShouldShoot {
@@ -63,10 +67,6 @@ namespace Gun {
             animator.SetTrigger(trigger);
             yield return new WaitForSeconds(.2f);
             animator.ResetTrigger(trigger);
-        }
-
-        public void ResetAmmo() {
-            Ammo = magazineSize;
         }
 
         public void Shoot() {
@@ -101,8 +101,15 @@ namespace Gun {
             }
         }
 
+        public void ResetAmmo() {
+            Ammo = magazineSize;
+        }
+
         public void OnUnequipEnd() {
             Unequip = false;
+            
+            ammoBackup ??= magazineSize;
+            Ammo = ammoBackup.Value;
         }
 
         private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {
