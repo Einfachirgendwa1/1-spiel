@@ -8253,12 +8253,7 @@ MonoBehaviour:
   - {fileID: 2205139858756433783, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
   - {fileID: 8749426249802217569, guid: 3c81b162a1af44348b8994f7040514d4, type: 3}
   cam: {fileID: 963194225}
-  weaponHolder: {fileID: 0}
-  cameraHolderHip: {x: 0.537, y: -0.516, z: 0.676}
-  cameraHolderAim: {x: 0, y: -1, z: 1.25}
-  aimSwitchTimeSecs: 0.33
-  weaponSwitchY: -1
-  weaponSwitchSpeed: 1
+  weaponHolder: {fileID: 2047746745}
 --- !u!1 &836099507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
@@ -21327,7 +21322,7 @@ Transform:
   m_GameObject: {fileID: 2047746745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -1.01, z: 1.24}
+  m_LocalPosition: {x: 0.71, y: -0.65, z: 1.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

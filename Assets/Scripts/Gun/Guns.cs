@@ -7,12 +7,6 @@ using UnityEngine;
 namespace Gun {
     [Serializable]
     public abstract class Guns : MonoBehaviour {
-        private static readonly int Equipped = Animator.StringToHash("Equipped");
-        public static readonly int ShootId = Animator.StringToHash("StartShoot");
-        private static readonly int ReloadId = Animator.StringToHash("StartReload");
-        private static readonly int EquipId = Animator.StringToHash("StartEquip");
-        private static readonly int UnequipId = Animator.StringToHash("StartUnequip");
-
         public List<Gun> guns;
         public GameObject cam;
         public GameObject weaponHolder;
@@ -28,9 +22,8 @@ namespace Gun {
         }
 
         private void InitGuns() {
-            weaponHolder = GameObject.Find("Camera Holder/Weapon Holder");
-
             List<Gun> newGuns = new();
+
             foreach (Gun newGun in guns.Select(gun => Instantiate(gun, weaponHolder.transform))) {
                 newGun.Cam = cam;
                 newGuns.Add(newGun);
@@ -46,21 +39,13 @@ namespace Gun {
         }
 
         public IEnumerator DoSelect(int index) {
-            StartCoroutine(CurrentGun.Toggle(UnequipId));
-            yield return new WaitWhile(() => CurrentGun.animator.GetBool(Equipped));
+            CurrentGun.Unequip = true;
+            yield return new WaitWhile(() => CurrentGun.Unequip);
 
             CurrentGunIdx = index;
             RefreshGuns();
-            StartCoroutine(CurrentGun.Toggle(EquipId));
+            CurrentGun.animator.Play("Equip");
             yield return null;
-        }
-
-        public void Shoot() {
-            StartCoroutine(CurrentGun.Toggle(ShootId));
-        }
-
-        public void Reload() {
-            StartCoroutine(CurrentGun.Toggle(ReloadId));
         }
 
         private void DeactivateInactiveGuns() {

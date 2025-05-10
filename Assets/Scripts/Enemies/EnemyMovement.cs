@@ -17,7 +17,7 @@ namespace Enemies {
             agent = GetComponent<NavMeshAgent>();
 
             Transform child = transform.Find("Path");
-            if (child != null) {
+            if (child) {
                 foreach (Transform child2 in child) {
                     patrollingPath.Add(child2.position);
                 }
@@ -46,7 +46,6 @@ namespace Enemies {
             if (distance.magnitude < 0.5f) {
                 patrollingPathHead = (patrollingPathHead + 1) % patrollingPath.Count;
                 target = patrollingPath[patrollingPathHead];
-                Debug.Log($"Head is now {patrollingPathHead} (Count is {patrollingPath.Count})");
             }
 
             return target!.Value;

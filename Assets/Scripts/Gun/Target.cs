@@ -16,13 +16,13 @@ namespace Gun {
             health -= damage;
 
             if (health <= 0) {
-                if (deathSound != null) {
-                    audioSource.PlayOneShot(deathSound);
+                if (deathSound) {
+                    audioSource?.PlayOneShot(deathSound);
                 }
 
                 Destroy(gameObject);
-            } else if (hurtSound != null) {
-                audioSource.PlayOneShot(hurtSound);
+            } else if (hurtSound) {
+                audioSource?.PlayOneShot(hurtSound);
             }
         }
     }

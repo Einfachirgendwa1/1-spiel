@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
-using Enemies;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Gun {
@@ -11,7 +9,9 @@ namespace Gun {
     public class Gun : MonoBehaviour {
         private static readonly int FLineColor = Shader.PropertyToID("_Color");
         private static readonly int AmmoId = Animator.StringToHash("Ammo");
-        private static readonly int EquippedId = Animator.StringToHash("Equipped");
+        private static readonly int ShootId = Animator.StringToHash("ShouldShoot");
+        private static readonly int ReloadId = Animator.StringToHash("ShouldReload");
+        private static readonly int UnequipId = Animator.StringToHash("Unequip");
         private static Material firingLineMaterial;
 
         [Header("Gun Stats")] public bool automatic;
@@ -36,12 +36,23 @@ namespace Gun {
             set => animator.SetInteger(AmmoId, value);
         }
 
-        public bool Equipped {
-            set => animator.SetBool(EquippedId, value);
+        public bool ShouldShoot {
+            get => animator.GetBool(ShootId);
+            set => animator.SetBool(ShootId, value);
+        }
+
+        public bool ShouldReload {
+            get => animator.GetBool(ReloadId);
+            set => animator.SetBool(ReloadId, value);
+        }
+
+        public bool Unequip {
+            get => animator.GetBool(UnequipId);
+            set => animator.SetBool(UnequipId, value);
         }
 
         private void Start() {
-            if (firingLineMaterial == null) {
+            if (!firingLineMaterial) {
                 firingLineMaterial = new Material(Resources.Load<Material>("Materials/FiringLine"));
             }
 
@@ -60,6 +71,10 @@ namespace Gun {
 
         public void Shoot() {
             Ammo--;
+
+            if (!automatic || Ammo <= 0) {
+                ShouldShoot = false;
+            }
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
@@ -82,21 +97,12 @@ namespace Gun {
             StartCoroutine(CreateFiringLine(origin, end));
 
             if (hitSomething) {
-                Target target = hit.transform.GetComponent<Target>();
-                if (target != null) {
-                    target.TakeDamage(damage);
-                }
+                hit.transform.GetComponent<Target>()?.TakeDamage(damage);
             }
         }
 
-        public void SetEquipped() {
-            Equipped = true;
-            Debug.Log("Equipped is now true");
-        }
-
-        public void SetUnequipped() {
-            Equipped = false;
-            Debug.Log("Equipped is now false");
+        public void OnUnequipEnd() {
+            Unequip = false;
         }
 
         private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {
