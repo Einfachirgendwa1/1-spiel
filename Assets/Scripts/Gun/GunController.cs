@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gun {
     [Serializable]
-    public abstract class Guns : MonoBehaviour {
+    public abstract class GunController : MonoBehaviour {
         public List<Gun> guns;
         public GameObject cam;
         public GameObject weaponHolder;

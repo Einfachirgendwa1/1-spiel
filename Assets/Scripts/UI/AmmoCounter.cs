@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace UI {
     public class AmmoCounter : MonoBehaviour {
-        private Guns player;
+        private GunController player;
         private TextMeshProUGUI text;
 
         private void Start() {
             text = GetComponent<TextMeshProUGUI>();
-            player = GameObject.Find("Player").GetComponent<Guns>();
+            player = GameObject.Find("Player").GetComponent<GunController>();
             if (player == null) {
                 Debug.LogError("Player not found");
             }

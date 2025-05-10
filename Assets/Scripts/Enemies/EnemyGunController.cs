@@ -1,7 +1,7 @@
 ﻿using Gun;
 
 namespace Enemies {
-    public class EnemyGunController : Guns {
+    public class EnemyGunController : GunController {
         public EnemyPlayerDetection detection;
 
         public void Update() {
