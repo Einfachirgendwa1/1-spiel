@@ -154,8 +154,8 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 scale *= abs(input.texcoord0.w) * _GradientScale * (_Sharpness + 1);
                 if (UNITY_MATRIX_P[3][3] == 0)
                     scale = lerp(abs(scale) * (1 - _PerspectiveFilter), scale,
-                        abs(dot(UnityObjectToWorldNormal(input.normal.xyz),
-                                                    normalize(WorldSpaceViewDir(vert)))));
+                                 abs(dot(UnityObjectToWorldNormal(input.normal.xyz),
+                                         normalize(WorldSpaceViewDir(vert)))));
 
                 float weight = lerp(_WeightNormal, _WeightBold, bold) / 4.0;
                 weight = (weight + _FaceDilate) * _ScaleRatioA * 0.5;
@@ -197,7 +197,7 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
                 float2 maskUV = (vert.xy - clampedRect.xy) / (clampedRect.zw - clampedRect.xy);
                 const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX),
-                                                 max(_UIMaskSoftnessY, _MaskSoftnessY));
+                                               max(_UIMaskSoftnessY, _MaskSoftnessY));
 
                 // Structure for pixel shader
                 pixel_t output = {

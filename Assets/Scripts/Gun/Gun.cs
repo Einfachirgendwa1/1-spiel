@@ -107,7 +107,7 @@ namespace Gun {
 
         public void OnUnequipEnd() {
             Unequip = false;
-            
+
             ammoBackup ??= magazineSize;
             Ammo = ammoBackup.Value;
         }
