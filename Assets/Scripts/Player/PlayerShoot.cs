@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start() {
-        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
+        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>(); 
         gun.timeSinceLastShot = 1.0f / (gun.firerate / 60);
         ammunitionText.SetText("Ammo: " + gun.ammunitionInGun);
         //gunSwitching = 

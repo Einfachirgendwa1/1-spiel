@@ -1,33 +1,26 @@
 using UnityEngine;
 
 public class Target : MonoBehaviour, IDamageable {
-    [SerializeField] private float health = 100f;
-    [SerializeField] private AudioClip hurtSound;
-    [SerializeField] private AudioClip deathSound;
-
-    private AudioSource enemyAudio;
+    EnemyHealth enemyHealth;
+    AudioSource enemyAudio;
+    public AudioClip hurtSound;
 
     private void Start() {
-        enemyAudio = GetComponent<AudioSource>();
+        enemyAudio = transform.root.GetComponent<AudioSource>();
+        enemyHealth = transform.root.GetComponent<EnemyHealth>();
     }
 
     public void TakeDamage(RaycastHit hit, float damage) {
         if (hit.transform.CompareTag("Enemy"))
         {
-            health -= damage;
+            enemyHealth.GetDamage(damage);
             Debug.Log(hit.transform.name + "[from Target Enemy]");
             Debug.Log("Tag is " + hit.transform.tag);
         }
         else if (hit.transform.CompareTag("Head"))
         {
-            health -= 100;
+            enemyHealth.GetDamage(100);
             Debug.Log("Headshot on Enemy");
-        }
-
-        
-        if (health <= 0) {
-            enemyAudio.PlayOneShot(deathSound);
-            Destroy(gameObject);
         }
 
         enemyAudio.PlayOneShot(hurtSound);
