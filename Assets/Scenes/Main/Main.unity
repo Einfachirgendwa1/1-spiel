@@ -8344,6 +8344,7 @@ Transform:
   - {fileID: 505097662}
   - {fileID: 1333199829}
   - {fileID: 509947553}
+  - {fileID: 1560160793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &830808271
@@ -9568,9 +9569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
-  deathSound: {fileID: 0}
 --- !u!4 &942482371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
@@ -16315,6 +16313,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0013250173, y: 0.02, z: 0.02}
   m_Center: {x: -0.0001625235, y: -0.000000029802322, z: 0.010000002}
+--- !u!1001 &1560160792
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 830808270}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+      propertyPath: m_Name
+      value: fps_arms
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+--- !u!4 &1560160793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08390014f935834409a8c64bfaa9d7fc, type: 3}
+  m_PrefabInstance: {fileID: 1560160792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1561852937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
@@ -17178,9 +17238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  hurtSound: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
-  deathSound: {fileID: 0}
 --- !u!4 &1610467072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4420517154851618513, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
