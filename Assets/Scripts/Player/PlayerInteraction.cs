@@ -17,7 +17,9 @@ public class PlayerInteraction : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             RaycastHit interacion;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out interacion,
-                    distance, ~(1 << 6))) {
+                    distance, ~(1 << 6)))
+                Debug.Log(interacion.transform.name);
+                    {
                 if (interacion.collider.gameObject.TryGetComponent(out IInteractable interactObj)) {
                     interactObj.Interact();
                 }
