@@ -30,10 +30,6 @@ namespace Gun {
             set => animator.SetBool(ReloadHash, value);
         }
 
-        private bool DoShoot {
-            set => animator.SetBool(ShootHash, value);
-        }
-
         internal bool DoUnequip {
             set => animator.SetBool(UnequipHash, value);
         }
@@ -43,12 +39,12 @@ namespace Gun {
         }
 
         internal void WantsToShoot(bool b) {
-            DoShoot = b && Ammo > 0;
+            animator.SetBool(ShootHash, b && Ammo > 0);
         }
 
         public void Shoot() {
             Ammo--;
-            DoShoot = false;
+            WantsToShoot(false);
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
