@@ -1,3 +1,4 @@
+using Settings;
 using UnityEngine;
 
 namespace Player {
@@ -11,7 +12,7 @@ namespace Player {
         private bool grounded;
 
         public void Update() {
-            if (Input.GetKey(KeyCode.Space) && grounded) {
+            if (Action.Jump.Is(Input.GetKeyDown) && grounded) {
                 rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
                 grounded = false;
             }
