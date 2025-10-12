@@ -23,17 +23,18 @@ namespace Gun {
         internal GameObject cam;
         private int shotsInARow;
         private int timeSinceLastShot;
+
         [CanBeNull] internal Action whenUnequipped;
 
-        internal bool ShouldReload {
+        internal bool DoReload {
             set => animator.SetBool(ReloadHash, value);
         }
 
-        internal bool ShouldShoot {
+        private bool DoShoot {
             set => animator.SetBool(ShootHash, value);
         }
 
-        internal bool ShouldUnequip {
+        internal bool DoUnequip {
             set => animator.SetBool(UnequipHash, value);
         }
 
@@ -41,8 +42,13 @@ namespace Gun {
             Ammo = magazineSize;
         }
 
+        internal void WantsToShoot(bool b) {
+            DoShoot = b && Ammo > 0;
+        }
+
         public void Shoot() {
-            ShouldShoot = automatic && Ammo-- > 0;
+            Ammo--;
+            DoShoot = false;
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;

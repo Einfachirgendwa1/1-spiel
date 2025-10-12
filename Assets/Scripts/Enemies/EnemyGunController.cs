@@ -5,8 +5,8 @@ namespace Enemies {
         public EnemyPlayerDetection detection;
 
         public void Update() {
-            CurrentGun.ShouldShoot = detection.canSeePlayer;
-            CurrentGun.ShouldReload = CurrentGun.Ammo == 0;
+            CurrentGun.WantsToShoot(detection.canSeePlayer);
+            CurrentGun.DoReload = CurrentGun.Ammo == 0;
         }
     }
 }

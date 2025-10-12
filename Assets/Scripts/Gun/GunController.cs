@@ -31,12 +31,8 @@ namespace Gun {
         }
 
         internal void DoSelect(int index) {
-            CurrentGun.ShouldUnequip = true;
+            CurrentGun.DoUnequip = true;
             CurrentGun.whenUnequipped = () => {
-                CurrentGun.ShouldUnequip = false;
-                CurrentGun.ShouldReload = false;
-                CurrentGun.ShouldShoot = false;
-
                 currentGunIdx = index;
                 RefreshGuns();
                 CurrentGun.animator.Play("Equip");
