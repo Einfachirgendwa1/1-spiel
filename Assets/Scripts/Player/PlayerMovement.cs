@@ -1,54 +1,43 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-    [Header("Movement")] public float movementSpeed = 20;
+namespace Player {
+    public class PlayerMovement : MonoBehaviour {
+        [Header("Required")] public Rigidbody rigidBody;
+        public LayerMask groundLayerMask;
+        [Header("Movement")] public float movementSpeed = 20;
+        public float movementAcceleration = 20;
+        public float jumpForce = 4;
 
-    public float jumpForce = 4;
+        private bool grounded;
 
-    [Header("Collision")] public LayerMask whatIsGround;
-
-    public float movementAcceleration = 20;
-    public bool grounded = true;
-    public Rigidbody rb;
-
-    public void Start() {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    public void Update() {
-        if (Input.GetKey(KeyCode.Space) && grounded) {
-            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-            grounded = false;
+        public void Update() {
+            if (Input.GetKey(KeyCode.Space) && grounded) {
+                rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                grounded = false;
+            }
         }
-    }
 
-    public void FixedUpdate() {
-        Vector3 plane = RecheckGrounded().normal;
-        Vector3 src = rb.linearVelocity;
-        Vector3 dst = MovementDirection(plane);
+        public void FixedUpdate() {
+            grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0F, groundLayerMask);
 
-        src.y = 0;
-        dst.y = 0;
-        Vector3 movement = MovementVector(src, dst);
+            Vector3 plane = hit.normal;
+            Vector3 src = rigidBody.linearVelocity;
+            Vector3 dst = MovementDirection(plane);
 
-        movement.y = rb.linearVelocity.y;
-        rb.linearVelocity = movement;
-    }
+            src.y = 0;
+            dst.y = 0;
+            Vector3 movement = Vector3.Lerp(src, dst, movementAcceleration);
 
-    private Vector3 MovementVector(Vector3 src, Vector3 dst) {
-        return Vector3.Lerp(src, dst, movementAcceleration);
-    }
+            movement.y = rigidBody.linearVelocity.y;
+            rigidBody.linearVelocity = movement;
+        }
 
 
-    private RaycastHit RecheckGrounded() {
-        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit raycasthit, 1.0F, whatIsGround);
-        return raycasthit;
-    }
-
-    private Vector3 MovementDirection(Vector3 plane) {
-        Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") +
-                                Vector3.right * Input.GetAxisRaw("Horizontal");
-        Vector3 direction = (transform.rotation * moveDirection).normalized;
-        return Vector3.ProjectOnPlane(direction, plane) * movementSpeed;
+        private Vector3 MovementDirection(Vector3 plane) {
+            Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") +
+                                    Vector3.right * Input.GetAxisRaw("Horizontal");
+            Vector3 direction = (transform.rotation * moveDirection).normalized;
+            return Vector3.ProjectOnPlane(direction, plane) * movementSpeed;
+        }
     }
 }

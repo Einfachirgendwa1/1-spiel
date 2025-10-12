@@ -1,78 +1,70 @@
 ﻿using System;
-using System.Collections;
-using System.Diagnostics;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Cursor = UI.Cursor;
 
 namespace Gun {
     [Serializable]
     public class Gun : MonoBehaviour {
-        private static readonly int FLineColor = Shader.PropertyToID("_Color");
-        private static readonly int AmmoId = Animator.StringToHash("Ammo");
-        private static readonly int ShootId = Animator.StringToHash("ShouldShoot");
-        private static readonly int ReloadId = Animator.StringToHash("ShouldReload");
-        private static readonly int UnequipId = Animator.StringToHash("Unequip");
-        private static Material firingLineMaterial;
+        private static readonly int ReloadHash = Animator.StringToHash("Reload");
+        private static readonly int ShootHash = Animator.StringToHash("Shoot");
+        private static readonly int UnequipHash = Animator.StringToHash("Unequip");
 
-        [Header("Gun Stats")] public bool automatic;
+        private static readonly Cursor reload = new() {
+            name = "Should Reload"
+        };
+
+        private static readonly Cursor shoot = new() {
+            name = "Should Shoot"
+        };
+
+        private static readonly Cursor unequip = new() {
+            name = "Should Unequip"
+        };
+
+        [Header("Required")] public Animator animator;
+        [Header("Gun Settings")] public bool automatic;
         public int damage;
         public float range;
         public int magazineSize;
-        public int firingLineMillis;
-        public Animator animator;
-
-
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
-        private int? ammoBackup;
 
-        [NonSerialized] public GameObject Cam;
-
+        internal int Ammo;
+        internal GameObject cam;
         private int shotsInARow;
         private int timeSinceLastShot;
+        [CanBeNull] internal Action whenUnequipped;
 
-        public int Ammo {
-            get => animator.GetInteger(AmmoId);
+        internal bool ShouldReload {
             set {
-                ammoBackup = value;
-                animator.SetInteger(AmmoId, value);
+                animator.SetBool(ReloadHash, value);
+                reload.description = value.ToString();
             }
         }
 
-        public bool ShouldShoot {
-            get => animator.GetBool(ShootId);
-            set => animator.SetBool(ShootId, value);
+        internal bool ShouldShoot {
+            set {
+                animator.SetBool(ShootHash, value);
+                shoot.description = value.ToString();
+            }
         }
 
-        public bool ShouldReload {
-            get => animator.GetBool(ReloadId);
-            set => animator.SetBool(ReloadId, value);
-        }
-
-        public bool Unequip {
-            get => animator.GetBool(UnequipId);
-            set => animator.SetBool(UnequipId, value);
+        internal bool ShouldUnequip {
+            set {
+                animator.SetBool(UnequipHash, value);
+                unequip.description = value.ToString();
+            }
         }
 
         private void Start() {
-            if (!firingLineMaterial) {
-                firingLineMaterial = new Material(Resources.Load<Material>("Materials/FiringLine"));
-            }
-
             Ammo = magazineSize;
         }
 
-        public IEnumerator Toggle(int trigger) {
-            animator.SetTrigger(trigger);
-            yield return new WaitForSeconds(.2f);
-            animator.ResetTrigger(trigger);
-        }
-
         public void Shoot() {
-            Ammo--;
-
-            if (!automatic || Ammo <= 0) {
+            if (!automatic || Ammo-- <= 0) {
                 ShouldShoot = false;
             }
 
@@ -89,61 +81,13 @@ namespace Gun {
             Quaternion weaponSpray = Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right);
             Quaternion recoilOffset = Quaternion.AngleAxis(shotsInARow * recoil, Vector3.right);
 
-            Vector3 direction = weaponSpray * recoilOffset * Cam.transform.forward;
+            Vector3 direction = weaponSpray * recoilOffset * cam.transform.forward;
 
             Vector3 origin = transform.position;
-            bool hitSomething = Physics.Raycast(origin, direction, out RaycastHit hit, range);
-            Vector3 end = hitSomething ? hit.point : origin + direction * range;
-            StartCoroutine(CreateFiringLine(origin, end));
 
-            if (hitSomething) {
-                hit.transform.GetComponent<Target>()?.TakeDamage(damage);
+            if (Physics.Raycast(origin, direction, out RaycastHit hit, range)) {
+                hit.transform.GetComponent<Health>()?.TakeDamage(damage);
             }
-        }
-
-        public void ResetAmmo() {
-            Ammo = magazineSize;
-        }
-
-        public void OnUnequipEnd() {
-            Unequip = false;
-
-            ammoBackup ??= magazineSize;
-            Ammo = ammoBackup.Value;
-        }
-
-        private IEnumerator CreateFiringLine(Vector3 start, Vector3 end) {
-            GameObject go = new("DynamicLine");
-            LineRenderer lr = go.AddComponent<LineRenderer>();
-
-            lr.positionCount = 2;
-            lr.SetPosition(0, start);
-            lr.SetPosition(1, end);
-
-            Material firingLine = new(firingLineMaterial);
-
-            lr.startWidth = 0.05f;
-            lr.endWidth = 0.05f;
-            lr.material = firingLine;
-            lr.startColor = Color.red;
-            lr.endColor = Color.yellow;
-
-            Stopwatch watch = new();
-            watch.Start();
-
-
-            while (watch.ElapsedMilliseconds < firingLineMillis) {
-                float perc = watch.ElapsedMilliseconds / (float)firingLineMillis;
-                Color color = firingLine.GetColor(FLineColor);
-
-                // fuck this
-                color.b = 1 - perc;
-
-                firingLine.SetColor(FLineColor, color);
-                yield return new WaitForSeconds(0.05f);
-            }
-
-            Destroy(go);
         }
     }
 }

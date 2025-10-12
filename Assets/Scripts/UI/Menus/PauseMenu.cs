@@ -1,52 +1,30 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour {
-    public static bool gameIsPaused = false;
+namespace UI.Menus {
+    public class PauseMenu : MonoBehaviour {
+        public GameObject pauseMenuUI;
+        private bool paused;
 
-    public GameObject pauseMenuUI;
-
-    void Update() {
-        if (gameIsPaused && pauseMenuUI != null) {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        } else {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (gameIsPaused == true) {
-                Resume();
-            } else {
-                Pause();
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                TogglePause();
             }
-
         }
-    }
-    void Resume() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-    }
 
-    void Pause() {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-    }
+        public void TogglePause() {
+            Time.timeScale = paused ? 0f : 1f;
+            paused = !paused;
 
-    public void ResumeGame() {
-        Resume();
-    }
+            pauseMenuUI.SetActive(paused);
+            Menu.Cursor(paused);
+        }
 
-    public void SettingsMenu() {
-        //nothing to see here
-    }
+        public void SettingsMenu() { }
 
-    public void QuitToMenu() {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        public void QuitToMenu() {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

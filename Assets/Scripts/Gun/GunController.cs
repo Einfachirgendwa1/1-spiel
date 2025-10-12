@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,54 +6,47 @@ using UnityEngine;
 namespace Gun {
     [Serializable]
     public abstract class GunController : MonoBehaviour {
-        public List<Gun> guns;
         public GameObject cam;
         public GameObject weaponHolder;
+        public List<Gun> guns;
 
-        [NonSerialized] public int CurrentGunIdx;
-        private bool reloading;
+        private int currentGunIdx;
 
-        public Gun CurrentGun => guns[CurrentGunIdx];
+        internal Gun CurrentGun => guns[currentGunIdx];
 
         public void Start() {
-            List<Gun> newGuns = new();
-            foreach (Gun newGun in guns.Select(gun => Instantiate(gun, weaponHolder.transform))) {
-                newGun.Cam = cam;
-                newGuns.Add(newGun);
-            }
-
-            guns = newGuns;
+            guns = guns.Select(gun => {
+                Gun instance = Instantiate(gun, weaponHolder.transform);
+                instance.cam = cam;
+                return instance;
+            }).ToList();
 
             RefreshGuns();
         }
 
-        public void SelectGun(int index) {
+        internal void SelectGun(int index) {
             if (index < guns.Count) {
-                StartCoroutine(DoSelect(index));
+                DoSelect(index);
             }
         }
 
-        public IEnumerator DoSelect(int index) {
-            CurrentGun.Unequip = true;
-            yield return new WaitWhile(() => CurrentGun.Unequip);
+        internal void DoSelect(int index) {
+            CurrentGun.ShouldUnequip = true;
+            CurrentGun.whenUnequipped = () => {
+                CurrentGun.ShouldUnequip = false;
+                CurrentGun.ShouldReload = false;
+                CurrentGun.ShouldShoot = false;
 
-            CurrentGunIdx = index;
-            RefreshGuns();
-            CurrentGun.animator.Play("Equip");
-            yield return null;
-        }
-
-        private void DeactivateInactiveGuns() {
-            for (int i = 0; i < guns.Count; i++) {
-                if (i != CurrentGunIdx) {
-                    guns[i].gameObject.SetActive(false);
-                }
-            }
+                currentGunIdx = index;
+                RefreshGuns();
+                CurrentGun.animator.Play("Equip");
+            };
         }
 
         private void RefreshGuns() {
-            DeactivateInactiveGuns();
-            CurrentGun.gameObject.SetActive(true);
+            for (int i = 0; i < guns.Count; i++) {
+                guns[i].gameObject.SetActive(i == currentGunIdx);
+            }
         }
     }
 }

@@ -1,22 +1,23 @@
 ﻿using Gun;
+using Settings;
 using UnityEngine;
 
 namespace Player {
     public class PlayerGunController : GunController {
         public void Update() {
-            for (KeyCode key = KeyCode.Alpha1; key <= KeyCode.Alpha9; key++) {
-                if (Input.GetKeyDown(key)) {
-                    SelectGun(key - KeyCode.Alpha1);
+            for (int gun = 1; gun <= 9; gun++) {
+                if (gun.Is(Input.GetKeyDown)) {
+                    SelectGun(gun);
                 }
             }
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Action.Shoot.Is(Input.GetKeyDown)) {
                 CurrentGun.ShouldShoot = true;
-            } else if (Input.GetMouseButtonUp(0)) {
+            } else if (Action.Shoot.Is(Input.GetKeyUp)) {
                 CurrentGun.ShouldShoot = false;
             }
 
-            CurrentGun.ShouldReload = Input.GetKey(KeyCode.R);
+            CurrentGun.ShouldReload = Action.Reload.Is(Input.GetKey);
         }
     }
 }

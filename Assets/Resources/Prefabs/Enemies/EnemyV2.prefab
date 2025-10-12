@@ -71,6 +71,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -92,6 +94,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -126,10 +129,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2154720572634413384}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 80
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -184,6 +187,7 @@ MonoBehaviour:
   health: 100
   hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
   deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
+  audioSource: {fileID: 9053684390083029725}
 --- !u!82 &9053684390083029725
 AudioSource:
   m_ObjectHideFlags: 0
@@ -327,11 +331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5984d6980fcd4152a8a2ea35fd4bd1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 2154720572634413384}
+  weaponHolder: {fileID: 8077628556111906356}
   guns:
   - {fileID: 8749426249802217569, guid: 3c81b162a1af44348b8994f7040514d4, type: 3}
   - {fileID: 2205139858756433783, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
-  cam: {fileID: 2154720572634413384}
-  weaponHolder: {fileID: 8077628556111906356}
   detection: {fileID: 83905111857176184}
 --- !u!1 &7636176973976090125
 GameObject:
@@ -395,6 +399,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -416,6 +422,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

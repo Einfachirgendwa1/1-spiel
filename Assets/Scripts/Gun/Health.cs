@@ -1,27 +1,23 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Gun {
-    public class Target : MonoBehaviour {
+    public class Health : MonoBehaviour {
         public float health;
-        public AudioClip hurtSound;
-        public AudioClip deathSound;
-
-        private AudioSource audioSource;
-
-        private void Start() {
-            audioSource = GetComponent<AudioSource>();
-        }
+        [CanBeNull] public AudioClip hurtSound;
+        [CanBeNull] public AudioClip deathSound;
+        [CanBeNull] public AudioSource audioSource;
 
         public void TakeDamage(float damage) {
             health -= damage;
 
             if (health <= 0) {
-                if (deathSound) {
+                if (deathSound != null) {
                     audioSource?.PlayOneShot(deathSound);
                 }
 
                 Destroy(gameObject);
-            } else if (hurtSound) {
+            } else if (hurtSound != null) {
                 audioSource?.PlayOneShot(hurtSound);
             }
         }

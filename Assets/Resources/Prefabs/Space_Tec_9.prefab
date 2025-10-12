@@ -111,6 +111,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e1e0d722c09b8b419371f3f9190e264, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7695298815727284145}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e1e0d722c09b8b419371f3f9190e264, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5937701655479832538}
   m_SourcePrefab: {fileID: 100100000, guid: 4e1e0d722c09b8b419371f3f9190e264, type: 3}
 --- !u!1 &3675734902200330184 stripped
 GameObject:
@@ -129,12 +132,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa05403ee1a4baf89ce47a32e203fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5937701655479832538}
   automatic: 0
   damage: 23
   range: 100
   magazineSize: 30
   firingLineMillis: 5
-  animator: {fileID: 0}
   weaponSprayX: 0.075
   weaponSprayY: 0.08
   recoil: 1.05
+--- !u!95 &5937701655479832538
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675734902200330184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db911ebb5fc0da44dbd575d788cf19a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

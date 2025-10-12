@@ -1,27 +1,25 @@
+using Settings;
 using UnityEngine;
 
-internal interface IInteractable {
-    public void Interact();
-}
+namespace Player {
+    internal interface IInteractable {
+        public void Interact();
+    }
 
-public class PlayerInteraction : MonoBehaviour {
-    public Camera playerCamera;
+    public class PlayerInteraction : MonoBehaviour {
+        public Camera playerCamera;
+        public float distance = 2f;
+        public LayerMask playerLayer;
 
-    [SerializeField] private float distance = 2f;
+        private void Update() {
+            if (Action.Interact.Is(Input.GetKeyDown)) {
+                Vector3 origin = playerCamera.transform.position;
+                Vector3 direction = playerCamera.transform.forward;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start() { }
+                bool hit = Physics.Raycast(origin, direction, out RaycastHit interaction, distance, ~playerLayer);
 
-    // Update is called once per frame
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
-            RaycastHit interacion;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out interacion,
-                    distance, ~(1 << 6)))
-                Debug.Log(interacion.transform.name);
-                    {
-                if (interacion.collider.gameObject.TryGetComponent(out IInteractable interactObj)) {
-                    interactObj.Interact();
+                if (hit && interaction.collider.gameObject.TryGetComponent(out IInteractable interactable)) {
+                    interactable.Interact();
                 }
             }
         }
