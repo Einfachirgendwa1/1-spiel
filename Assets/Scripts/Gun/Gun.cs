@@ -2,7 +2,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Cursor = UI.Cursor;
 
 namespace Gun {
     [Serializable]
@@ -10,18 +9,6 @@ namespace Gun {
         private static readonly int ReloadHash = Animator.StringToHash("Reload");
         private static readonly int ShootHash = Animator.StringToHash("Shoot");
         private static readonly int UnequipHash = Animator.StringToHash("Unequip");
-
-        private static readonly Cursor reload = new() {
-            name = "Should Reload"
-        };
-
-        private static readonly Cursor shoot = new() {
-            name = "Should Shoot"
-        };
-
-        private static readonly Cursor unequip = new() {
-            name = "Should Unequip"
-        };
 
         [Header("Required")] public Animator animator;
         [Header("Gun Settings")] public bool automatic;
@@ -39,24 +26,15 @@ namespace Gun {
         [CanBeNull] internal Action whenUnequipped;
 
         internal bool ShouldReload {
-            set {
-                animator.SetBool(ReloadHash, value);
-                reload.description = value.ToString();
-            }
+            set => animator.SetBool(ReloadHash, value);
         }
 
         internal bool ShouldShoot {
-            set {
-                animator.SetBool(ShootHash, value);
-                shoot.description = value.ToString();
-            }
+            set => animator.SetBool(ShootHash, value);
         }
 
         internal bool ShouldUnequip {
-            set {
-                animator.SetBool(UnequipHash, value);
-                unequip.description = value.ToString();
-            }
+            set => animator.SetBool(UnequipHash, value);
         }
 
         private void Start() {
@@ -64,9 +42,7 @@ namespace Gun {
         }
 
         public void Shoot() {
-            if (!automatic || Ammo-- <= 0) {
-                ShouldShoot = false;
-            }
+            ShouldShoot = automatic && Ammo-- > 0;
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
