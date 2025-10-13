@@ -10,13 +10,9 @@ namespace Lift {
             StartCoroutine(Move());
         }
 
-        private bool isUp() {
-            return transform.position.y >= lift.upPosY - lift.delta;
-        }
+        private bool isUp() => transform.position.y >= lift.upPosY - lift.delta;
 
-        private bool isDown() {
-            return transform.position.y <= lift.downPosY + lift.delta;
-        }
+        private bool isDown() => transform.position.y <= lift.downPosY + lift.delta;
 
         private IEnumerator Move() {
             if (isUp() || isDown()) {

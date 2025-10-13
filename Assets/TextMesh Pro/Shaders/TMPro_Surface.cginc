@@ -12,7 +12,7 @@ void VertShader(inout appdata_full v, out Input data)
     v.normal *= sign(dot(v.normal, view));
 
     #if USE_DERIVATIVE
-	data.param.y = 1;
+    data.param.y = 1;
     #else
     float4 vert = v.vertex;
     float4 vPosition = UnityObjectToClipPos(vert);
@@ -33,9 +33,9 @@ void VertShader(inout appdata_full v, out Input data)
 void PixShader(Input input, inout SurfaceOutput o)
 {
     #if USE_DERIVATIVE
-	float2 pixelSize = float2(ddx(input.uv_MainTex.y), ddy(input.uv_MainTex.y));
-	pixelSize *= _TextureWidth * .75;
-	float scale = rsqrt(dot(pixelSize, pixelSize)) * _GradientScale * (_Sharpness + 1);
+    float2 pixelSize = float2(ddx(input.uv_MainTex.y), ddy(input.uv_MainTex.y));
+    pixelSize *= _TextureWidth * .75;
+    float scale = rsqrt(dot(pixelSize, pixelSize)) * _GradientScale * (_Sharpness + 1);
     #else
     float scale = input.param.y;
     #endif
@@ -87,11 +87,11 @@ void PixShader(Input input, inout SurfaceOutput o)
     #endif
 
     #if GLOW_ON
-	float4 glowColor = GetGlowColor(sd, scale);
-	glowColor.a *= input.color.a;
-	emission += glowColor.rgb*glowColor.a;
-	faceColor = BlendARGB(glowColor, faceColor);
-	faceColor.rgb /= max(faceColor.a, 0.0001);
+    float4 glowColor = GetGlowColor(sd, scale);
+    glowColor.a *= input.color.a;
+    emission += glowColor.rgb * glowColor.a;
+    faceColor = BlendARGB(glowColor, faceColor);
+    faceColor.rgb /= max(faceColor.a, 0.0001);
     #endif
 
     // Set Standard output structure

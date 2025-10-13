@@ -23,9 +23,7 @@ public class Printer : MonoBehaviour {
         textMeshPro.text = futureText;
     }
 
-    public static DebugPrinter NewPrinter() {
-        return new DebugPrinter(count++, behaviour);
-    }
+    public static DebugPrinter NewPrinter() => new(count++, behaviour);
 }
 
 public class DebugPrinter {

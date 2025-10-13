@@ -21,7 +21,6 @@ namespace Player {
             }
 
             cursor.str = CurrentGun.DoShoot().ToString();
-
             CurrentGun.DoReload = Action.Reload.Is(Input.GetKey);
         }
     }

@@ -125,8 +125,8 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 half4 mask : TEXCOORD2; // Position in clip space(xy), Softness(zw)
 
                 #if (UNDERLAY_ON | UNDERLAY_INNER)
-			float4	texcoord1		: TEXCOORD3;			// Texture UV, alpha, reserved
-			half2	underlayParam	: TEXCOORD4;			// Scale(x), Bias(y)
+                float4 texcoord1 : TEXCOORD3; // Texture UV, alpha, reserved
+                half2 underlayParam : TEXCOORD4; // Scale(x), Bias(y)
                 #endif
             };
 
@@ -172,7 +172,7 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 }
                 float opacity = input.color.a;
                 #if (UNDERLAY_ON | UNDERLAY_INNER)
-					opacity = 1.0;
+                opacity = 1.0;
                 #endif
 
                 fixed4 faceColor = fixed4(input.color.rgb, opacity) * _FaceColor;
@@ -185,19 +185,20 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
 
                 #if (UNDERLAY_ON | UNDERLAY_INNER)
 
-			layerScale /= 1 + ((_UnderlaySoftness * _ScaleRatioC) * layerScale);
-			float layerBias = (.5 - weight) * layerScale - .5 - ((_UnderlayDilate * _ScaleRatioC) * .5 * layerScale);
+                layerScale /= 1 + ((_UnderlaySoftness * _ScaleRatioC) * layerScale);
+                float layerBias = (.5 - weight) * layerScale - .5 - ((_UnderlayDilate * _ScaleRatioC) * .5 *
+                    layerScale);
 
-			float x = -(_UnderlayOffsetX * _ScaleRatioC) * _GradientScale / _TextureWidth;
-			float y = -(_UnderlayOffsetY * _ScaleRatioC) * _GradientScale / _TextureHeight;
-			float2 layerOffset = float2(x, y);
+                float x = -(_UnderlayOffsetX * _ScaleRatioC) * _GradientScale / _TextureWidth;
+                float y = -(_UnderlayOffsetY * _ScaleRatioC) * _GradientScale / _TextureHeight;
+                float2 layerOffset = float2(x, y);
                 #endif
 
                 // Generate UV for the Masking Texture
                 float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
                 float2 maskUV = (vert.xy - clampedRect.xy) / (clampedRect.zw - clampedRect.xy);
                 const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX),
-                                               max(_UIMaskSoftnessY, _MaskSoftnessY));
+           max(_UIMaskSoftnessY, _MaskSoftnessY));
 
                 // Structure for pixel shader
                 pixel_t output = {
@@ -208,8 +209,8 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                     half4(scale, bias - outline, bias + outline, bias),
                     half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * maskSoftness + pixelSize.xy)),
                     #if (UNDERLAY_ON | UNDERLAY_INNER)
-				float4(input.texcoord0 + layerOffset, input.color.a, 0),
-				half2(layerScale, layerBias),
+                    float4(input.texcoord0 + layerOffset, input.color.a, 0),
+                    half2(layerScale, layerBias),
                     #endif
                 };
 
@@ -224,19 +225,21 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 half4 c = input.faceColor * saturate(d - input.param.w);
 
                 #ifdef OUTLINE_ON
-			c = lerp(input.outlineColor, input.faceColor, saturate(d - input.param.z));
-			c *= saturate(d - input.param.y);
+                c = lerp(input.outlineColor, input.faceColor, saturate(d - input.param.z));
+                c *= saturate(d - input.param.y);
                 #endif
 
                 #if UNDERLAY_ON
-			d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
-			c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * saturate(d - input.underlayParam.y) * (1 - c.a);
+                d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
+                c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * saturate(
+                    d - input.underlayParam.y) * (1 - c.a);
                 #endif
 
                 #if UNDERLAY_INNER
-			half sd = saturate(d - input.param.z);
-			d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
-			c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * (1 - saturate(d - input.underlayParam.y)) * sd * (1 - c.a);
+                half sd = saturate(d - input.param.z);
+                d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
+                c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * (1 - saturate(
+                    d - input.underlayParam.y)) * sd * (1 - c.a);
                 #endif
 
                 // Alternative implementation to UnityGet2DClipping with support for softness.
@@ -252,11 +255,11 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 c *= a;
 
                 #if (UNDERLAY_ON | UNDERLAY_INNER)
-			c *= input.texcoord1.z;
+                c *= input.texcoord1.z;
                 #endif
 
                 #if UNITY_UI_ALPHACLIP
-			clip(c.a - 0.001);
+                clip(c.a - 0.001);
                 #endif
 
                 return c;
