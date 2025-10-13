@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4472795042717003543}
-  automatic: 1
+  automatic: 0
   damage: 50
   range: 200
   magazineSize: 12

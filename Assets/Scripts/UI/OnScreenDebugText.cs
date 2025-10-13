@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -9,30 +10,17 @@ namespace UI {
 
         private void Update() {
             textMesh.text = "";
-            foreach (Cursor cursor in cursors) {
-                textMesh.text += $"{cursor.GetString()}\n";
+            foreach (string cursor in cursors.Select(c => c.str)) {
+                textMesh.text += $"{cursor}\n";
             }
         }
     }
 
     internal class Cursor {
-        internal string description;
-        internal string name;
+        internal string str;
 
         internal Cursor() {
             OnScreenDebugText.cursors.Add(this);
-        }
-
-        internal string GetString() {
-            string ret = "";
-
-            if (name != "") {
-                ret += $"[{name}] ";
-            }
-
-            ret += description;
-
-            return ret;
         }
     }
 }

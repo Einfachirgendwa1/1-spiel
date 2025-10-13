@@ -38,13 +38,17 @@ namespace Gun {
             Ammo = magazineSize;
         }
 
+        internal bool DoShoot() {
+            return animator.GetBool(ShootHash);
+        }
+
         internal void WantsToShoot(bool b) {
             animator.SetBool(ShootHash, b && Ammo > 0);
         }
 
         public void Shoot() {
             Ammo--;
-            WantsToShoot(false);
+            WantsToShoot(automatic && DoShoot());
 
             if (timeSinceLastShot > 1) {
                 shotsInARow = 0;
