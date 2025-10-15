@@ -1,4 +1,4 @@
-using Settings;
+using Settings.Input;
 using UnityEngine;
 
 namespace Player {

@@ -1,5 +1,5 @@
 ﻿using System;
-using JetBrains.Annotations;
+using Misc;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,10 +21,10 @@ namespace Gun {
 
         internal int Ammo;
         internal GameObject cam;
+        internal GunController controller;
+
         private int shotsInARow;
         private int timeSinceLastShot;
-
-        [CanBeNull] internal Action whenUnequipped;
 
         internal bool DoReload {
             set => animator.SetBool(ReloadHash, value);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Settings {
+namespace Settings.Input {
     internal static class Keybinds {
         internal static readonly Dictionary<Action, KeyCode> keybinds = new() {
             [Action.Forward] = KeyCode.W,

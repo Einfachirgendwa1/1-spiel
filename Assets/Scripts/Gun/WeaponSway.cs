@@ -1,23 +1,21 @@
 using UnityEngine;
 
-public class WeaponSway : MonoBehaviour {
-    [Header("Sway Settings")] [SerializeField]
-    private float smooth;
+namespace Gun {
+    public class WeaponSway : MonoBehaviour {
+        public float smooth;
+        public float multiplier;
 
-    [SerializeField] private float multiplier;
+        private void Update() {
+            float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
 
-    private void Update() {
-        // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
+            Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
+            Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
 
-        // calculate target rotation
-        Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
-        Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
+            Quaternion targetRotation = rotationX * rotationY;
 
-        Quaternion targetRotation = rotationX * rotationY;
-
-        // rotate 
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
+            float t = smooth * Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, t);
+        }
     }
 }

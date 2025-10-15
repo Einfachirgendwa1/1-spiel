@@ -10,7 +10,8 @@ namespace Gun {
         public GameObject weaponHolder;
         public List<Gun> guns;
 
-        private int currentGunIdx;
+        internal int currentGunIdx;
+        internal int nextGunIdx;
 
         internal Gun CurrentGun => guns[currentGunIdx];
 
@@ -18,6 +19,7 @@ namespace Gun {
             guns = guns.Select(gun => {
                 Gun instance = Instantiate(gun, weaponHolder.transform);
                 instance.cam = cam;
+                instance.controller = this;
                 return instance;
             }).ToList();
 
@@ -26,20 +28,18 @@ namespace Gun {
 
         internal void SelectGun(int index) {
             if (index < guns.Count) {
-                DoSelect(index);
+                CurrentGun.DoUnequip = true;
+                nextGunIdx = index;
             }
         }
 
-        internal void DoSelect(int index) {
-            CurrentGun.DoUnequip = true;
-            CurrentGun.whenUnequipped = () => {
-                currentGunIdx = index;
-                RefreshGuns();
-                CurrentGun.animator.Play("Equip");
-            };
+        internal void OnUnequip() {
+            currentGunIdx = nextGunIdx;
+            RefreshGuns();
+            CurrentGun.animator.Play("Equip");
         }
 
-        private void RefreshGuns() {
+        internal void RefreshGuns() {
             for (int i = 0; i < guns.Count; i++) {
                 guns[i].gameObject.SetActive(i == currentGunIdx);
             }

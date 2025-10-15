@@ -1,5 +1,5 @@
 ﻿using Gun;
-using Settings;
+using Settings.Input;
 using UnityEngine;
 using Cursor = UI.Cursor;
 

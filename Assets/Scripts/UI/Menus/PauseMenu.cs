@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace UI.Menus {
     public class PauseMenu : MonoBehaviour {
-        public GameObject pauseMenuUI;
+        public GameObject pauseMenu;
         private bool paused;
 
         private void Update() {
@@ -13,10 +13,10 @@ namespace UI.Menus {
         }
 
         public void TogglePause() {
-            Time.timeScale = paused ? 0f : 1f;
             paused = !paused;
+            Time.timeScale = paused ? 0f : 1f;
 
-            pauseMenuUI.SetActive(paused);
+            pauseMenu.SetActive(paused);
             Menu.Cursor(paused);
         }
 
