@@ -13,10 +13,14 @@ namespace Guns.Behaviours {
             gun = animator.gameObject.GetComponent<Gun>();
 
             gun.controller.state = state;
+
+            if (!stateInfo.loop) {
+                Action();
+            }
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            if (!animator.IsInTransition(0)) {
+            if (!animator.IsInTransition(layerIndex) && stateInfo.loop) {
                 actualNormalizedTime += stateInfo.normalizedTime - lastNormalizedTime;
 
                 int repsThisFrame = Mathf.FloorToInt(actualNormalizedTime);
