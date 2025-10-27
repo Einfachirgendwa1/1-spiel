@@ -1,33 +1,40 @@
+using System;
 using Settings.Input;
 using UnityEngine;
+using Action = Settings.Input.Action;
 
 namespace Player {
     public class PlayerMovement : MonoBehaviour {
         [Header("Required")] public Rigidbody rigidBody;
         public LayerMask groundLayerMask;
-        [Header("Movement")] public float movementSpeed = 20;
-        public float movementAcceleration = 20;
-        public float jumpForce = 4;
+        [Header("Movement")] public float movementSpeed;
+        public float movementAcceleration;
+        public float jumpForce;
 
         private bool grounded;
+        private float jumpBuffer;
 
         public void Update() {
-            if (Action.Jump.Is(Input.GetKeyDown) && grounded) {
-                rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-                grounded = false;
+            jumpBuffer = Math.Max(0, jumpBuffer - Time.deltaTime);
+
+            if (Action.Jump.Is(Input.GetKeyDown)) {
+                jumpBuffer = 0.5f;
             }
         }
 
         public void FixedUpdate() {
             grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0F, groundLayerMask);
 
-            Vector3 plane = hit.normal;
-            Vector3 src = rigidBody.linearVelocity;
-            Vector3 dst = MovementDirection(plane);
+            if (grounded && jumpBuffer > 0) {
+                rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                grounded = false;
+            }
 
-            src.y = 0;
-            dst.y = 0;
-            Vector3 movement = Vector3.Lerp(src, dst, movementAcceleration);
+            Vector3 plane = grounded ? hit.normal : Vector3.up;
+            Vector3 current = rigidBody.linearVelocity;
+            Vector3 target = MovementDirection(plane);
+
+            Vector3 movement = Vector3.Lerp(current, target, movementAcceleration);
 
             movement.y = rigidBody.linearVelocity.y;
             rigidBody.linearVelocity = movement;
@@ -35,9 +42,10 @@ namespace Player {
 
 
         private Vector3 MovementDirection(Vector3 plane) {
-            Vector3 moveDirection = Vector3.forward * Input.GetAxisRaw("Vertical") +
-                                    Vector3.right * Input.GetAxisRaw("Horizontal");
-            Vector3 direction = (transform.rotation * moveDirection).normalized;
+            Vector3 forward = Vector3.forward * Input.GetAxisRaw("Vertical");
+            Vector3 right = Vector3.right * Input.GetAxisRaw("Horizontal");
+
+            Vector3 direction = (transform.rotation * (forward + right)).normalized;
             return Vector3.ProjectOnPlane(direction, plane) * movementSpeed;
         }
     }

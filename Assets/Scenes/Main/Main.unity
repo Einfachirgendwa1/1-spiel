@@ -9478,9 +9478,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  movementSpeed: 10
+  movementSpeed: 7
   movementAcceleration: 0.1
-  jumpForce: 225
+  jumpForce: 300
 --- !u!114 &830808274
 MonoBehaviour:
   m_ObjectHideFlags: 0
