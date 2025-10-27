@@ -1,4 +1,4 @@
-﻿using Gun;
+﻿using Guns;
 using TMPro;
 using UnityEngine;
 

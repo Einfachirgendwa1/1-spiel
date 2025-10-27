@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gun {
+namespace Guns {
     public class WeaponSway : MonoBehaviour {
         public float smooth;
         public float multiplier;

@@ -1,12 +1,13 @@
-﻿using Gun;
+﻿using Guns;
 
 namespace Enemies {
     public class EnemyGunController : GunController {
         public EnemyPlayerDetection detection;
 
-        public void Update() {
-            CurrentGun.WantsToShoot(detection.canSeePlayer);
-            CurrentGun.DoReload = CurrentGun.Ammo == 0;
+        public new void Update() {
+            base.Update();
+            inputBuffer[State.Shoot] = detection.canSeePlayer ? 1 : 0;
+            inputBuffer[State.Reload] = CurrentGun.Ammo == 0 ? 1 : 0;
         }
     }
 }
