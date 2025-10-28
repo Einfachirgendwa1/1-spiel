@@ -12,6 +12,7 @@ namespace Player {
         public float jumpForce;
 
         private readonly List<GameObject> groundColliders = new();
+
         private float jumpBuffer;
 
         public void Update() {

@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7506eefa9629432488b57a5475a86a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Guns.Behaviours.Equip
-  gun: {fileID: 0}
 --- !u!114 &-3111581316853953227
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f97aeff05994877b93efca65cdc42a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun.Behaviours.Unequip
-  gun: {fileID: 0}
 --- !u!1102 &-2793705281111302261
 AnimatorState:
   serializedVersion: 6
@@ -342,7 +340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0cfbc20c0d4b9791ae2b58d708f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Guns.Behaviours.Idle
-  gun: {fileID: 0}
 --- !u!1101 &2204808552448551566
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -445,7 +442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab68df516cf4ccfab61978a7cd70d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun.Behaviours.Reload
-  gun: {fileID: 0}
 --- !u!114 &5462741250872817289
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,7 +454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dbc95c284041f39882aff086de5930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun.Behaviours.Shoot
-  gun: {fileID: 0}
 --- !u!1101 &8055241459346038601
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -466,10 +461,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Shoot
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2321733935155291337}
   m_Solo: 0
