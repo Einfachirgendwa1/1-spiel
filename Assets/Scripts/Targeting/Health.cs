@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Misc {
-    public class Health : MonoBehaviour {
+namespace Targeting {
+    public class Health : MonoBehaviour, ITarget {
         public float health;
         public AudioClip hurtSound;
         public AudioClip deathSound;

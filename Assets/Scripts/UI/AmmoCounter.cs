@@ -8,7 +8,7 @@ namespace UI {
         public TextMeshProUGUI text;
 
         private void Update() {
-            text.text = $"{gunController.CurrentGun.Ammo}/{gunController.CurrentGun.magazineSize}";
+            text.text = $"{gunController.CurrentGun.Ammo}/{gunController.CurrentGun.AmmoBackup}";
         }
     }
 }

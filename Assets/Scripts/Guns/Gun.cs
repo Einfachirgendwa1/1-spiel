@@ -1,5 +1,6 @@
 ﻿using System;
-using Misc;
+using Guns.Ammunition;
+using Targeting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,20 +9,32 @@ namespace Guns {
     public class Gun : MonoBehaviour {
         [Header("Required")] public Animator animator;
         [Header("Gun Settings")] public bool automatic;
+        public BulletType bulletType;
         public int damage;
         public float range;
         public int magazineSize;
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
-
         internal int Ammo;
         internal GameObject cam;
         internal GunController controller;
 
-        private void Start() => Ammo = magazineSize;
+        internal int AmmoBackup {
+            get => controller.ammo[bulletType];
+            set => controller.ammo[bulletType] = value;
+        }
 
-        public void Shoot(int shotsInARow) {
+        private void Start() => Reload();
+
+        internal void Reload() {
+            int missingBullets = Math.Min(magazineSize - Ammo, AmmoBackup);
+
+            AmmoBackup -= missingBullets;
+            Ammo += missingBullets;
+        }
+
+        internal void Shoot(int shotsInARow) {
             Ammo--;
 
             float x = Random.Range(-weaponSprayX, weaponSprayX);
@@ -33,7 +46,7 @@ namespace Guns {
             Vector3 direction = weaponSpray * recoilOffset * cam.transform.forward;
 
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range)) {
-                hit.transform.GetComponent<Health>()?.TakeDamage(damage);
+                hit.transform.GetComponent<ITarget>()?.TakeDamage(damage);
             }
         }
     }

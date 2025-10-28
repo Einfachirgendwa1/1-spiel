@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,8 +18,9 @@ namespace Enemies {
         public LayerMask targetMask;
         public LayerMask obstructionMask;
 
+        [NonSerialized]
         public bool canSeePlayer;
-        public EnemyState state = EnemyState.Patrolling;
+        internal EnemyState state = EnemyState.Patrolling;
 
         private void Start() {
             playerReference = GameObject.FindGameObjectWithTag("Player");

@@ -6,16 +6,13 @@ using UnityEngine.AI;
 namespace Enemies {
     [Serializable]
     public class EnemyMovement : MonoBehaviour {
-        private NavMeshAgent agent;
-        private EnemyPlayerDetection detection;
+        public NavMeshAgent agent;
+        public EnemyPlayerDetection detection;
         private List<Vector3> patrollingPath = new();
         private int patrollingPathHead;
         private Vector3? target;
 
         private void Start() {
-            detection = GetComponent<EnemyPlayerDetection>();
-            agent = GetComponent<NavMeshAgent>();
-
             Transform child = transform.Find("Path");
             if (child) {
                 foreach (Transform child2 in child) {

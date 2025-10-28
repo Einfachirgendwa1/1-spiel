@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Guns.Ammunition;
 using UnityEngine;
 
 namespace Guns {
@@ -14,6 +15,8 @@ namespace Guns {
         public GameObject cam;
         public GameObject weaponHolder;
         public List<Gun> guns;
+
+        internal Dictionary<BulletType, int> ammo = BulletTypeExtensions.GetAmmoInit();
         private int currentGunIdx;
         internal Dictionary<State, float> inputBuffer = new();
         private int nextGunIdx;
@@ -41,8 +44,10 @@ namespace Guns {
                 inputBuffer[key] = Math.Max(inputBuffer[key] - Time.deltaTime, 0);
             }
 
+            bool reloadMakesSense = CurrentGun.Ammo != CurrentGun.magazineSize && CurrentGun.AmmoBackup != 0;
+
             CurrentGun.animator.SetBool(UnequipHash, WantsTransition(State.Unequip));
-            CurrentGun.animator.SetBool(ReloadHash, WantsTransition(State.Reload));
+            CurrentGun.animator.SetBool(ReloadHash, WantsTransition(State.Reload) && reloadMakesSense);
             CurrentGun.animator.SetBool(ShootHash, WantsTransition(State.Shoot) && CurrentGun.Ammo > 0);
         }
 
@@ -75,6 +80,7 @@ namespace Guns {
             }
         }
     }
+
 
     internal enum State {
         Idle,

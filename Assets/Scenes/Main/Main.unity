@@ -1353,7 +1353,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1448,12 +1448,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 146247585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06febfb66d5a193429913af7660f56d8, type: 3}
+  m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  enemyHealth: 100
-  timeToWait: 1000
+  m_EditorClassIdentifier: Assembly-CSharp::Targeting.Health
+  health: 100
+  hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
   deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
+  audioSource: {fileID: 146247590}
 --- !u!4 &147084200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
@@ -10669,13 +10670,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 942258594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
+  m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  audioSource: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
+  Parent: {fileID: 146247591}
+  DamageMultiplier: 1
 --- !u!4 &942482371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e18ec207b4a415d4e92a99617df413e3, type: 3}
@@ -18529,13 +18528,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1608960100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
+  m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  audioSource: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
+  Parent: {fileID: 146247591}
+  DamageMultiplier: 2
 --- !u!4 &1610467072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4420517154851618513, guid: d7855ae3f7bd2fb40a66634998cc994d, type: 3}
