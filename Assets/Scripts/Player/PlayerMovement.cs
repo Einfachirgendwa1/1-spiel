@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Settings.Input;
 using UnityEngine;
 using Action = Settings.Input.Action;
@@ -6,12 +7,11 @@ using Action = Settings.Input.Action;
 namespace Player {
     public class PlayerMovement : MonoBehaviour {
         [Header("Required")] public Rigidbody rigidBody;
-        public LayerMask groundLayerMask;
         [Header("Movement")] public float movementSpeed;
         public float movementAcceleration;
         public float jumpForce;
 
-        private bool grounded;
+        private readonly List<GameObject> groundColliders = new();
         private float jumpBuffer;
 
         public void Update() {
@@ -23,30 +23,28 @@ namespace Player {
         }
 
         public void FixedUpdate() {
-            grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0F, groundLayerMask);
-
-            if (grounded && jumpBuffer > 0) {
+            if (groundColliders.Count > 0 && jumpBuffer > 0) {
                 rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-                grounded = false;
+                jumpBuffer = 0;
             }
 
-            Vector3 plane = grounded ? hit.normal : Vector3.up;
-            Vector3 current = rigidBody.linearVelocity;
-            Vector3 target = MovementDirection(plane);
+            Vector3 forward = Vector3.forward * Input.GetAxisRaw("Vertical");
+            Vector3 right = Vector3.right * Input.GetAxisRaw("Horizontal");
+            Vector3 direction = (transform.rotation * (forward + right)).normalized * movementSpeed;
 
-            Vector3 movement = Vector3.Lerp(current, target, movementAcceleration);
+            Vector3 movement = Vector3.Lerp(rigidBody.linearVelocity, direction, movementAcceleration);
 
             movement.y = rigidBody.linearVelocity.y;
             rigidBody.linearVelocity = movement;
         }
 
-
-        private Vector3 MovementDirection(Vector3 plane) {
-            Vector3 forward = Vector3.forward * Input.GetAxisRaw("Vertical");
-            Vector3 right = Vector3.right * Input.GetAxisRaw("Horizontal");
-
-            Vector3 direction = (transform.rotation * (forward + right)).normalized;
-            return Vector3.ProjectOnPlane(direction, plane) * movementSpeed;
+        private void OnCollisionEnter(Collision other) {
+            Vector3 normal = other.contacts[0].normal;
+            if (Vector3.Angle(normal, Vector3.up) < 60) {
+                groundColliders.Add(other.gameObject);
+            }
         }
+
+        private void OnCollisionExit(Collision other) => groundColliders.Remove(other.gameObject);
     }
 }
