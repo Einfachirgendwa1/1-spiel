@@ -49,7 +49,7 @@ namespace Enemies {
         }
 
         private Vector3 AttackPlayer() {
-            Vector3 playerPosition = detection.playerReference.transform.position;
+            Vector3 playerPosition = detection.player.transform.position;
             Vector3 distance = playerPosition - transform.position;
             float distanceToPlayer = distance.magnitude;
 

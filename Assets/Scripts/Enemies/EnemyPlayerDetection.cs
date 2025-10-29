@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using UnityEngine;
+using Cursor = UI.Cursor;
 
 namespace Enemies {
     public enum EnemyState {
@@ -10,59 +10,38 @@ namespace Enemies {
 
     public class EnemyPlayerDetection : MonoBehaviour {
         public float radius;
-
         [Range(0, 360)] public float angle;
-
-        public GameObject playerReference;
-
-        public LayerMask targetMask;
         public LayerMask obstructionMask;
 
-        [NonSerialized]
-        public bool canSeePlayer;
-        internal EnemyState state = EnemyState.Patrolling;
+        private readonly Cursor cursor = new();
+
+        [NonSerialized] public GameObject player;
+        [NonSerialized] public EnemyState state = EnemyState.Patrolling;
 
         private void Start() {
-            playerReference = GameObject.FindGameObjectWithTag("Player");
-            StartCoroutine(FOVRoutine());
+            player = GameObject.Find("/Player");
         }
 
-        private IEnumerator FOVRoutine() {
-            while (true) {
-                yield return new WaitForSeconds(0.2f);
-                FieldOfViewCheck();
-            }
-        }
+        private void Update() {
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+            float angleToTarget = Vector3.Angle(transform.forward, direction);
 
-        private void FieldOfViewCheck() {
-            Collider[] rangeChecks = new Collider[1];
-            if (Physics.OverlapSphereNonAlloc(transform.position, radius, rangeChecks, targetMask) == 0) {
-                canSeePlayer = false;
-                return;
-            }
 
-            Collider rangeCheck = rangeChecks[0];
-            Transform target = rangeCheck.transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-            float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-            if (!(angleToTarget < angle / 2)) {
-                return;
-            }
-
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-            canSeePlayer = !Physics.Raycast(
+            bool obstructed = Physics.Raycast(
                 transform.position,
-                directionToTarget,
+                direction,
                 distanceToTarget,
                 obstructionMask
             );
-            state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
 
+            bool canSeePlayer = distanceToTarget <= radius && angleToTarget <= angle / 2 && !obstructed;
+            state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
             if (canSeePlayer) {
-                transform.LookAt(target);
+                transform.LookAt(player.transform);
             }
+
+            cursor.str = state.ToString();
         }
     }
 }
