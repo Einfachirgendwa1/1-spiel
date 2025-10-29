@@ -1,10 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace UI.Menus {
     public class PauseMenu : MonoBehaviour {
-        public GameObject pauseMenu;
-        private bool paused;
+        private readonly List<GameObject> children = new();
+        private bool paused = true;
+
+        private void Start() {
+            foreach (Transform child in transform) {
+                children.Add(child.gameObject);
+            }
+
+            TogglePause();
+        }
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -14,10 +23,10 @@ namespace UI.Menus {
 
         public void TogglePause() {
             paused = !paused;
-            Time.timeScale = paused ? 0f : 1f;
 
-            pauseMenu.SetActive(paused);
+            Time.timeScale = paused ? 0f : 1f;
             Menu.Cursor(paused);
+            children.ForEach(go => go.SetActive(paused));
         }
 
         public void SettingsMenu() { }
