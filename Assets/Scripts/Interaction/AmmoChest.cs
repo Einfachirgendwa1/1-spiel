@@ -1,11 +1,16 @@
 ﻿using System;
 using Guns;
 using Guns.Ammunition;
+using Player;
 using UnityEngine;
 
 namespace Interaction {
     public class AmmoChest : MonoBehaviour, IInteractable {
-        public GunController gunController;
+        private GunController gunController;
+
+        private void Start() {
+            gunController = GameObject.Find("/Player").GetComponent<PlayerGunController>();
+        }
 
         public string Description => "Pick up ammo";
         public bool CanInteract => true;

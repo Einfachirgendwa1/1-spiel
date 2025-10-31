@@ -3,6 +3,8 @@ using static Settings.Input.Mouse;
 
 namespace Player {
     public class PlayerCam : MonoBehaviour {
+        internal static bool paused = false;
+
         public Transform player;
         public Transform cameraHolder;
 
@@ -10,6 +12,10 @@ namespace Player {
         private float yRotation;
 
         private void Update() {
+            if (paused) {
+                return;
+            }
+
             yRotation += Input.GetAxisRaw("Mouse X") * sensitivityX;
             xRotation -= Input.GetAxisRaw("Mouse Y") * sensitivityY;
 

@@ -19,8 +19,6 @@ namespace UI {
     internal class Cursor {
         internal string str;
 
-        internal Cursor() {
-            OnScreenDebugText.cursors.Add(this);
-        }
+        internal Cursor() => OnScreenDebugText.cursors.Add(this);
     }
 }

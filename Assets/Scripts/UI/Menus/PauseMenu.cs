@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,7 @@ namespace UI.Menus {
         public void TogglePause() {
             paused = !paused;
 
+            PlayerCam.paused = paused;
             Time.timeScale = paused ? 0f : 1f;
             Menu.Cursor(paused);
             children.ForEach(go => go.SetActive(paused));

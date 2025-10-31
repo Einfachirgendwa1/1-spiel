@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Settings.Input;
 using UnityEngine;
 using Action = Settings.Input.Action;
@@ -10,9 +11,7 @@ namespace Interaction {
         public float distance;
         public LayerMask playerLayer;
 
-        private void Start() {
-            instance = this;
-        }
+        private void Start() => instance = this;
 
 
         private void Update() {
@@ -21,7 +20,7 @@ namespace Interaction {
             }
         }
 
-        internal bool CanInteract(out IInteractable interactable) {
+        internal bool CanInteract([NotNullWhen(true)] out IInteractable interactable) {
             interactable = null;
 
             Vector3 origin = playerCamera.transform.position;
