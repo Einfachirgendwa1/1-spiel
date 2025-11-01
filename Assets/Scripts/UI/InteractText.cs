@@ -1,7 +1,7 @@
 ﻿using Interaction;
 using Settings.Input;
 using UI.Text;
-using Color = UnityEngine.Color;
+using UnityEngine;
 
 namespace UI {
     public class InteractText : ElementDisplay {
@@ -13,7 +13,9 @@ namespace UI {
                 SetElements(
                     new ElementBuilder(Keybinds.keybinds[Action.Interact]),
                     new ElementBuilder(" to "),
-                    new ElementBuilder(new Color(0.1f, 0.1f, 0.1f, 0.9f), interactable.Description)
+                    new ElementBuilder(Extensions.Rgba(30, 30, 30, 255), interactable.Description) {
+                        backgroundSizeDelta = new Vector2(20, 10)
+                    }
                 );
             }
         }

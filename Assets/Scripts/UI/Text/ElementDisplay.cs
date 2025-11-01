@@ -57,7 +57,7 @@ namespace UI.Text {
             foreach (Element element in elements) {
                 foreach (Element.Subpart subpart in element.subparts.Values) {
                     Vector2 preserve = subpart.rectTransform.anchoredPosition;
-                    subpart.rectTransform.transform.SetParent(transform, true);
+                    subpart.rectTransform.transform.SetParent(transform);
                     subpart.rectTransform.anchoredPosition = preserve;
                     render.Add(subpart);
                 }

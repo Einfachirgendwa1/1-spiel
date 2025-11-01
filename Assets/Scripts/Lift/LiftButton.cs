@@ -23,8 +23,8 @@ namespace Lift {
         };
 
         public string Description => mode switch {
-            Mode.Toggle => $"Move Lift {(isUp() ? "Down" : "Up")}",
-            _           => "Call Lift"
+            Mode.Toggle => $"move lift {(isUp() ? "down" : "up")}",
+            _           => "call lift"
         };
 
         public void Interact() {

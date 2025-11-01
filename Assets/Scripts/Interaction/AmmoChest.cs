@@ -12,7 +12,7 @@ namespace Interaction {
             gunController = GameObject.Find("/Player").GetComponent<PlayerGunController>();
         }
 
-        public string Description => "Pick up ammo";
+        public string Description => "pick up ammo";
         public bool CanInteract => true;
 
         public void Interact() {
