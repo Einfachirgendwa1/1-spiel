@@ -34,7 +34,7 @@ namespace Enemies {
         }
 
         private Vector3 FollowPatrollingPath() {
-            // we have no points to go to, so we just stand there doing nothing
+            // if we have no points to go to, so we just stand there doing nothing
             if (target == null) {
                 return transform.position;
             }
