@@ -7,6 +7,8 @@ namespace UI {
         public GunController gunController;
         public TextMeshProUGUI text;
 
-        private void Update() => text.text = $"{gunController.CurrentGun.Ammo}/{gunController.CurrentGun.AmmoBackup}";
+        private void Update() {
+            text.text = $"{gunController.CurrentGun.Ammo}/{gunController.CurrentGun.AmmoBackup}";
+        }
     }
 }

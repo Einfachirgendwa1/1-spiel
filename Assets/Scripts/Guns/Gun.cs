@@ -25,7 +25,9 @@ namespace Guns {
             set => controller.ammo[bulletType] = value;
         }
 
-        private void Start() => Reload();
+        private void Start() {
+            Reload();
+        }
 
         internal void Reload() {
             int missingBullets = Math.Min(magazineSize - Ammo, AmmoBackup);

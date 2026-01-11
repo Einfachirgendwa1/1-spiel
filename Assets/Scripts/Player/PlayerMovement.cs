@@ -46,6 +46,8 @@ namespace Player {
             }
         }
 
-        private void OnCollisionExit(Collision other) => groundColliders.Remove(other.gameObject);
+        private void OnCollisionExit(Collision other) {
+            groundColliders.Remove(other.gameObject);
+        }
     }
 }

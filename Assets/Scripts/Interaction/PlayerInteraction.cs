@@ -11,7 +11,9 @@ namespace Interaction {
         public float distance;
         public LayerMask playerLayer;
 
-        private void Start() => instance = this;
+        private void Start() {
+            instance = this;
+        }
 
 
         private void Update() {

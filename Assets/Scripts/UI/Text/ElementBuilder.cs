@@ -31,11 +31,13 @@ namespace UI.Text {
             backgroundSizeDelta = new Vector2(20, 10);
         }
 
-        internal Element Build() => mode switch {
-            Mode.TextField      => new TextField(this),
-            Mode.FullBackground => new FullBackground(this),
-            _                   => throw new ArgumentOutOfRangeException()
-        };
+        internal Element Build() {
+            return mode switch {
+                Mode.TextField      => new TextField(this),
+                Mode.FullBackground => new FullBackground(this),
+                _                   => throw new ArgumentOutOfRangeException()
+            };
+        }
 
         private enum Mode {
             TextField,
