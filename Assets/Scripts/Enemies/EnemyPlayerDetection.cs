@@ -41,7 +41,7 @@ namespace Enemies {
                 transform.LookAt(player.transform);
             }
 
-            cursor.str = state.ToString();
+            cursor.Str = state.ToString();
         }
     }
 }

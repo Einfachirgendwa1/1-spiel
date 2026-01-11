@@ -28,11 +28,13 @@ namespace Settings.Input {
             [9] = KeyCode.Alpha9
         };
 
-        internal static bool Is(this Action action, Func<KeyCode, bool> f) =>
-            keybinds.TryGetValue(action, out KeyCode key) && f(key);
+        internal static bool Is(this Action action, Func<KeyCode, bool> f) {
+            return keybinds.TryGetValue(action, out KeyCode key) && f(key);
+        }
 
-        internal static bool Is(this int weapon, Func<KeyCode, bool> f) =>
-            weaponSelect.TryGetValue(weapon, out KeyCode key) && f(key);
+        internal static bool Is(this int weapon, Func<KeyCode, bool> f) {
+            return weaponSelect.TryGetValue(weapon, out KeyCode key) && f(key);
+        }
     }
 
     internal enum Action {

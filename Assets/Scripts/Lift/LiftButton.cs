@@ -15,24 +15,31 @@ namespace Lift {
         public Transform liftTransform;
         public Mode mode;
 
-        public bool CanInteract => mode switch {
-            Mode.Toggle => isUp() || isDown(),
-            Mode.High   => isDown(),
-            Mode.Low    => isUp(),
-            _           => throw new ArgumentOutOfRangeException()
-        };
+        public bool CanInteract =>
+            mode switch {
+                Mode.Toggle => isUp() || isDown(),
+                Mode.High   => isDown(),
+                Mode.Low    => isUp(),
+                _           => throw new ArgumentOutOfRangeException()
+            };
 
-        public string Description => mode switch {
-            Mode.Toggle => $"move lift {(isUp() ? "down" : "up")}",
-            _           => "call lift"
-        };
+        public string Description =>
+            mode switch {
+                Mode.Toggle => $"move lift {(isUp() ? "down" : "up")}",
+                _           => "call lift"
+            };
 
         public void Interact() {
             StartCoroutine(Move());
         }
 
-        private bool isUp() => liftTransform.position.y >= lift.upPosY - lift.delta;
-        private bool isDown() => liftTransform.position.y <= lift.downPosY + lift.delta;
+        private bool isUp() {
+            return liftTransform.position.y >= lift.upPosY - lift.delta;
+        }
+
+        private bool isDown() {
+            return liftTransform.position.y <= lift.downPosY + lift.delta;
+        }
 
         private IEnumerator Move() {
             if (CanInteract) {

@@ -198,7 +198,7 @@ Shader "TextMeshPro/Mobile/Distance Field - Masking"
                 float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
                 float2 maskUV = (vert.xy - clampedRect.xy) / (clampedRect.zw - clampedRect.xy);
                 const half2 maskSoftness = half2(max(_UIMaskSoftnessX, _MaskSoftnessX),
-           max(_UIMaskSoftnessY, _MaskSoftnessY));
+                                                 max(_UIMaskSoftnessY, _MaskSoftnessY));
 
                 // Structure for pixel shader
                 pixel_t output = {

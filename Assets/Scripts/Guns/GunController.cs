@@ -25,12 +25,15 @@ namespace Guns {
         internal Gun CurrentGun => guns[currentGunIdx];
 
         public void Start() {
-            guns = guns.Select(gun => {
-                Gun instance = Instantiate(gun, weaponHolder.transform);
-                instance.cam = cam;
-                instance.controller = this;
-                return instance;
-            }).ToList();
+            guns = guns
+                .Select(gun => {
+                        Gun instance = Instantiate(gun, weaponHolder.transform);
+                        instance.cam = cam;
+                        instance.controller = this;
+                        return instance;
+                    }
+                )
+                .ToList();
 
             foreach (State key in AllStates) {
                 inputBuffer.Add(key, 0);
@@ -71,8 +74,13 @@ namespace Guns {
             }
         }
 
-        internal bool WantsTransition(State newState) => inputBuffer[newState] > 0;
-        internal bool ActiveOrRequested(State s) => state == s || WantsTransition(s);
+        internal bool WantsTransition(State newState) {
+            return inputBuffer[newState] > 0;
+        }
+
+        internal bool ActiveOrRequested(State s) {
+            return state == s || WantsTransition(s);
+        }
 
         internal void ReadInput(bool input, State newState, float bufferLength = 5) {
             if (input) {
