@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using UnityEngine;
+using UI.Text;
 
 namespace UI {
-    public class OnScreenDebugText : MonoBehaviour {
+    public class OnScreenDebugText : ElementDisplay {
         internal static readonly List<Cursor> cursors = new();
-        public TextMeshProUGUI textMesh;
 
         private void Update() {
-            textMesh.text = "";
-            foreach (string cursor in cursors.Select(c => c.str)) {
-                textMesh.text += $"{cursor}\n";
-            }
+            string res = cursors.Select(c => c.str).Aggregate((s1, s2) => $"{s1}\n{s2}");
+            SetElements(new ElementBuilder(res));
         }
     }
 

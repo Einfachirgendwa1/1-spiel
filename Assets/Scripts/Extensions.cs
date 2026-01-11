@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 internal static class Extensions {
@@ -17,4 +18,13 @@ internal static class Extensions {
     }
 
     public static Color Rgba(byte r, byte g, byte b, byte a) => new(r / 255f, g / 255f, b / 255f, a / 255f);
+
+    [ContractAnnotation("b: true => true; b: false => false")]
+    public static bool Then(this bool b, Action action) {
+        if (b) {
+            action();
+        }
+
+        return b;
+    }
 }

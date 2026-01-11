@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace UI.Text {
@@ -8,6 +9,7 @@ namespace UI.Text {
         internal Color backgroundColor;
         internal int backgroundRenderPriority = -1;
         internal Vector2 backgroundSizeDelta;
+        private Mode mode = Mode.TextField;
         internal string text;
         internal int textRenderPriority = 0;
 
@@ -16,7 +18,9 @@ namespace UI.Text {
             background = false;
         }
 
-        internal ElementBuilder(Color color, string text = "") {
+        internal ElementBuilder(Color color, string text = "", bool fullBackground = false) {
+            fullBackground.Then(() => mode = Mode.FullBackground);
+
             this.text = text;
             backgroundColor = color;
         }
@@ -27,6 +31,15 @@ namespace UI.Text {
             backgroundSizeDelta = new Vector2(20, 10);
         }
 
-        internal Element Build() => new(this);
+        internal Element Build() => mode switch {
+            Mode.TextField      => new TextField(this),
+            Mode.FullBackground => new FullBackground(this),
+            _                   => throw new ArgumentOutOfRangeException()
+        };
+
+        private enum Mode {
+            TextField,
+            FullBackground
+        }
     }
 }
