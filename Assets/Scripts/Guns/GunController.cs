@@ -26,14 +26,14 @@ namespace Guns {
 
         public void Start() {
             guns = guns //hier wird die gun beim weaponholder instantiated
-                .Select(gun => {
-                        Gun instance = Instantiate(gun, weaponHolder.transform);
-                        instance.cam = cam;
-                        instance.controller = this;
-                        return instance;
-                    }
-                )
-                .ToList();
+                   .Select(gun => {
+                           Gun instance = Instantiate(gun, weaponHolder.transform);
+                           instance.Cam = cam;
+                           instance.Controller = this;
+                           return instance;
+                       }
+                   )
+                   .ToList();
 
             foreach (State key in AllStates) {
                 inputBuffer.Add(key, 0);

@@ -7,7 +7,13 @@ namespace UI.Crosshair {
     public abstract class Crosshair : MonoBehaviour {
         public Image rect;
         public GunController gunController;
-        private readonly Image[] children = { null, null, null, null };
+
+        private readonly Image[] children = {
+            null,
+            null,
+            null,
+            null
+        };
 
         internal void Start() {
             for (int i = 0; i < children.Length; ++i) {

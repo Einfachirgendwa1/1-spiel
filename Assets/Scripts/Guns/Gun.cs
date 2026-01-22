@@ -17,12 +17,12 @@ namespace Guns {
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
         internal int Ammo;
-        internal GameObject cam;
-        internal GunController controller;
+        internal GameObject Cam;
+        internal GunController Controller;
 
         internal int AmmoBackup {
-            get => controller.ammo[bulletType];
-            set => controller.ammo[bulletType] = value;
+            get => Controller.ammo[bulletType];
+            set => Controller.ammo[bulletType] = value;
         }
 
         private void Start() {
@@ -45,12 +45,13 @@ namespace Guns {
             Quaternion weaponSpray = Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right);
             Quaternion recoilOffset = Quaternion.AngleAxis(shotsInARow * recoil, Vector3.right);
 
-            Vector3 direction = weaponSpray * recoilOffset * cam.transform.forward;
+            Vector3 direction = weaponSpray * recoilOffset * Cam.transform.forward;
 
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range)) {
                 hit.transform.GetComponent<ITarget>()?.TakeDamage(damage);
             }
-            Debug.DrawLine(transform.position, transform.forward, Color.red,3.0f);
+
+            Debug.DrawLine(transform.position, transform.forward, Color.red, 3.0f);
         }
     }
 }

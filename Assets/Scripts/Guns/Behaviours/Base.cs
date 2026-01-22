@@ -12,7 +12,7 @@ namespace Guns.Behaviours {
             repetitions = -1;
             gun = animator.gameObject.GetComponent<Gun>();
 
-            gun.controller.state = state;
+            gun.Controller.state = state;
 
             if (!stateInfo.loop) {
                 Action();
@@ -34,7 +34,7 @@ namespace Guns.Behaviours {
         }
 
         protected virtual void Action() {
-            gun.controller.inputBuffer[state] = 0f;
+            gun.Controller.inputBuffer[state] = 0f;
         }
     }
 }
