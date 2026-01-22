@@ -752,8 +752,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3809222280786854644}
   - {fileID: 3809222280668562654}
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4472795042717003543}
   automatic: 0
-  bulletType: {fileID: 6708107729399605744, guid: 4d1631d1dd0f8bd46af9f6c4ba6b09ed, type: 3}
+  bulletType: 0
   damage: 50
   range: 200
   magazineSize: 12
