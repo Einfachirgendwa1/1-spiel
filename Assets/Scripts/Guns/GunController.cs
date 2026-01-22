@@ -25,7 +25,7 @@ namespace Guns {
         internal Gun CurrentGun => guns[currentGunIdx];
 
         public void Start() {
-            guns = guns. //hier wird die gun beim weaponholder instantiated
+            guns = guns //hier wird die gun beim weaponholder instantiated
                 .Select(gun => {
                         Gun instance = Instantiate(gun, weaponHolder.transform);
                         instance.cam = cam;
