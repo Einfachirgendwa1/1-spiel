@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.Health
-  health: 400
+  health: 100
   hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
   deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
   audioSource: {fileID: 2767550777923573171}

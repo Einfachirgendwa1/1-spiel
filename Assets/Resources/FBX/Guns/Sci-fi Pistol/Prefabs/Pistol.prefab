@@ -783,7 +783,7 @@ MonoBehaviour:
   animator: {fileID: 4472795042717003543}
   automatic: 1
   bulletType: 0
-  damage: 50
+  damage: 33
   range: 200
   magazineSize: 12
   weaponSprayX: 0
