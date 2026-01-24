@@ -8,20 +8,13 @@ namespace Enemies {
     public class EnemyMovement : MonoBehaviour {
         public NavMeshAgent agent;
         public EnemyPlayerDetection detection;
-        private List<Vector3> patrollingPath = new();
+        internal List<Vector3> PatrollingPath = new();
         private int patrollingPathHead;
         private Vector3? target;
 
         private void Start() {
-            Transform child = transform.Find("Path");
-            if (child) {
-                foreach (Transform child2 in child) {
-                    patrollingPath.Add(child2.position);
-                }
-            }
-
-            if (patrollingPath.Count != 0) {
-                target = patrollingPath[0];
+            if (PatrollingPath.Count != 0) {
+                target = PatrollingPath[0];
             }
         }
 
@@ -41,8 +34,8 @@ namespace Enemies {
 
             Vector3 distance = target.Value - transform.position;
             if (distance.magnitude < 0.5f) {
-                patrollingPathHead = (patrollingPathHead + 1) % patrollingPath.Count;
-                target = patrollingPath[patrollingPathHead];
+                patrollingPathHead = (patrollingPathHead + 1) % PatrollingPath.Count;
+                target = PatrollingPath[patrollingPathHead];
             }
 
             return target!.Value;

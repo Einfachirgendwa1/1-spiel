@@ -1355,6 +1355,7 @@ GameObject:
   - component: {fileID: 768006245817576574}
   - component: {fileID: 6809437986415982966}
   - component: {fileID: 4976582193737473910}
+  - component: {fileID: 1009613337238505380}
   m_Layer: 0
   m_Name: Enemy_Model
   m_TagString: Untagged
@@ -1613,6 +1614,28 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1536
+--- !u!64 &1009613337238505380
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0

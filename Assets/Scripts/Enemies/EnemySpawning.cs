@@ -1,22 +1,23 @@
-using NUnit.Framework;
 using UnityEngine;
 
-public class EnemySpawning : MonoBehaviour
-{
-    public GameObject enemy;
+namespace Enemies {
+    public class EnemySpawning : MonoBehaviour {
+        public GameObject enemyPrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        foreach(Transform Child in transform)
-        {
-            Instantiate(enemy, Child.position, Quaternion.identity);
+        private void Start() {
+            foreach (Transform child in transform) {
+                GameObject enemyInstance = Instantiate(enemyPrefab, child.position, Quaternion.identity);
+
+                EnemyMovement enemyMovement = enemyInstance.GetComponent<EnemyMovement>();
+                if (enemyMovement is null) {
+                    Debug.LogWarning("EnemySpawning: No EnemyMovement component found on enemy instance.");
+                    continue;
+                }
+
+                foreach (Transform waypoint in child) {
+                    enemyMovement.PatrollingPath.Add(waypoint.position);
+                }
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
