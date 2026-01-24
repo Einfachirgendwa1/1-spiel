@@ -22,6 +22,8 @@ namespace Guns {
         private int nextGunIdx;
         internal State State;
 
+        internal virtual Vector3 FacingDirection => cam.transform.forward;
+
         internal Gun CurrentGun => guns[currentGunIdx];
 
         public void Start() {

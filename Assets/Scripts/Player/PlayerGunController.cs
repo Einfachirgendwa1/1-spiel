@@ -4,8 +4,14 @@ using UnityEngine;
 
 namespace Player {
     public class PlayerGunController : GunController {
+        public float pitch;
+        internal override Vector3 FacingDirection => Quaternion.AngleAxis(pitch, Vector3.right) * cam.transform.forward;
+
         public new void Update() {
             base.Update();
+
+            Debug.DrawRay(cam.transform.position, FacingDirection * 100, Color.green);
+
             for (int gun = 1; gun <= 9; gun++) {
                 if (gun.Is(Input.GetKeyDown)) {
                     SelectGun(gun - 1);
