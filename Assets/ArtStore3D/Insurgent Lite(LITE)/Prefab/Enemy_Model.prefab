@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 6809437986415982966}
   - component: {fileID: 4976582193737473910}
   m_Layer: 0
-  m_Name: Insurgent_Lite_Lite
+  m_Name: Enemy_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
