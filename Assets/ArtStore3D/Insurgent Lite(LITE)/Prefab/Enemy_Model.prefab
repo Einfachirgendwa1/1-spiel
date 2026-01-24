@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
-  parent: {fileID: 0}
+  parent: {fileID: 1342867973017627488}
   damageMultiplier: 10
 --- !u!1 &2778952052195505799
 GameObject:
@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 768006245817576574}
   - component: {fileID: 6809437986415982966}
   - component: {fileID: 4976582193737473910}
-  - component: {fileID: 1009613337238505380}
+  - component: {fileID: 8017037902803192708}
   m_Layer: 0
   m_Name: Enemy_Model
   m_TagString: Untagged
@@ -1614,8 +1614,8 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1536
---- !u!64 &1009613337238505380
-MeshCollider:
+--- !u!65 &8017037902803192708
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1632,10 +1632,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.6, z: 1}
+  m_Center: {x: 0, y: 0.74, z: 0}
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0
