@@ -51,7 +51,7 @@ namespace Guns {
                 hit.transform.GetComponent<ITarget>()?.TakeDamage(damage);
             }
 
-            Debug.DrawLine(transform.position, transform.forward, Color.red, 3.0f);
+            Debug.DrawLine(transform.position, transform.position + direction * range, Color.red, 3.0f);
         }
     }
 }
