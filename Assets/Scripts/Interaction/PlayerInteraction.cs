@@ -1,18 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
-using Settings.Input;
+using Settings.Global.Input;
 using UnityEngine;
-using Action = Settings.Input.Action;
+using Action = Settings.Global.Input.Action;
 
 namespace Interaction {
     public class PlayerInteraction : MonoBehaviour {
-        internal static PlayerInteraction instance;
+        internal static PlayerInteraction Instance;
 
         public Camera playerCamera;
         public float distance;
         public LayerMask playerLayer;
 
         private void Start() {
-            instance = this;
+            Instance = this;
         }
 
 

@@ -3,16 +3,16 @@
 namespace Guns.Behaviours {
     public abstract class Base : StateMachineBehaviour {
         private float actualNormalizedTime;
-        internal Gun gun;
+        internal Gun Gun;
         private float lastNormalizedTime;
-        internal int repetitions;
-        internal abstract State state { get; }
+        internal int Repetitions;
+        internal abstract State State { get; }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            repetitions = -1;
-            gun = animator.gameObject.GetComponent<Gun>();
+            Repetitions = -1;
+            Gun = animator.gameObject.GetComponent<Gun>();
 
-            gun.Controller.state = state;
+            Gun.Controller.State = State;
 
             if (!stateInfo.loop) {
                 Action();
@@ -24,8 +24,8 @@ namespace Guns.Behaviours {
                 actualNormalizedTime += stateInfo.normalizedTime - lastNormalizedTime;
 
                 int repsThisFrame = Mathf.FloorToInt(actualNormalizedTime);
-                if (repsThisFrame > repetitions) {
-                    repetitions = repsThisFrame;
+                if (repsThisFrame > Repetitions) {
+                    Repetitions = repsThisFrame;
                     Action();
                 }
             }
@@ -34,7 +34,7 @@ namespace Guns.Behaviours {
         }
 
         protected virtual void Action() {
-            gun.Controller.inputBuffer[state] = 0f;
+            Gun.Controller.InputBuffer[State] = 0f;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Interaction {
 
         public void Interact() {
             foreach (BulletType type in Enum.GetValues(typeof(BulletType))) {
-                gunController.ammo[type] += type.DefaultAmount();
+                gunController.Ammo[type] += type.DefaultAmount();
             }
 
             Destroy(gameObject);

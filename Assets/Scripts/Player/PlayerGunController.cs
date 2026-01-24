@@ -1,5 +1,5 @@
 ﻿using Guns;
-using Settings.Input;
+using Settings.Global.Input;
 using UnityEngine;
 
 namespace Player {

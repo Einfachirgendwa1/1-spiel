@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Settings.Input;
+using Settings.Global.Input;
 using UnityEngine;
-using Action = Settings.Input.Action;
+using Action = Settings.Global.Input.Action;
 
 namespace Player {
     public class PlayerMovement : MonoBehaviour {

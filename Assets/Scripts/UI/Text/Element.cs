@@ -8,47 +8,47 @@ using Object = UnityEngine.Object;
 
 namespace UI.Text {
     internal abstract class Element {
-        private static readonly Lazy<GameObject> prefab = new(() => Resources.Load<GameObject>("Prefabs/Text"));
+        private static readonly Lazy<GameObject> Prefab = new(() => Resources.Load<GameObject>("Prefabs/Text"));
 
-        internal readonly GameObject instance;
+        internal readonly GameObject Instance;
 
-        internal readonly Dictionary<string, Subpart> subparts;
+        internal readonly Dictionary<string, Subpart> Subparts;
 
         internal Element(ElementBuilder elementBuilder) {
-            instance = Object.Instantiate(prefab.Value);
+            Instance = Object.Instantiate(Prefab.Value);
 
-            subparts = new Dictionary<string, Subpart> {
+            Subparts = new Dictionary<string, Subpart> {
                 ["Text"] = new() {
-                    rectTransform = instance.transform.Find("Text").GetComponent<RectTransform>(),
-                    renderPriority = elementBuilder.textRenderPriority
+                    RectTransform = Instance.transform.Find("Text").GetComponent<RectTransform>(),
+                    RenderPriority = elementBuilder.TextRenderPriority
                 },
                 ["Background"] = new() {
-                    rectTransform = instance.transform.Find("Background").GetComponent<RectTransform>(),
-                    renderPriority = elementBuilder.backgroundRenderPriority
+                    RectTransform = Instance.transform.Find("Background").GetComponent<RectTransform>(),
+                    RenderPriority = elementBuilder.BackgroundRenderPriority
                 }
             };
 
-            TextMeshProUGUI textMesh = subparts["Text"].rectTransform.GetComponent<TextMeshProUGUI>();
-            Image backgroundImage = subparts["Background"].rectTransform.GetComponent<Image>();
+            TextMeshProUGUI textMesh = Subparts["Text"].RectTransform.GetComponent<TextMeshProUGUI>();
+            Image backgroundImage = Subparts["Background"].RectTransform.GetComponent<Image>();
 
-            textMesh.text = elementBuilder.text;
+            textMesh.text = elementBuilder.Text;
             textMesh.rectTransform.sizeDelta = textMesh.GetPreferredValues();
 
             (textMesh.text == "").Then(() => textMesh.gameObject.SetActive(false));
 
-            Vector2 sizeDelta = textMesh.rectTransform.sizeDelta + elementBuilder.backgroundSizeDelta;
+            Vector2 sizeDelta = textMesh.rectTransform.sizeDelta + elementBuilder.BackgroundSizeDelta;
 
-            backgroundImage.gameObject.SetActive(elementBuilder.background);
+            backgroundImage.gameObject.SetActive(elementBuilder.Background);
             backgroundImage.rectTransform.sizeDelta = sizeDelta;
-            backgroundImage.color = elementBuilder.backgroundColor;
+            backgroundImage.color = elementBuilder.BackgroundColor;
         }
 
-        internal Vector2 Size => subparts["Background"].rectTransform.sizeDelta;
+        internal Vector2 Size => Subparts["Background"].RectTransform.sizeDelta;
         internal abstract Vector2 Render(Vector2 start, int direction, List<Element> elements);
 
         internal struct Subpart {
-            internal RectTransform rectTransform;
-            internal int renderPriority;
+            internal RectTransform RectTransform;
+            internal int RenderPriority;
         }
     }
 
@@ -57,7 +57,7 @@ namespace UI.Text {
 
         internal override Vector2 Render(Vector2 start, int direction, List<Element> elements) {
             start.x += Size.x / 2 * direction;
-            subparts.Values.ForEach(subpart => subpart.rectTransform.anchoredPosition = start);
+            Subparts.Values.ForEach(subpart => subpart.RectTransform.anchoredPosition = start);
 
             start.x += Size.x / 2 * direction;
             return start;
@@ -71,7 +71,7 @@ namespace UI.Text {
             float x = elements.Select(element => element.Size.x).Sum();
             float y = elements.Select(element => element.Size.y).Max();
 
-            subparts["Background"].rectTransform.anchoredPosition = new Vector2(x, y);
+            Subparts["Background"].RectTransform.anchoredPosition = new Vector2(x, y);
 
             return start;
         }

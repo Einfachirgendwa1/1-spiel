@@ -15,16 +15,16 @@ namespace Enemies {
 
         private readonly Cursor cursor = new();
 
-        [NonSerialized] public GameObject player;
-        [NonSerialized] public EnemyState state = EnemyState.Patrolling;
+        [NonSerialized] public GameObject Player;
+        [NonSerialized] public EnemyState State = EnemyState.Patrolling;
 
         private void Start() {
-            player = GameObject.Find("/Player");
+            Player = GameObject.Find("/Player");
         }
 
         private void Update() {
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            float distanceToTarget = Vector3.Distance(transform.position, Player.transform.position);
             float angleToTarget = Vector3.Angle(transform.forward, direction);
 
 
@@ -36,12 +36,12 @@ namespace Enemies {
             );
 
             bool canSeePlayer = distanceToTarget <= radius && angleToTarget <= angle / 2 && !obstructed;
-            state = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
+            State = canSeePlayer ? EnemyState.Attacking : EnemyState.Patrolling;
             if (canSeePlayer) {
-                transform.LookAt(player.transform);
+                transform.LookAt(Player.transform);
             }
 
-            cursor.Str = state.ToString();
+            cursor.Str = State.ToString();
         }
     }
 }

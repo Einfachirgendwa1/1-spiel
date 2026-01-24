@@ -16,11 +16,11 @@ namespace Guns {
         public GameObject weaponHolder;
         public List<Gun> guns;
 
-        internal Dictionary<BulletType, int> ammo = BulletTypeExtensions.GetAmmoInit();
+        internal Dictionary<BulletType, int> Ammo = BulletTypeExtensions.GetAmmoInit();
         private int currentGunIdx;
-        internal Dictionary<State, float> inputBuffer = new();
+        internal Dictionary<State, float> InputBuffer = new();
         private int nextGunIdx;
-        internal State state;
+        internal State State;
 
         internal Gun CurrentGun => guns[currentGunIdx];
 
@@ -36,7 +36,7 @@ namespace Guns {
                    .ToList();
 
             foreach (State key in AllStates) {
-                inputBuffer.Add(key, 0);
+                InputBuffer.Add(key, 0);
             }
 
             RefreshGuns();
@@ -44,7 +44,7 @@ namespace Guns {
 
         public void Update() {
             foreach (State key in AllStates) {
-                inputBuffer[key] = Math.Max(inputBuffer[key] - Time.deltaTime, 0);
+                InputBuffer[key] = Math.Max(InputBuffer[key] - Time.deltaTime, 0);
             }
 
             bool reloadMakesSense = CurrentGun.Ammo != CurrentGun.magazineSize && CurrentGun.AmmoBackup != 0;
@@ -56,7 +56,7 @@ namespace Guns {
 
         internal void SelectGun(int index) {
             if (index < guns.Count && index != currentGunIdx) {
-                inputBuffer[State.Unequip] = float.PositiveInfinity;
+                InputBuffer[State.Unequip] = float.PositiveInfinity;
                 nextGunIdx = index;
             }
         }
@@ -75,16 +75,16 @@ namespace Guns {
         }
 
         internal bool WantsTransition(State newState) {
-            return inputBuffer[newState] > 0;
+            return InputBuffer[newState] > 0;
         }
 
         internal bool ActiveOrRequested(State s) {
-            return state == s || WantsTransition(s);
+            return State == s || WantsTransition(s);
         }
 
         internal void ReadInput(bool input, State newState, float bufferLength = 5) {
             if (input) {
-                inputBuffer[newState] = bufferLength;
+                InputBuffer[newState] = bufferLength;
             }
         }
     }

@@ -12,51 +12,51 @@ namespace UI.Text {
         private List<Element> elements = new();
         private ElementBuilder[] rawLastElements = { };
 
-        private IEnumerable<Element.Subpart> alive => render.Where(subpart => subpart.rectTransform != null);
-        private RectTransform rectTransform => GetComponent<RectTransform>();
+        private IEnumerable<Element.Subpart> Alive => render.Where(subpart => subpart.RectTransform != null);
+        private RectTransform RectTransform => GetComponent<RectTransform>();
 
         internal void SetElements(params ElementBuilder[] newElements) {
             if (newElements.SequenceEqual(rawLastElements)) {
                 return;
             }
 
-            alive.ForEach(subpart => Destroy(subpart.rectTransform.gameObject));
+            Alive.ForEach(subpart => Destroy(subpart.RectTransform.gameObject));
 
             rawLastElements = newElements;
             elements = newElements.Select(builder => builder.Build()).ToList();
 
             foreach (Element element in elements) {
-                foreach (Element.Subpart subpart in element.subparts.Values) {
-                    if (subpart.rectTransform.gameObject.activeSelf) {
-                        subpart.rectTransform.transform.SetParent(transform);
+                foreach (Element.Subpart subpart in element.Subparts.Values) {
+                    if (subpart.RectTransform.gameObject.activeSelf) {
+                        subpart.RectTransform.transform.SetParent(transform);
                         render.Add(subpart);
                     } else {
-                        Destroy(subpart.rectTransform.gameObject);
+                        Destroy(subpart.RectTransform.gameObject);
                     }
                 }
 
-                Destroy(element.instance);
+                Destroy(element.Instance);
             }
 
             int direction = alignment == HorizontalAlignmentOptions.Right ? -1 : 1;
 
             float right = alignment switch {
-                HorizontalAlignmentOptions.Left   => rectTransform.rect.xMin,
-                HorizontalAlignmentOptions.Center => rectTransform.rect.x,
-                HorizontalAlignmentOptions.Right  => rectTransform.rect.xMax,
+                HorizontalAlignmentOptions.Left   => RectTransform.rect.xMin,
+                HorizontalAlignmentOptions.Center => RectTransform.rect.x,
+                HorizontalAlignmentOptions.Right  => RectTransform.rect.xMax,
                 _                                 => throw new Exception($"Alignment not supported: {alignment}")
             };
 
-            Vector2 start = new(right, rectTransform.anchoredPosition.y);
+            Vector2 start = new(right, RectTransform.anchoredPosition.y);
             elements.Aggregate(start, (vector, element) => element.Render(vector, direction, elements));
 
-            alive
-                .OrderBy(subpart => subpart.renderPriority)
-                .ForEach((idx, subpart) => subpart.rectTransform.transform.SetSiblingIndex(idx));
+            Alive
+                .OrderBy(subpart => subpart.RenderPriority)
+                .ForEach((idx, subpart) => subpart.RectTransform.transform.SetSiblingIndex(idx));
         }
 
         internal void SetVisible(bool visible) {
-            alive.ForEach(subpart => subpart.rectTransform.gameObject.SetActive(visible));
+            Alive.ForEach(subpart => subpart.RectTransform.gameObject.SetActive(visible));
         }
     }
 }

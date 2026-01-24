@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Settings.Input {
+namespace Settings.Global.Input {
     internal static class Keybinds {
-        internal static readonly Dictionary<Action, KeyCode> keybinds = new() {
+        internal static readonly Dictionary<Action, KeyCode> Keybindings = new() {
             [Action.Forward] = KeyCode.W,
             [Action.Backward] = KeyCode.S,
             [Action.Left] = KeyCode.A,
@@ -15,7 +15,7 @@ namespace Settings.Input {
             [Action.Interact] = KeyCode.E
         };
 
-        internal static readonly Dictionary<int, KeyCode> weaponSelect = new() {
+        internal static readonly Dictionary<int, KeyCode> WeaponSelect = new() {
             [0] = KeyCode.Alpha0,
             [1] = KeyCode.Alpha1,
             [2] = KeyCode.Alpha2,
@@ -29,11 +29,11 @@ namespace Settings.Input {
         };
 
         internal static bool Is(this Action action, Func<KeyCode, bool> f) {
-            return keybinds.TryGetValue(action, out KeyCode key) && f(key);
+            return Keybindings.TryGetValue(action, out KeyCode key) && f(key);
         }
 
         internal static bool Is(this int weapon, Func<KeyCode, bool> f) {
-            return weaponSelect.TryGetValue(weapon, out KeyCode key) && f(key);
+            return WeaponSelect.TryGetValue(weapon, out KeyCode key) && f(key);
         }
     }
 

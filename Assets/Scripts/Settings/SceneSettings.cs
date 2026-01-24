@@ -1,12 +1,13 @@
 ﻿using UI.Menus;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Settings {
     public class SceneSettings : MonoBehaviour {
-        public bool ShowCursor;
+        [FormerlySerializedAs("ShowCursor")] public bool showCursor;
 
         private void Start() {
-            Menu.Cursor(ShowCursor);
+            Menu.Cursor(showCursor);
         }
     }
 }

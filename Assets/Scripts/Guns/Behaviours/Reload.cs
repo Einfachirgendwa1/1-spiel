@@ -2,10 +2,10 @@
 
 namespace Guns.Behaviours {
     public class Reload : Base {
-        internal override State state => State.Reload;
+        internal override State State => State.Reload;
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            gun.Reload();
+            Gun.Reload();
         }
     }
 }

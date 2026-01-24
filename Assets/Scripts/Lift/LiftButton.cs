@@ -17,15 +17,15 @@ namespace Lift {
 
         public bool CanInteract =>
             mode switch {
-                Mode.Toggle => isUp() || isDown(),
-                Mode.High   => isDown(),
-                Mode.Low    => isUp(),
+                Mode.Toggle => IsUp() || IsDown(),
+                Mode.High   => IsDown(),
+                Mode.Low    => IsUp(),
                 _           => throw new ArgumentOutOfRangeException()
             };
 
         public string Description =>
             mode switch {
-                Mode.Toggle => $"move lift {(isUp() ? "down" : "up")}",
+                Mode.Toggle => $"move lift {(IsUp() ? "down" : "up")}",
                 _           => "call lift"
             };
 
@@ -33,19 +33,19 @@ namespace Lift {
             StartCoroutine(Move());
         }
 
-        private bool isUp() {
+        private bool IsUp() {
             return liftTransform.position.y >= lift.upPosY - lift.delta;
         }
 
-        private bool isDown() {
+        private bool IsDown() {
             return liftTransform.position.y <= lift.downPosY + lift.delta;
         }
 
         private IEnumerator Move() {
             if (CanInteract) {
-                Vector3 direction = isUp() ? Vector3.down : Vector3.up;
+                Vector3 direction = IsUp() ? Vector3.down : Vector3.up;
 
-                while (direction == Vector3.down ? !isDown() : !isUp()) {
+                while (direction == Vector3.down ? !IsDown() : !IsUp()) {
                     liftTransform.position += direction * lift.speed;
                     yield return new WaitForEndOfFrame();
                 }

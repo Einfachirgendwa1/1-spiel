@@ -17,12 +17,12 @@ namespace Editor {
             Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle01 * fov.radius);
             Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle02 * fov.radius);
 
-            if (fov.state != EnemyState.Attacking) {
+            if (fov.State != EnemyState.Attacking) {
                 return;
             }
 
             Handles.color = Color.green;
-            Handles.DrawLine(fov.transform.position, fov.player.transform.position);
+            Handles.DrawLine(fov.transform.position, fov.Player.transform.position);
         }
 
         private static Vector3 DirectionFromAngle(float eulerY, float angleInDegrees) {

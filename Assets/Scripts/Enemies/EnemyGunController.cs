@@ -6,8 +6,8 @@ namespace Enemies {
 
         public new void Update() {
             base.Update();
-            inputBuffer[State.Shoot] = detection.state == EnemyState.Attacking ? 1 : 0;
-            inputBuffer[State.Reload] = CurrentGun.Ammo == 0 ? 1 : 0;
+            InputBuffer[State.Shoot] = detection.State == EnemyState.Attacking ? 1 : 0;
+            InputBuffer[State.Reload] = CurrentGun.Ammo == 0 ? 1 : 0;
         }
     }
 }

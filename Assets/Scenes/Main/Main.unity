@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c83e177d60492fa45bbee2c124d417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 963194225}
+  cam: {fileID: 505097661}
   weaponHolder: {fileID: 1160826233}
   guns:
   - {fileID: 2205139858756433783, guid: 726cd21416e138640a4f2575ffe04009, type: 3}

@@ -1,10 +1,10 @@
 ﻿namespace Guns.Behaviours {
     public class Shoot : Base {
-        internal override State state => State.Shoot;
+        internal override State State => State.Shoot;
 
         protected override void Action() {
             base.Action();
-            gun.Shoot(repetitions);
+            Gun.Shoot(Repetitions);
         }
     }
 }

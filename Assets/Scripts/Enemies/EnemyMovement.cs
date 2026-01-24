@@ -26,7 +26,7 @@ namespace Enemies {
         }
 
         private void Update() {
-            agent.destination = detection.state switch {
+            agent.destination = detection.State switch {
                 EnemyState.Patrolling => FollowPatrollingPath(),
                 EnemyState.Attacking  => AttackPlayer(),
                 _                     => throw new ArgumentOutOfRangeException()
@@ -49,7 +49,7 @@ namespace Enemies {
         }
 
         private Vector3 AttackPlayer() {
-            Vector3 playerPosition = detection.player.transform.position;
+            Vector3 playerPosition = detection.Player.transform.position;
             Vector3 distance = playerPosition - transform.position;
             float distanceToPlayer = distance.magnitude;
 

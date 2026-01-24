@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Targeting {
     public class HealthSubpart : MonoBehaviour, ITarget {
-        public Health Parent;
-        public float DamageMultiplier;
+        [FormerlySerializedAs("Parent")] public Health parent;
+
+        [FormerlySerializedAs("DamageMultiplier")]
+        public float damageMultiplier;
 
         public void TakeDamage(float damage) {
-            Parent.TakeDamage(damage * DamageMultiplier);
+            parent.TakeDamage(damage * damageMultiplier);
         }
     }
 }

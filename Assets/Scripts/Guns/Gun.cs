@@ -21,8 +21,8 @@ namespace Guns {
         internal GunController Controller;
 
         internal int AmmoBackup {
-            get => Controller.ammo[bulletType];
-            set => Controller.ammo[bulletType] = value;
+            get => Controller.Ammo[bulletType];
+            set => Controller.Ammo[bulletType] = value;
         }
 
         private void Start() {

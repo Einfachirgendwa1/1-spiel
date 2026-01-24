@@ -1,5 +1,5 @@
 ﻿namespace Guns.Behaviours {
     public class Equip : Base {
-        internal override State state => State.Equip;
+        internal override State State => State.Equip;
     }
 }

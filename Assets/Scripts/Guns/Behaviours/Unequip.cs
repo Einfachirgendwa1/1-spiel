@@ -2,10 +2,10 @@
 
 namespace Guns.Behaviours {
     public class Unequip : Base {
-        internal override State state => State.Unequip;
+        internal override State State => State.Unequip;
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            gun.Controller.OnUnequip();
+            Gun.Controller.OnUnequip();
         }
     }
 }

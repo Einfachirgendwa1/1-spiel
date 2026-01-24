@@ -1,6 +1,11 @@
-﻿namespace Settings.Input {
+﻿namespace Settings.Global.Input {
     public static class Mouse {
-        internal static float sensitivityX = 3;
-        internal static float sensitivityY = 3;
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        // ReSharper disable once ConvertToConstant.Global
+        internal static float SensitivityX = 3;
+
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        // ReSharper disable once ConvertToConstant.Global
+        internal static float SensitivityY = 3;
     }
 }
