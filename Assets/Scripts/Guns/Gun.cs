@@ -49,6 +49,7 @@ namespace Guns {
 
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range)) {
                 hit.transform.GetComponent<ITarget>()?.TakeDamage(damage);
+                Console.WriteLine("Hit " + hit.transform.name);
             }
 
             Debug.DrawLine(transform.position, transform.position + direction * range, Color.red, 3.0f);
