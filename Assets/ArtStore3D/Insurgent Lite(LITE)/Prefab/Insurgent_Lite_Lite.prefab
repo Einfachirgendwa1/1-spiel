@@ -1181,6 +1181,37 @@ Transform:
   - {fileID: 4536543180149755802}
   m_Father: {fileID: 7882674114969470349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7323124960100311497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8022487371982269711}
+  m_Layer: 0
+  m_Name: Weapon Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8022487371982269711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323124960100311497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8725554152193088012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7646987535592046690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1260,7 @@ GameObject:
   - component: {fileID: 2469977809508212933}
   - component: {fileID: 768006245817576574}
   - component: {fileID: 6809437986415982966}
+  - component: {fileID: 4976582193737473910}
   m_Layer: 0
   m_Name: Insurgent_Lite_Lite
   m_TagString: Untagged
@@ -1251,6 +1283,7 @@ Transform:
   m_Children:
   - {fileID: 3937944394250442201}
   - {fileID: 344577231742052300}
+  - {fileID: 8022487371982269711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3456312130320105590
@@ -1287,8 +1320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a4901bd2f6477199a1c9ab0ac21271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyMovement
-  agent: {fileID: 0}
-  detection: {fileID: 0}
+  agent: {fileID: 2469977809508212933}
+  detection: {fileID: 4976582193737473910}
 --- !u!114 &9035488101695473698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,10 +1334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5984d6980fcd4152a8a2ea35fd4bd1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyGunController
-  cam: {fileID: 0}
-  weaponHolder: {fileID: 0}
-  guns: []
-  detection: {fileID: 0}
+  cam: {fileID: 8240661434394411190}
+  weaponHolder: {fileID: 7323124960100311497}
+  guns:
+  - {fileID: 8749426249802217569, guid: 3c81b162a1af44348b8994f7040514d4, type: 3}
+  detection: {fileID: 4976582193737473910}
 --- !u!114 &1342867973017627488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,10 +1351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ab0aef6ecfabc439fa6b07b8ba7af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.Health
-  health: 0
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  audioSource: {fileID: 0}
+  health: 100
+  hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
+  deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
+  audioSource: {fileID: 768006245817576574}
 --- !u!195 &2469977809508212933
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1467,6 +1501,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4976582193737473910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b53609c5dbcfe4690c00a21ed1298f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyPlayerDetection
+  radius: 20
+  angle: 120
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1536
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0

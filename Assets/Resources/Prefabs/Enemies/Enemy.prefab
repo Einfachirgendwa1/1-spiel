@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
-  Parent: {fileID: 4822240298640418499}
-  DamageMultiplier: 1
+  parent: {fileID: 4822240298640418499}
+  damageMultiplier: 1
 --- !u!1 &4574876385448004715
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,5 +596,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
-  Parent: {fileID: 4822240298640418499}
-  DamageMultiplier: 2
+  parent: {fileID: 4822240298640418499}
+  damageMultiplier: 3
