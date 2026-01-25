@@ -34,20 +34,22 @@ namespace Guns {
         }
 
         private void Update() {
-            Vector3 camPos = Controller.cam.transform.position;
-            Vector3 toTarget = Physics.Raycast(camPos, Controller.cam.transform.forward, out RaycastHit crosshairHit)
-                ? (crosshairHit.point - transform.position).normalized
-                : Controller.cam.transform.forward;
-
-            Vector3 targetPos = transform.position + toTarget * range;
-            if (Physics.Raycast(transform.position, toTarget, out RaycastHit hit, range)) {
-                targetPos = hit.point;
-            }
+            Vector3 toTarget = DirectionToCrosshairTarget();
 
             lineRenderer.SetPositions(new[] {
                 transform.position,
-                targetPos
+                Physics.Raycast(transform.position, toTarget, out RaycastHit hit, range)
+                    ? hit.point
+                    : transform.position + toTarget * range
             });
+        }
+
+        private Vector3 DirectionToCrosshairTarget() {
+            Vector3 camPos = Controller.cam.transform.position;
+
+            return Physics.Raycast(camPos, Controller.cam.transform.forward, out RaycastHit crosshairHit)
+                ? (crosshairHit.point - transform.position).normalized
+                : Controller.cam.transform.forward;
         }
 
         internal void Reload() {
