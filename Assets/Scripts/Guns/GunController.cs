@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Guns.Ammunition;
+using NUnit.Framework;
 using UnityEngine;
+using Validation;
 
 namespace Guns {
     [Serializable]
-    public abstract class GunController : MonoBehaviour {
+    public abstract class GunController : MonoBehaviour, IValidate {
         private static readonly int ReloadHash = Animator.StringToHash("Reload");
         private static readonly int ShootHash = Animator.StringToHash("Shoot");
         private static readonly int UnequipHash = Animator.StringToHash("Unequip");
@@ -46,6 +48,14 @@ namespace Guns {
             CurrentGun.animator.SetBool(UnequipHash, WantsTransition(State.Unequip));
             CurrentGun.animator.SetBool(ReloadHash, WantsTransition(State.Reload) && reloadMakesSense);
             CurrentGun.animator.SetBool(ShootHash, WantsTransition(State.Shoot) && CurrentGun.Ammo > 0);
+        }
+
+        public void Validate() {
+            Assert.NotNull(cam, "cam != null");
+            Assert.NotNull(weaponHolder, "weaponHolder != null");
+            Assert.NotZero(guns.Count, "guns.Count != 0");
+
+            guns.ForEach(gun => Assert.NotNull(gun, "gun != null"));
         }
 
         internal void SelectGun(int index) {

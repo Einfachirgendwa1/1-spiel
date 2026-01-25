@@ -1,7 +1,10 @@
+using System;
+using NUnit.Framework;
 using UnityEngine;
+using Validation;
 
 namespace Enemies {
-    public class EnemySpawning : MonoBehaviour {
+    public class EnemySpawner : MonoBehaviour, IValidateMultiple {
         public GameObject enemyPrefab;
 
         private void Start() {
@@ -18,6 +21,18 @@ namespace Enemies {
                     enemyMovement.PatrollingPath.Add(waypoint.position);
                 }
             }
+        }
+
+        public void Validate(Action<GameObject> validateAsWell) {
+            Assert.IsNotNull(enemyPrefab, "enemyPrefab != null");
+
+            GameObject instance = Instantiate(enemyPrefab);
+            Assert.IsNotNull(instance, "instance != null");
+
+            validateAsWell(instance);
+            Assert.IsNotNull(instance.GetComponent<EnemyMovement>(), "instance.GetComponent<EnemyMovement>() != null");
+
+            DestroyImmediate(instance);
         }
     }
 }
