@@ -21,9 +21,14 @@ namespace Enemies {
         private void Update() {
             agent.destination = detection.State switch {
                 EnemyState.Patrolling => FollowPatrollingPath(),
+                EnemyState.Alerted    => LookAround(),
                 EnemyState.Attacking  => AttackPlayer(),
                 _                     => throw new ArgumentOutOfRangeException()
             };
+
+            if (detection.CanSeePlayer()) {
+                transform.LookAt(detection.Player.transform);
+            }
         }
 
         private Vector3 FollowPatrollingPath() {
@@ -39,6 +44,11 @@ namespace Enemies {
             }
 
             return target!.Value;
+        }
+
+        private Vector3 LookAround() {
+            transform.Rotate(Vector3.up, 5);
+            return transform.position;
         }
 
         private Vector3 AttackPlayer() {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Targeting {
@@ -8,6 +9,8 @@ namespace Targeting {
         public AudioSource audioSource;
 
         public void TakeDamage(float damage) {
+            OnDamageTaken?.Invoke(damage);
+
             health -= damage;
 
             if (health <= 0) {
@@ -17,5 +20,7 @@ namespace Targeting {
                 audioSource.PlayOneShot(hurtSound);
             }
         }
+
+        internal event Action<float> OnDamageTaken;
     }
 }
