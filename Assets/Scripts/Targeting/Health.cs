@@ -1,11 +1,13 @@
+using Enemies;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using Validation;
 
 namespace Targeting {
     public class Health : MonoBehaviour, ITarget {
         [PositiveNonZero] public float health;
-        [NonNull] public AudioClip hurtSound;
         [NonNull] public AudioClip deathSound;
         [NonNull] public AudioSource audioSource;
 
@@ -15,13 +17,23 @@ namespace Targeting {
             health -= damage;
 
             if (health <= 0) {
+                gameObject.GetComponent<EnemyGunController>().enabled = false;
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                gameObject.GetComponent<CapsuleCollider>().enabled = false;
                 audioSource.PlayOneShot(deathSound);
-                Destroy(gameObject);
-            } else {
-                audioSource.PlayOneShot(hurtSound);
+                StartCoroutine(Kill());
             }
         }
 
         internal event Action<float> OnDamageTaken;
+
+        //temporäre lösung
+        private IEnumerator Kill()
+        {
+            yield return new WaitForSeconds(5);
+            Destroy(gameObject);
+        }
     }
+
+    
 }
