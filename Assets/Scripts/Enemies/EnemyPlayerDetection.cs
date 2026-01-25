@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Cursor = UI.Cursor;
 
 namespace Enemies {
     public enum EnemyState {
@@ -11,9 +10,9 @@ namespace Enemies {
 
     public class EnemyPlayerDetection : MonoBehaviour {
         public float radius;
+        public float radiusWhenAlerted;
         [Range(0, 360)] public float angle;
         public LayerMask obstructionMask;
-        private readonly Cursor cursor = new();
 
         internal bool HighAlert;
 
@@ -26,7 +25,6 @@ namespace Enemies {
 
         private void Update() {
             State = CanSeePlayer() ? EnemyState.Attacking : HighAlert ? EnemyState.Alerted : EnemyState.Patrolling;
-            cursor.Str = State.ToString();
         }
 
         internal bool CanSeePlayer() {
@@ -41,7 +39,8 @@ namespace Enemies {
                 obstructionMask
             );
 
-            return distanceToTarget <= radius && angleToTarget <= angle / 2 && !obstructed;
+            float r = State == EnemyState.Patrolling ? radius : radiusWhenAlerted;
+            return distanceToTarget <= r && angleToTarget <= angle / 2 && !obstructed;
         }
     }
 }

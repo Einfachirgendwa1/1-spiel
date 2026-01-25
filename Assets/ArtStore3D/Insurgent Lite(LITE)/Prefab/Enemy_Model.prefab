@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyPlayerDetection
   radius: 20
+  radiusWhenAlerted: 40
   angle: 190
   obstructionMask:
     serializedVersion: 2
