@@ -16,10 +16,10 @@ namespace Guns {
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
+
         internal int Ammo;
-        internal Func<Vector3> BulletOrigin;
         internal GunController Controller;
-        internal Func<Vector3> GetShootDirection;
+        private LineRenderer lineRenderer;
 
         internal int AmmoBackup {
             get => Controller.Ammo[bulletType];
@@ -28,6 +28,26 @@ namespace Guns {
 
         private void Start() {
             Reload();
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.03f;
+        }
+
+        private void Update() {
+            Vector3 camPos = Controller.cam.transform.position;
+            Vector3 toTarget = Physics.Raycast(camPos, Controller.cam.transform.forward, out RaycastHit crosshairHit)
+                ? (crosshairHit.point - transform.position).normalized
+                : Controller.cam.transform.forward;
+
+            Vector3 targetPos = transform.position + toTarget * range;
+            if (Physics.Raycast(transform.position, toTarget, out RaycastHit hit, range)) {
+                targetPos = hit.point;
+            }
+
+            lineRenderer.SetPositions(new[] {
+                transform.position,
+                targetPos
+            });
         }
 
         internal void Reload() {
@@ -46,13 +66,16 @@ namespace Guns {
             Quaternion weaponSpray = Quaternion.AngleAxis(x, Vector3.up) * Quaternion.AngleAxis(y, Vector3.right);
             Quaternion recoilOffset = Quaternion.AngleAxis(shotsInARow * recoil, Vector3.right);
 
-            Vector3 direction = weaponSpray * recoilOffset * GetShootDirection();
+            Vector3 camPos = Controller.cam.transform.position;
+            Vector3 toTarget = Physics.Raycast(camPos, Controller.cam.transform.forward, out RaycastHit crosshairHit)
+                ? (crosshairHit.point - transform.position).normalized
+                : Controller.cam.transform.forward;
 
-            if (Physics.Raycast(BulletOrigin(), direction, out RaycastHit hit, range)) {
+            Vector3 direction = weaponSpray * recoilOffset * toTarget;
+
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range)) {
                 hit.transform.GetComponent<ITarget>()?.TakeDamage(damage);
             }
-
-            Debug.DrawLine(BulletOrigin(), BulletOrigin() + direction * range, Color.red, 3.0f);
         }
     }
 }

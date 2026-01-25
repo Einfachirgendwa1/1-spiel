@@ -2,10 +2,7 @@ using UnityEngine;
 
 namespace Interaction {
     public class DoorOpen : MonoBehaviour, IInteractable {
-        [SerializeField] private bool isOpen = false;
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        private void Start() { }
+        [SerializeField] private bool isOpen;
 
         public string Description => "move door";
 

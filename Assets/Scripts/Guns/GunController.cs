@@ -26,14 +26,7 @@ namespace Guns {
 
         public void Start() {
             guns = guns
-                   .Select(gun => {
-                           Gun instance = Instantiate(gun, weaponHolder.transform);
-                           instance.BulletOrigin = () => cam.transform.position;
-                           instance.GetShootDirection = FacingDirection;
-                           instance.Controller = this;
-                           return instance;
-                       }
-                   )
+                   .Select(gun => Instantiate(gun, weaponHolder.transform).Also(ts => ts.Controller = this))
                    .ToList();
 
             foreach (State key in AllStates) {
@@ -53,10 +46,6 @@ namespace Guns {
             CurrentGun.animator.SetBool(UnequipHash, WantsTransition(State.Unequip));
             CurrentGun.animator.SetBool(ReloadHash, WantsTransition(State.Reload) && reloadMakesSense);
             CurrentGun.animator.SetBool(ShootHash, WantsTransition(State.Shoot) && CurrentGun.Ammo > 0);
-        }
-
-        internal virtual Vector3 FacingDirection() {
-            return cam.transform.forward;
         }
 
         internal void SelectGun(int index) {

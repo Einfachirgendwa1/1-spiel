@@ -29,4 +29,9 @@ internal static class Extensions {
 
         return b;
     }
+
+    public static T Also<T>(this T obj, Action<T> action) {
+        action(obj);
+        return obj;
+    }
 }
