@@ -1683,7 +1683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.ReactToDamage
   health: {fileID: 1342867973017627488}
   detection: {fileID: 5709931450647706695}
-  secondsInHighAlert: 10
+  secondsInHighAlert: 2
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0

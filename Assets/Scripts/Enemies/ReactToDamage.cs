@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using JetBrains.Annotations;
 using Targeting;
 using UnityEngine;
 
@@ -8,8 +9,17 @@ namespace Enemies {
         public EnemyPlayerDetection detection;
         public int secondsInHighAlert;
 
+        [CanBeNull] private IEnumerator routine;
+
         private void Start() {
-            health.OnDamageTaken += _ => StartCoroutine(HighAlertCountdown());
+            health.OnDamageTaken += _ => {
+                if (routine != null) {
+                    StopCoroutine(routine);
+                }
+
+                routine = HighAlertCountdown();
+                StartCoroutine(routine);
+            };
         }
 
         private IEnumerator HighAlertCountdown() {
