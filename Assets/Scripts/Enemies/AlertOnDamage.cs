@@ -3,7 +3,7 @@ using UnityEngine;
 using Validation;
 
 namespace Enemies {
-    public class ReactToDamage : MonoBehaviour {
+    public class AlertOnDamage : MonoBehaviour {
         [NonNull] public Health health;
         [NonNull] public EnemyPlayerDetection detection;
         [Positive] public int secondsInHighAlert;

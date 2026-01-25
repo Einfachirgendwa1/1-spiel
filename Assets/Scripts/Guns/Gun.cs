@@ -17,6 +17,9 @@ namespace Guns {
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;
+        [NonNull] public AudioSource audioSource;
+        [NonNull] public AudioClip shootSound;
+        [NonNull] public AudioClip reloadSound;
 
         internal int Ammo;
         internal GunController Controller;
@@ -62,6 +65,8 @@ namespace Guns {
 
         internal void Shoot(int shotsInARow) {
             Ammo--;
+
+            audioSource.PlayOneShot(shootSound);
 
             float x = Random.Range(-weaponSprayX, weaponSprayX);
             float y = Random.Range(-weaponSprayY, weaponSprayY);
