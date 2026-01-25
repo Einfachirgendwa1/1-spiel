@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Interaction {
     public class DoorOpen : MonoBehaviour, IInteractable {
-        [SerializeField] private bool isOpen;
+        public bool isOpen;
 
         public string Description => "move door";
 

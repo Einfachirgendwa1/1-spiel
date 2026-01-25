@@ -1,12 +1,13 @@
 using UnityEngine;
+using Validation;
 using static Settings.Global.Input.Mouse;
 
 namespace Player {
     public class PlayerCam : MonoBehaviour {
         internal static bool Paused = false;
 
-        public Transform player;
-        public Transform cameraHolder;
+        [NonNull] public Transform player;
+        [NonNull] public Transform cameraHolder;
 
         private float xRotation;
         private float yRotation;

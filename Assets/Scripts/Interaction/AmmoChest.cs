@@ -1,11 +1,13 @@
 ﻿using System;
 using Guns;
 using Guns.Ammunition;
+using NUnit.Framework;
 using Player;
 using UnityEngine;
+using Validation;
 
 namespace Interaction {
-    public class AmmoChest : MonoBehaviour, IInteractable {
+    public class AmmoChest : MonoBehaviour, IInteractable, IValidate {
         private GunController gunController;
 
         private void Start() {
@@ -21,6 +23,11 @@ namespace Interaction {
             }
 
             Destroy(gameObject);
+        }
+
+        public void Validate() {
+            Start();
+            Assert.NotNull(gunController, "gunController != null");
         }
     }
 }

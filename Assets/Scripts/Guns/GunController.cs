@@ -14,9 +14,9 @@ namespace Guns {
         private static readonly int UnequipHash = Animator.StringToHash("Unequip");
         internal static Array AllStates = Enum.GetValues(typeof(State));
 
-        public GameObject cam;
-        public GameObject weaponHolder;
-        public List<Gun> guns;
+        [NonNull] public GameObject cam;
+        [NonNull] public GameObject weaponHolder;
+        [NonNull] public List<Gun> guns;
 
         internal Dictionary<BulletType, int> Ammo = BulletTypeExtensions.GetAmmoInit();
         private int currentGunIdx;
@@ -51,10 +51,7 @@ namespace Guns {
         }
 
         public void Validate() {
-            Assert.NotNull(cam, "cam != null");
-            Assert.NotNull(weaponHolder, "weaponHolder != null");
             Assert.NotZero(guns.Count, "guns.Count != 0");
-
             guns.ForEach(gun => Assert.NotNull(gun, "gun != null"));
         }
 

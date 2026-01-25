@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Interaction;
 using UnityEngine;
+using Validation;
 
 namespace Lift {
     public class LiftButton : MonoBehaviour, IInteractable {
@@ -11,9 +12,9 @@ namespace Lift {
             Toggle
         }
 
-        public Lift lift;
-        public Transform liftTransform;
-        public Mode mode;
+        [NonNull] public Lift lift;
+        [NonNull] public Transform liftTransform;
+        [NonNull] public Mode mode;
 
         public bool CanInteract =>
             mode switch {

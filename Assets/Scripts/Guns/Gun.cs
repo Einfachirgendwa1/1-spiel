@@ -2,17 +2,18 @@
 using Guns.Ammunition;
 using Targeting;
 using UnityEngine;
+using Validation;
 using Random = UnityEngine.Random;
 
 namespace Guns {
     [Serializable]
     public class Gun : MonoBehaviour {
-        [Header("Required")] public Animator animator;
-        [Header("Gun Settings")] public bool automatic;
-        public BulletType bulletType;
-        public int damage;
-        public float range;
-        public int magazineSize;
+        [NonNull] public Animator animator;
+        public bool automatic;
+        [NonNull] public BulletType bulletType;
+        [Positive] public int damage;
+        [PositiveNonZero] public float range;
+        [PositiveNonZero] public int magazineSize;
         [Range(0f, 1f)] public float weaponSprayX;
         [Range(0f, 1f)] public float weaponSprayY;
         [Range(0f, 15f)] public float recoil;

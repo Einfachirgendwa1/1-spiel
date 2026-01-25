@@ -4,8 +4,8 @@ using System.Reflection;
 namespace Validation {
     [AttributeUsage(AttributeTargets.Field)]
     public class Validate : Attribute {
+        public readonly Func<FieldInfo, string> Message;
         public Func<object, bool> Condition;
-        public Func<FieldInfo, string> Message;
 
         protected Validate(Func<FieldInfo, string> message) {
             Message = message;

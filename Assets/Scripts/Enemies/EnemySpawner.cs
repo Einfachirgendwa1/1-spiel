@@ -5,7 +5,7 @@ using Validation;
 
 namespace Enemies {
     public class EnemySpawner : MonoBehaviour, IValidateMultiple {
-        public GameObject enemyPrefab;
+        [NonNull] public GameObject enemyPrefab;
 
         private void Start() {
             foreach (Transform child in transform) {
@@ -24,10 +24,7 @@ namespace Enemies {
         }
 
         public void Validate(Action<GameObject> validateAsWell) {
-            Assert.IsNotNull(enemyPrefab, "enemyPrefab != null");
-
             GameObject instance = Instantiate(enemyPrefab);
-            Assert.IsNotNull(instance, "instance != null");
 
             validateAsWell(instance);
             Assert.IsNotNull(instance.GetComponent<EnemyMovement>(), "instance.GetComponent<EnemyMovement>() != null");

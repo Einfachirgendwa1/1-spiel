@@ -1029,8 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
-  lift: {fileID: 0}
-  liftTransform: {fileID: 0}
+  lift: {fileID: 890964321}
+  liftTransform: {fileID: 890964318}
   mode: 0
 --- !u!1 &530893964
 GameObject:
@@ -4257,7 +4257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 890964321}
   liftTransform: {fileID: 890964318}
-  mode: 0
+  mode: 2
 --- !u!1001 &1719905202
 PrefabInstance:
   m_ObjectHideFlags: 0

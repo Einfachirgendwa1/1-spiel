@@ -1,9 +1,10 @@
 using UnityEngine;
+using Validation;
 
 namespace Guns {
     public class WeaponSway : MonoBehaviour {
-        public float smooth;
-        public float multiplier;
+        [Positive] public float smooth;
+        [Positive] public float multiplier;
 
         private void Update() {
             float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;

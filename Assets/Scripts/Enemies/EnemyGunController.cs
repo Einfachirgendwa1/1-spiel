@@ -1,8 +1,9 @@
 ﻿using Guns;
+using Validation;
 
 namespace Enemies {
     public class EnemyGunController : GunController {
-        public EnemyPlayerDetection detection;
+        [NonNull] public EnemyPlayerDetection detection;
 
         public new void Update() {
             base.Update();

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Validation;
 
 namespace Enemies {
     [Serializable]
     public class EnemyMovement : MonoBehaviour {
-        public NavMeshAgent agent;
-        public EnemyPlayerDetection detection;
+        [NonNull] public NavMeshAgent agent;
+        [NonNull] public EnemyPlayerDetection detection;
+
         internal List<Vector3> PatrollingPath = new();
         private int patrollingPathHead;
         private Vector3? target;

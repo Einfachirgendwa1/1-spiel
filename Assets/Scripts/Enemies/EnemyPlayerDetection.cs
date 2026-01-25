@@ -1,5 +1,7 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
+using Validation;
 
 namespace Enemies {
     public enum EnemyState {
@@ -8,10 +10,12 @@ namespace Enemies {
         Attacking
     }
 
-    public class EnemyPlayerDetection : MonoBehaviour {
-        public float radius;
-        public float radiusWhenAlerted;
-        [Range(0, 360)] public float angle;
+    public class EnemyPlayerDetection : MonoBehaviour, IValidate {
+        [PositiveNonZero] public float radius;
+        [PositiveNonZero] public float radiusWhenAlerted;
+
+        [UnityEngine.Range(0, 360)] public float angle;
+
         public LayerMask obstructionMask;
 
         private float highAlertTimerSecs;
@@ -28,6 +32,10 @@ namespace Enemies {
 
             bool highAlert = highAlertTimerSecs > 0;
             State = CanSeePlayer() ? EnemyState.Attacking : highAlert ? EnemyState.Alerted : EnemyState.Patrolling;
+        }
+
+        public void Validate() {
+            Assert.IsTrue(radiusWhenAlerted >= radius, "radiusWhenAlerted >= radius");
         }
 
         internal void ConsiderHighAlert(float seconds) {

@@ -9,8 +9,8 @@ namespace Interaction {
     public class PlayerInteraction : MonoBehaviour, IValidate {
         internal static PlayerInteraction Instance;
 
-        public Camera playerCamera;
-        public float distance;
+        [NonNull] public Camera playerCamera;
+        [PositiveNonZero] public float distance;
         public LayerMask playerLayer;
 
         private void Start() {
@@ -25,8 +25,6 @@ namespace Interaction {
         }
 
         public void Validate() {
-            Assert.IsNotNull(playerCamera, "playerCamera != null");
-            Assert.IsTrue(distance > 0, "distance > 0");
             Assert.IsTrue((playerLayer.value & 1 << gameObject.layer) != 0, "player is in playerLayer");
         }
 

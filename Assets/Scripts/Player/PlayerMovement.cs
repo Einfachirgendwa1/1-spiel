@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using Settings.Global.Input;
 using UnityEngine;
 using Validation;
 using Action = Settings.Global.Input.Action;
 
 namespace Player {
-    public class PlayerMovement : MonoBehaviour, IValidate {
-        [Header("Required")] public Rigidbody rigidBody;
-        [Header("Movement")] public float movementSpeed;
-        public float movementAcceleration;
-        public float jumpForce;
+    public class PlayerMovement : MonoBehaviour {
+        [NonNull] public Rigidbody rigidBody;
+        [PositiveNonZero] public float movementSpeed;
+        [PositiveNonZero] public float movementAcceleration;
+        [PositiveNonZero] public float jumpForce;
 
         private readonly List<GameObject> groundColliders = new();
 
@@ -50,12 +49,6 @@ namespace Player {
 
         private void OnCollisionExit(Collision other) {
             groundColliders.Remove(other.gameObject);
-        }
-
-        public void Validate() {
-            Assert.IsNotNull(rigidBody, "rigidBody != null");
-            Assert.IsTrue(movementSpeed > 0, "movementSpeed > 0");
-            Assert.IsTrue(movementAcceleration > 0, "movementAcceleration > 0");
         }
     }
 }

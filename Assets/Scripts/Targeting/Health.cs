@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using Validation;
 
 namespace Targeting {
     public class Health : MonoBehaviour, ITarget {
-        public float health;
-        public AudioClip hurtSound;
-        public AudioClip deathSound;
-        public AudioSource audioSource;
+        [PositiveNonZero] public float health;
+        [NonNull] public AudioClip hurtSound;
+        [NonNull] public AudioClip deathSound;
+        [NonNull] public AudioSource audioSource;
 
         public void TakeDamage(float damage) {
             OnDamageTaken?.Invoke(damage);
