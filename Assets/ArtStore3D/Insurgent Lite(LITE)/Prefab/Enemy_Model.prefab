@@ -1406,7 +1406,8 @@ GameObject:
   - component: {fileID: 6809437986415982966}
   - component: {fileID: 8017037902803192708}
   - component: {fileID: 6874411295938582789}
-  m_Layer: 0
+  - component: {fileID: 5643708752215832749}
+  m_Layer: 7
   m_Name: Enemy_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,6 +1685,24 @@ MonoBehaviour:
   health: {fileID: 1342867973017627488}
   detection: {fileID: 5709931450647706695}
   secondsInHighAlert: 2
+--- !u!114 &5643708752215832749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0480c5d74545449da32ae9858275a7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemies.AlertOtherEnemies
+  detection: {fileID: 5709931450647706695}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  alertRadius: 20
+  alertDelaySeconds: 1.5
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0

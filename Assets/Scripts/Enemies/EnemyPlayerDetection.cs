@@ -14,7 +14,7 @@ namespace Enemies {
         [Range(0, 360)] public float angle;
         public LayerMask obstructionMask;
 
-        internal bool HighAlert;
+        internal float HighAlertTimerSecs;
 
         [NonSerialized] public GameObject Player;
         [NonSerialized] public EnemyState State = EnemyState.Patrolling;
@@ -24,7 +24,14 @@ namespace Enemies {
         }
 
         private void Update() {
-            State = CanSeePlayer() ? EnemyState.Attacking : HighAlert ? EnemyState.Alerted : EnemyState.Patrolling;
+            HighAlertTimerSecs -= Time.deltaTime;
+
+            bool highAlert = HighAlertTimerSecs > 0;
+            State = CanSeePlayer() ? EnemyState.Attacking : highAlert ? EnemyState.Alerted : EnemyState.Patrolling;
+        }
+
+        internal void ConsiderHighAlert(float seconds) {
+            HighAlertTimerSecs = Math.Max(HighAlertTimerSecs, seconds);
         }
 
         internal bool CanSeePlayer() {
