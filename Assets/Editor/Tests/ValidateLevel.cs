@@ -1,22 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Validation;
+using static System.Reflection.BindingFlags;
 using Scene = UnityEngine.SceneManagement.Scene;
 
 namespace Editor.Tests {
-    public class LevelSetupProperly {
+    public class ValidateLevel {
         [UnityTest]
         public IEnumerator ValidateEverything() {
-            Debug.Log("Beginning validation.");
-
             foreach (EditorBuildSettingsScene sceneSettings in EditorBuildSettings.scenes) {
                 if (!sceneSettings.enabled) continue;
 
-                Debug.Log("Loading scene " + sceneSettings.path);
+                Debug.Log($"Loading scene {sceneSettings.path}");
                 Scene scene = EditorSceneManager.OpenScene(sceneSettings.path, OpenSceneMode.Single);
 
                 foreach (GameObject go in AllChildrenInScene(scene)) {
@@ -24,18 +26,30 @@ namespace Editor.Tests {
                 }
             }
 
-            Debug.Log("Validation done.");
-
             yield return null;
         }
 
         private static void ValidateGameObject(GameObject go) {
+            foreach (Component component in go.GetComponents<Component>()) {
+                CheckAttrs(component);
+            }
+
             foreach (IValidate validate in go.GetComponents<IValidate>()) {
                 validate.Validate();
             }
 
             foreach (IValidateMultiple validate in go.GetComponents<IValidateMultiple>()) {
                 validate.Validate(ValidateGameObject);
+            }
+        }
+
+        private static void CheckAttrs(Component component) {
+            Type type = component.GetType();
+            foreach (FieldInfo fieldInfo in type.GetFields(Instance | NonPublic | Public)) {
+                if (fieldInfo.GetCustomAttribute<Validate>() is { } validateAttr) {
+                    object value = fieldInfo.GetValue(component);
+                    Assert.IsTrue(validateAttr.Condition(value), validateAttr.Message(fieldInfo));
+                }
             }
         }
 
@@ -47,8 +61,7 @@ namespace Editor.Tests {
                 stack.Push(root.transform);
 
                 while (stack.Count > 0) {
-                    Transform current = stack.Pop();
-                    foreach (Transform child in current) {
+                    foreach (Transform child in stack.Pop()) {
                         yield return child.gameObject;
                         stack.Push(child);
                     }

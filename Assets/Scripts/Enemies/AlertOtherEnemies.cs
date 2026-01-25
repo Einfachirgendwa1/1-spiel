@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
+using Validation;
 
 namespace Enemies {
     public class AlertOtherEnemies : MonoBehaviour {
-        public EnemyPlayerDetection detection;
+        [NonNull] public EnemyPlayerDetection detection;
         public LayerMask enemyLayer;
-        public float alertRadius;
-        public float alertDelaySeconds;
+
+        [PositiveNonZero] public float alertRadius;
+        [PositiveNonZero] public float alertDelaySeconds;
 
         [CanBeNull] private IEnumerator routine;
 
