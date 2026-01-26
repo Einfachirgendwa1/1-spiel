@@ -198,9 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
-  parent: {fileID: 1342867973017627488}
   hurtSound: {fileID: 8300000, guid: d3e5ce4dba0b1444c8213414794157bc, type: 3}
   damageMultiplier: 1
+  playDeathSound: 1
+  deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
 --- !u!1 &264130705464156341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,9 +1020,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadf5d1229644cca92332827ff57f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
-  parent: {fileID: 1342867973017627488}
-  hurtSound: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
+  hurtSound: {fileID: 8300000, guid: c6bc19084691c9344901e342d261d2f0, type: 3}
   damageMultiplier: 10
+  playDeathSound: 0
+  deathSound: {fileID: 0}
 --- !u!1 &5755103166762700699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,7 +1518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.Health
   health: 100
-  deathSound: {fileID: 8300000, guid: 79d8799f68d4aba42ad959a6f44e4475, type: 3}
   audioSource: {fileID: 768006245817576574}
 --- !u!195 &2469977809508212933
 NavMeshAgent:

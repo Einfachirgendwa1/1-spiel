@@ -77,9 +77,7 @@ namespace Guns {
             Vector3 direction = weaponSpray * recoilOffset * DirectionToCrosshairTarget();
 
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range)) {
-                Debug.Log(hit.collider.transform.name);
-          
-                hit.collider.transform.GetComponent<ITarget>()?.TakeDamage(damage);
+                hit.collider.transform.GetComponent<HealthSubpart>()?.TakeDamage(damage);
             }
         }
     }

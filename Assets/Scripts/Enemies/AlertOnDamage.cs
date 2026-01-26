@@ -9,7 +9,7 @@ namespace Enemies {
         [Positive] public int secondsInHighAlert;
 
         private void Start() {
-            health.OnDamageTaken += _ => detection.ConsiderHighAlert(secondsInHighAlert);
+            health.OnDamageTaken += () => detection.ConsiderHighAlert(secondsInHighAlert);
         }
     }
 }
