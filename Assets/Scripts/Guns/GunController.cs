@@ -28,8 +28,8 @@ namespace Guns {
 
         public void Start() {
             guns = guns
-                   .Select(gun => Instantiate(gun, weaponHolder.transform).Also(ts => ts.Controller = this))
-                   .ToList();
+                .Select(gun => Instantiate(gun, weaponHolder.transform).Also(ts => ts.Controller = this))
+                .ToList();
 
             foreach (State key in AllStates) {
                 InputBuffer.Add(key, 0);
@@ -75,13 +75,8 @@ namespace Guns {
             }
         }
 
-        internal bool WantsTransition(State newState) {
-            return InputBuffer[newState] > 0;
-        }
-
-        internal bool ActiveOrRequested(State s) {
-            return State == s || WantsTransition(s);
-        }
+        internal bool WantsTransition(State newState) => InputBuffer[newState] > 0;
+        internal bool ActiveOrRequested(State s) => State == s || WantsTransition(s);
 
         internal void ReadInput(bool input, State newState, float bufferLength = 5) {
             if (input) {

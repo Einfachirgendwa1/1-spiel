@@ -3,10 +3,10 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Editor {
-    [CustomEditor(typeof(EnemyPlayerDetection))]
+    [CustomEditor(typeof(Attacking))]
     public class PlayerDetectionEditor : UnityEditor.Editor {
         private void OnSceneGUI() {
-            EnemyPlayerDetection fov = (EnemyPlayerDetection)target;
+            Attacking fov = (Attacking)target;
             Handles.color = Color.white;
             Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.radius);
 
@@ -17,7 +17,7 @@ namespace Editor {
             Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle01 * fov.radius);
             Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle02 * fov.radius);
 
-            if (fov.State != EnemyState.Attacking) {
+            if (!fov.CanSeePlayer()) {
                 return;
             }
 
