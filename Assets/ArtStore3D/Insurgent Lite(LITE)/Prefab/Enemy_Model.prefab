@@ -1425,6 +1425,8 @@ GameObject:
   - component: {fileID: 6809437986415982966}
   - component: {fileID: 6874411295938582789}
   - component: {fileID: 5643708752215832749}
+  - component: {fileID: -9156521110947513913}
+  - component: {fileID: 1880152296556275458}
   m_Layer: 7
   m_Name: Enemy_Model
   m_TagString: Untagged
@@ -1698,6 +1700,37 @@ MonoBehaviour:
     m_Bits: 128
   alertRadius: 20
   alertDelaySeconds: 1.5
+--- !u!114 &-9156521110947513913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.Core::Unity.VisualScripting.Variables
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &1880152296556275458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe58df89b5b74a97a123b5ed2b70422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualScripting.State::Unity.VisualScripting.StateMachine
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 4f6fe76643ee2964ca521f0ce453bcc5, type: 2}
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,11 +5,15 @@ using Validation;
 namespace Enemies {
     public class AlertOnDamage : MonoBehaviour {
         [NonNull] public Health health;
-        [NonNull] public EnemyPlayerDetection detection;
-        [Positive] public int secondsInHighAlert;
+
+        private float lastTimeDamaged = -Mathf.Infinity;
 
         private void Start() {
-            health.OnDamageTaken += () => detection.ConsiderHighAlert(secondsInHighAlert);
+            health.OnDamageTaken += () => lastTimeDamaged = Time.time;
+        }
+
+        public float GetTimeSinceLastDamage() {
+            return Time.time - lastTimeDamaged;
         }
     }
 }
