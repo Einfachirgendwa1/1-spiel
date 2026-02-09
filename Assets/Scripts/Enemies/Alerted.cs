@@ -15,15 +15,13 @@ namespace Enemies {
 
         [NonNull] public Health health;
         [NonNull] public NavMeshAgent agent;
+        [NonNull] public ListenForGunSounds listener;
 
         private bool alertingOthers;
         private float duration;
 
 
-        private void Start() => health.OnDamageTaken += () => {
-            duration = Math.Max(duration, alertOnDamageDuration);
-            Debug.Log($"Took damage, now alerted for {duration} seconds.");
-        };
+        private void Start() => health.OnDamageTaken += () => { duration = Math.Max(duration, alertOnDamageDuration); };
 
         private void Update() => duration = Mathf.Max(0f, duration - Time.deltaTime);
 
@@ -34,8 +32,8 @@ namespace Enemies {
         public void WhenAlerted() {
             if (!alertingOthers) StartCoroutine(AlertOthers());
 
-            transform.Rotate(Vector3.up, 5);
-            agent.destination = transform.position;
+            transform.Rotate(Vector3.up, Mathf.Sin(2 * Time.time) / 4);
+            agent.destination = listener.TargetPosition ?? transform.position;
         }
 
         private IEnumerator AlertOthers() {

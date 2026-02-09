@@ -1,5 +1,6 @@
 ﻿using System;
 using Guns.Ammunition;
+using Sounds;
 using Targeting;
 using UnityEngine;
 using Validation;
@@ -67,6 +68,7 @@ namespace Guns {
             Ammo--;
 
             audioSource.PlayOneShot(shootSound);
+            GunSound.Create(transform.position, 100);
 
             float x = Random.Range(-weaponSprayX, weaponSprayX);
             float y = Random.Range(-weaponSprayY, weaponSprayY);

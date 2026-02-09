@@ -1377,6 +1377,7 @@ GameObject:
   - component: {fileID: 1595555140159110578}
   - component: {fileID: 1211912428665294161}
   - component: {fileID: 7172132562876317630}
+  - component: {fileID: 7265142168401056761}
   m_Layer: 7
   m_Name: Enemy_Model
   m_TagString: Untagged
@@ -1665,6 +1666,7 @@ MonoBehaviour:
   alertOthersDelaySeconds: 2
   health: {fileID: 1342867973017627488}
   agent: {fileID: 2469977809508212933}
+  listener: {fileID: 7265142168401056761}
 --- !u!114 &7172132562876317630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,6 +1686,19 @@ MonoBehaviour:
     m_Bits: 1536
   radius: 30
   angle: 150
+--- !u!114 &7265142168401056761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e02803acbf4370848edd8557f5a4d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemies.ListenForGunSounds
+  loudnessThreshold: 30
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0
