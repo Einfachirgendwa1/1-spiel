@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Targeting.HealthSubpart
   hurtSound: {fileID: 8300000, guid: c6bc19084691c9344901e342d261d2f0, type: 3}
-  damageMultiplier: 10
+  damageMultiplier: 10000
   playDeathSound: 0
   deathSound: {fileID: 0}
 --- !u!1 &5755103166762700699
