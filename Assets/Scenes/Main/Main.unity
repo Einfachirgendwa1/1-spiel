@@ -476,6 +476,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229589660}
   m_CullTransparentMesh: 1
+--- !u!1 &254147468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254147469}
+  m_Layer: 0
+  m_Name: SpawnPoint (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &254147469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254147468}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -35.57, y: -1.36, z: -71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1432804015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &255914445
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +632,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a2b024936fe54498e16bf28bfd0e90, type: 3}
+--- !u!1 &379002240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379002241}
+  m_Layer: 0
+  m_Name: SpawnPoint (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379002241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379002240}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9957921, z: -0, w: 0.091641545}
+  m_LocalPosition: {x: -33.1, y: -1.36, z: -71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1432804015}
+  m_LocalEulerAnglesHint: {x: 0, y: 169.484, z: 0}
 --- !u!4 &384914436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4452881278709086, guid: caaa7ae63a9ddff43a592237cf4c65fc, type: 3}
@@ -1473,6 +1535,24 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: c0b66a3c53a21534b99baec1dead8bba, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &599098686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1591807938057292636, guid: 4bfdee75ce5d18d459690fbaef00a7ed, type: 3}
+  m_PrefabInstance: {fileID: 1476618937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &599098691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599098686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dccb61b486e9744c820d4eb9d5f5095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.DoorOpen
+  isOpen: 0
 --- !u!1 &600249084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3881,6 +3961,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 470464, guid: e3a2b024936fe54498e16bf28bfd0e90, type: 3}
   m_PrefabInstance: {fileID: 359489585}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1424616156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424616157}
+  m_Layer: 0
+  m_Name: SpawnPoint (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1424616157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424616156}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9957921, z: -0, w: 0.091641545}
+  m_LocalPosition: {x: -11.9, y: -1.36, z: -71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1432804015}
+  m_LocalEulerAnglesHint: {x: 0, y: 169.484, z: 0}
 --- !u!1 &1432804013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +4040,9 @@ Transform:
   - {fileID: 1494088511}
   - {fileID: 2027032363}
   - {fileID: 2024911038}
+  - {fileID: 254147469}
+  - {fileID: 379002241}
+  - {fileID: 1424616157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1449225605
@@ -4040,6 +4154,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a13b3dbbf597744192ac4a84ebb93c6, type: 3}
+--- !u!1 &1475054171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5485254491686621539, guid: 4bfdee75ce5d18d459690fbaef00a7ed, type: 3}
+  m_PrefabInstance: {fileID: 1476618937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1475054176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475054171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dccb61b486e9744c820d4eb9d5f5095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.DoorOpen
+  isOpen: 0
 --- !u!4 &1476177524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 447850, guid: 91af7a3706671b943974b6ef43812fab, type: 3}
@@ -4108,7 +4240,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -5485254491686621539, guid: 4bfdee75ce5d18d459690fbaef00a7ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1475054176}
+    - targetCorrespondingSourceObject: {fileID: -1591807938057292636, guid: 4bfdee75ce5d18d459690fbaef00a7ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 599098691}
   m_SourcePrefab: {fileID: 100100000, guid: 4bfdee75ce5d18d459690fbaef00a7ed, type: 3}
 --- !u!1001 &1486384531
 PrefabInstance:
@@ -5783,7 +5921,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2df8cb2690caf004c9748fc788503dcd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
