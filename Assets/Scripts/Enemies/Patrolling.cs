@@ -7,6 +7,8 @@ using Validation;
 namespace Enemies {
     public class Patrolling : MonoBehaviour {
         [NonNull] public NavMeshAgent agent;
+        [NonNull] public Attacking attacking;
+        [NonNull] public Alerted alerted;
 
         internal readonly List<Vector3> PatrollingPath = new();
         private int patrollingPathHead;
@@ -20,6 +22,10 @@ namespace Enemies {
 
         [Preserve]
         public void WhenPatrolling() {
+            if (attacking.CanSeePlayer()) {
+                alerted.Alert(5);
+            }
+
             if (target == null) return;
 
             Vector3 distance = target.Value - transform.position;
