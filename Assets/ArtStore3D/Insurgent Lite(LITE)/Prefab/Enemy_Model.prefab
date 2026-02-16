@@ -1646,6 +1646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.Patrolling
   agent: {fileID: 2469977809508212933}
+  attacking: {fileID: 7172132562876317630}
+  alerted: {fileID: 1211912428665294161}
 --- !u!114 &1211912428665294161
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,10 +20,13 @@ namespace Enemies {
         private bool alertingOthers;
         private float duration;
 
-
         private void Start() => health.OnDamageTaken += () => { duration = Math.Max(duration, alertOnDamageDuration); };
 
         private void Update() => duration = Mathf.Max(0f, duration - Time.deltaTime);
+
+        public void Alert(float length) {
+            duration = Mathf.Max(duration, length);
+        }
 
         [Preserve]
         public bool IsAlerted() => duration > 0f;
