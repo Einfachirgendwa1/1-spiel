@@ -1,13 +1,12 @@
 ﻿using System;
 using Guns;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Scripting;
 using Validation;
 
 namespace Enemies {
     public class Attacking : MonoBehaviour {
-        [NonNull] public NavMeshAgent agent;
+        [NonNull] public EnemyMovement movement;
         [NonNull] public EnemyGunController gunController;
 
         public LayerMask obstructionMask;
@@ -15,9 +14,7 @@ namespace Enemies {
         [PositiveNonZero] public float radius;
         [Range(0, 360)] public float angle;
 
-
         [NonSerialized] public GameObject Player;
-
 
         private void Start() => Player = GameObject.Find("/Player");
 
@@ -27,7 +24,7 @@ namespace Enemies {
             Vector3 distance = playerPosition - transform.position;
             float distanceToPlayer = distance.magnitude;
 
-            agent.destination = distanceToPlayer switch {
+            movement.Destination = distanceToPlayer switch {
                 > 4 => playerPosition,
                 _   => transform.position
             };

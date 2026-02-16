@@ -2,7 +2,6 @@
 using System.Collections;
 using Targeting;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Scripting;
 using Validation;
 
@@ -14,7 +13,7 @@ namespace Enemies {
         [PositiveNonZero] public float alertOthersDelaySeconds;
 
         [NonNull] public Health health;
-        [NonNull] public NavMeshAgent agent;
+        [NonNull] public EnemyMovement movement;
         [NonNull] public ListenForGunSounds listener;
 
         private bool alertingOthers;
@@ -36,7 +35,7 @@ namespace Enemies {
             if (!alertingOthers) StartCoroutine(AlertOthers());
 
             transform.Rotate(Vector3.up, Mathf.Sin(2 * Time.time) / 4);
-            agent.destination = listener.TargetPosition ?? transform.position;
+            movement.Destination = listener.TargetPosition ?? transform.position;
         }
 
         private IEnumerator AlertOthers() {

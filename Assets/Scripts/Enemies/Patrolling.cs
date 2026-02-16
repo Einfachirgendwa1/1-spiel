@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Scripting;
 using Validation;
 
 namespace Enemies {
     public class Patrolling : MonoBehaviour {
-        [NonNull] public NavMeshAgent agent;
+        [NonNull] public EnemyMovement movement;
         [NonNull] public Attacking attacking;
         [NonNull] public Alerted alerted;
 
@@ -34,7 +33,7 @@ namespace Enemies {
                 target = PatrollingPath[patrollingPathHead];
             }
 
-            agent.destination = target!.Value;
+            movement.Destination = target!.Value;
         }
     }
 }
