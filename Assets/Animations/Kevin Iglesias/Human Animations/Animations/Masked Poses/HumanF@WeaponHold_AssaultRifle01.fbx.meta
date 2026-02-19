@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 4e5c96f3463e4d34895b28dba943b902
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340690
+  packageName: Human Soldier Animations FREE
+  packageVersion: 1.0
+  assetPath: Assets/Animations/Kevin Iglesias/Human Animations/Animations/Masked
+    Poses/HumanF@WeaponHold_AssaultRifle01.fbx
+  uploadId: 825260
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -42,7 +50,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -203,6 +211,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -951,8 +962,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1841c298173cdad4db8df8602c8f1c8d,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
@@ -964,11 +974,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 340690
-  packageName: Human Soldier Animations FREE
-  packageVersion: 1.0
-  assetPath: Assets/Animations/Kevin Iglesias/Human Animations/Animations/Masked
-    Poses/HumanF@WeaponHold_AssaultRifle01.fbx
-  uploadId: 825260

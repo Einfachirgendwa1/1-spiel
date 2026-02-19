@@ -1714,6 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a690157af3d44167a07af7aca3ad786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyMovement
+  enemyAnim: {fileID: 9100000, guid: b771911733453e040afe58643f267ffb, type: 2}
   animator: {fileID: 3456312130320105590}
   agent: {fileID: 2469977809508212933}
 --- !u!1 &8267428227512173659
