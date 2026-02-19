@@ -15,13 +15,22 @@ namespace Enemies {
         [NonNull] public Health health;
         [NonNull] public EnemyMovement movement;
         [NonNull] public ListenForGunSounds listener;
+        public Animator enemyAnim;
 
         private bool alertingOthers;
         private float duration;
 
-        private void Start() => health.OnDamageTaken += () => { duration = Math.Max(duration, alertOnDamageDuration); };
+        private void Start() {
+            enemyAnim = GetComponent<Animator>();
+            health.OnDamageTaken += () => { duration = Math.Max(duration, alertOnDamageDuration); };
 
-        private void Update() => duration = Mathf.Max(0f, duration - Time.deltaTime);
+        }
+
+        private void Update()
+        {
+            duration = Mathf.Max(0f, duration - Time.deltaTime);
+            enemyAnim.SetBool("isAiming", IsAlerted());
+        }
 
         public void Alert(float length) {
             duration = Mathf.Max(duration, length);
