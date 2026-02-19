@@ -33,7 +33,6 @@ namespace Targeting {
             parent.health -= damage * damageMultiplier;
             if (parent.health <= 0) {
                 StartCoroutine(parent.Kill());
-                Destroy(parent.gameObject);
                 if (playDeathSound) parent.audioSource.PlayOneShot(deathSound);
             } else {
                 parent.audioSource.PlayOneShot(hurtSound, 100f);

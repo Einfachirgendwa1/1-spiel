@@ -14,9 +14,8 @@ namespace Targeting {
             OnDamageTaken?.Invoke();
         }
 
-        //tempor�re l�sung
         internal IEnumerator Kill() {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(30f);
             Destroy(gameObject);
         }
     }

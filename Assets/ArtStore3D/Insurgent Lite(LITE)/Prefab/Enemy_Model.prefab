@@ -1380,6 +1380,7 @@ GameObject:
   - component: {fileID: 7172132562876317630}
   - component: {fileID: 7265142168401056761}
   - component: {fileID: 564413473345121915}
+  - component: {fileID: 1998748352578185821}
   m_Layer: 7
   m_Name: Enemy_Model
   m_TagString: Untagged
@@ -1714,9 +1715,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a690157af3d44167a07af7aca3ad786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.EnemyMovement
-  enemyAnim: {fileID: 9100000, guid: b771911733453e040afe58643f267ffb, type: 2}
-  animator: {fileID: 3456312130320105590}
+  enemyAnim: {fileID: 3456312130320105590}
   agent: {fileID: 2469977809508212933}
+  maxSpeed: 5
+--- !u!114 &1998748352578185821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240661434394411190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb30f52622944c2d9fd632d9035790f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemies.Dying
+  animator: {fileID: 3456312130320105590}
+  health: {fileID: 1342867973017627488}
 --- !u!1 &8267428227512173659
 GameObject:
   m_ObjectHideFlags: 0
