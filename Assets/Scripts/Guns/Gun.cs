@@ -24,7 +24,6 @@ namespace Guns {
 
         internal int Ammo;
         internal GunController Controller;
-        private LineRenderer lineRenderer;
 
         internal int AmmoBackup {
             get => Controller.Ammo[bulletType];
@@ -33,20 +32,6 @@ namespace Guns {
 
         private void Start() {
             Reload();
-            lineRenderer = gameObject.AddComponent<LineRenderer>();
-            lineRenderer.startWidth = 0.1f;
-            lineRenderer.endWidth = 0.03f;
-        }
-
-        private void Update() {
-            Vector3 toTarget = DirectionToCrosshairTarget();
-
-            lineRenderer.SetPositions(new[] {
-                transform.position,
-                Physics.Raycast(transform.position, toTarget, out RaycastHit hit, range)
-                    ? hit.point
-                    : transform.position + toTarget * range
-            });
         }
 
         private Vector3 DirectionToCrosshairTarget() {
