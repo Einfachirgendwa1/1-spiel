@@ -13,10 +13,9 @@ namespace Enemies {
             bool isDead = health.health <= 0;
             animator.SetBool(IsDead, isDead);
 
-            if (isDead) {
-                foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
-                    component.enabled = false;
-                }
+            if (!isDead) return;
+            foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
+                component.enabled = false;
             }
         }
     }
