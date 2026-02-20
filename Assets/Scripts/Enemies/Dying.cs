@@ -10,7 +10,13 @@ namespace Enemies {
         [NonNull] public Health health;
 
         private void Update() {
-            animator.SetBool(IsDead, health.health <= 0);
+            bool isDead = health.health <= 0;
+            animator.SetBool(IsDead, isDead);
+
+            if (!isDead) return;
+            foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
+                component.enabled = false;
+            }
         }
     }
 }
