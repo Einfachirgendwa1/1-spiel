@@ -1444,6 +1444,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 7323124960100311497}
   guns:
   - {fileID: 8749426249802217569, guid: 3c81b162a1af44348b8994f7040514d4, type: 3}
+  enemyAnim: {fileID: 3456312130320105590}
 --- !u!114 &1342867973017627488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,6 +1672,7 @@ MonoBehaviour:
   health: {fileID: 1342867973017627488}
   movement: {fileID: 564413473345121915}
   listener: {fileID: 7265142168401056761}
+  enemyAnim: {fileID: 3456312130320105590}
 --- !u!114 &7172132562876317630
 MonoBehaviour:
   m_ObjectHideFlags: 0
