@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Validation;
 
@@ -12,11 +11,6 @@ namespace Targeting {
 
         internal void DamageTakenCallback() {
             OnDamageTaken?.Invoke();
-        }
-
-        internal IEnumerator Kill() {
-            yield return new WaitForSeconds(30f);
-            Destroy(gameObject);
         }
     }
 }
