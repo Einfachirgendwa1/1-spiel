@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Guns.Gun
   animator: {fileID: -3737471249364839364}
   automatic: 0
-  bulletType: 0
+  bulletType: 1
   damage: 34
   range: 100
   magazineSize: 25
