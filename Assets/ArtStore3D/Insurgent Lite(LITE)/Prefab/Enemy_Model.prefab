@@ -1690,7 +1690,7 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1536
-  radius: 30
+  radius: 20
   angle: 150
 --- !u!114 &7265142168401056761
 MonoBehaviour:
