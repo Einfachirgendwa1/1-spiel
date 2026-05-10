@@ -34,7 +34,7 @@ namespace Targeting {
             if (parent.health <= 0) {
                 if (playDeathSound) parent.audioSource.PlayOneShot(deathSound);
             } else {
-                parent.audioSource.PlayOneShot(hurtSound, 100f);
+                parent.audioSource.PlayOneShot(hurtSound);
             }
         }
     }
