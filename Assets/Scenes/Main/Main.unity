@@ -888,6 +888,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &493655121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8238577963173486302, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 1147188762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &493655126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493655121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 525720729}
+  liftTransform: {fileID: 525720725}
+  mode: 0
 --- !u!1 &505097661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1113,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 802bd3dc24c20394ca2037c1b9c882a0, type: 3}
+--- !u!1 &525720724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 1147188762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &525720725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3948859573666959055, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 1147188762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &525720729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525720724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
+  delta: 0.008
+  downPosY: 0.6
+  upPosY: 3
+  speed: 0.2
 --- !u!1 &530893964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3359,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1939709636941242517, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
       insertIndex: -1
       addedObject: {fileID: 64782215}
+    - targetCorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 525720729}
+    - targetCorrespondingSourceObject: {fileID: 692834942675609040, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1166244556}
+    - targetCorrespondingSourceObject: {fileID: -8238577963173486302, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 493655126}
   m_SourcePrefab: {fileID: 100100000, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
 --- !u!1 &1160826233
 GameObject:
@@ -3345,6 +3400,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5735015607579674052}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
+--- !u!1 &1166244551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 692834942675609040, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 1147188762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1166244556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166244551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 0}
+  liftTransform: {fileID: 0}
+  mode: 1
 --- !u!4 &1173404584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 470464, guid: e3a2b024936fe54498e16bf28bfd0e90, type: 3}

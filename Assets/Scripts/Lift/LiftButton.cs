@@ -4,6 +4,9 @@ using Interaction;
 using UnityEngine;
 using Validation;
 
+/*
+ * X und Y kooordinaten sind wegen dem impot aus blender komischs
+ */
 namespace Lift {
     public class LiftButton : MonoBehaviour, IInteractable {
         public enum Mode {
@@ -16,6 +19,7 @@ namespace Lift {
         [NonNull] public Transform liftTransform;
         [NonNull] public Mode mode;
 
+        [SerializeField]
         public bool CanInteract =>
             mode switch {
                 Mode.Toggle => IsUp() || IsDown(),
@@ -35,11 +39,11 @@ namespace Lift {
         }
 
         private bool IsUp() {
-            return liftTransform.position.y >= lift.upPosY - lift.delta;
+            return liftTransform.position.z >= lift.upPosY - lift.delta;
         }
 
         private bool IsDown() {
-            return liftTransform.position.y <= lift.downPosY + lift.delta;
+            return liftTransform.position.z <= lift.downPosY + lift.delta;
         }
 
         private IEnumerator Move() {
