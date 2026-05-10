@@ -8,6 +8,7 @@ TagManager:
   - Head
   - Enemy
   - NoPause
+  - Pivot
   layers:
   - Default
   - TransparentFX
