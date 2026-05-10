@@ -19,7 +19,7 @@ namespace Lift {
         [NonNull] public Transform liftTransform;
         [NonNull] public Mode mode;
 
-        [SerializeField]
+        
         public bool CanInteract =>
             mode switch {
                 Mode.Toggle => IsUp() || IsDown(),
@@ -41,7 +41,7 @@ namespace Lift {
         private bool IsUp() {
             return liftTransform.position.z >= lift.upPosY - lift.delta;
         }
-
+        [SerializeField]
         private bool IsDown() {
             return liftTransform.position.z <= lift.downPosY + lift.delta;
         }

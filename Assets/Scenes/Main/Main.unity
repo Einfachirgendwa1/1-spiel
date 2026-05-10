@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
   delta: 0.008
-  downPosY: 0.6
+  downPosY: 0.472033
   upPosY: 3
   speed: 0.2
 --- !u!1 &530893964
@@ -3362,6 +3362,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
       insertIndex: -1
       addedObject: {fileID: 525720729}
+    - targetCorrespondingSourceObject: {fileID: 1554076535069152932, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1726091786}
     - targetCorrespondingSourceObject: {fileID: 692834942675609040, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1166244556}
@@ -4690,6 +4693,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caaa7ae63a9ddff43a592237cf4c65fc, type: 3}
+--- !u!1 &1726091781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1554076535069152932, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 1147188762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726091786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726091781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 525720729}
+  liftTransform: {fileID: 525720725}
+  mode: 2
 --- !u!1 &1729813072
 GameObject:
   m_ObjectHideFlags: 0
