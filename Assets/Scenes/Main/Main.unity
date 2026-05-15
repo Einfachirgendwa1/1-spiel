@@ -907,6 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 525720729}
   liftTransform: {fileID: 525720725}
+  buttonType: 1
   mode: 0
 --- !u!1 &505097661
 GameObject:
@@ -1135,9 +1136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
-  delta: 0.008
   downPosY: 0.472033
   upPosY: 3
+  isUp: 0
   speed: 0.2
 --- !u!1 &530893964
 GameObject:
@@ -3422,6 +3423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 0}
   liftTransform: {fileID: 0}
+  buttonType: 3
   mode: 1
 --- !u!4 &1173404584 stripped
 Transform:
@@ -4712,6 +4714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 525720729}
   liftTransform: {fileID: 525720725}
+  buttonType: 2
   mode: 2
 --- !u!1 &1729813072
 GameObject:
