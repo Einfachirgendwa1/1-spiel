@@ -27,6 +27,7 @@ namespace Lift {
         {
             if (up)
             {
+                Debug.Log("jetz soll hochfahren");
                 while (transform.position.z < endPos.z)
                 {
                     transform.position = Vector3.Lerp(startPos, endPos, speed);
@@ -39,6 +40,7 @@ namespace Lift {
             }
             else if (!up)
             {
+                Debug.Log("jetz soll runterfahren");
                 while (transform.position.z < upPosY)
                 {
                     transform.position = Vector3.Lerp(endPos, startPos, speed);

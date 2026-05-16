@@ -30,7 +30,7 @@ namespace Lift {
                 _           => "call lift"
             };
 
-        bool IInteractable.CanInteract => throw new NotImplementedException(); //WAS MACHT DAS ????
+        bool IInteractable.CanInteract => true; //WAS MACHT DAS ????
 
         public void Interact() {
            
