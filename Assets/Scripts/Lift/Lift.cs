@@ -30,14 +30,18 @@ namespace Lift {
             if (up)
             {
                 Debug.Log("jetz soll hochfahren");
-                while (transform.position.y < endPos.y)
+                Debug.Log(transform.position.y + " sollte kleiner sein als " + endPos.y);
+                
+                transform.position = endPos;
+                /*while (transform.position.y < endPos.y)
                 {
                     transform.position = Vector3.Lerp(startPos, endPos, speed);
-                    if (Math.Abs(transform.position.y - endPos.y) < 0.1f)      // ganz komischer Fehler darum z anstatt y für vertikale Bewegung
+                    if (Math.Abs(transform.position.y - endPos.y) < 0.2f)      // ganz komischer Fehler darum z anstatt y für vertikale Bewegung
                     {
                         transform.position = endPos; 
                     }
                 }
+                */
                 isUp = true;
             }
             else if (!up)

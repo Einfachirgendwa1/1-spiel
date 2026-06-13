@@ -454,6 +454,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187569038}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &199691146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9118470179933084469, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &199691148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199691146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dccb61b486e9744c820d4eb9d5f5095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.DoorOpen
+  isOpen: 0
+  leftWing: 1
 --- !u!1 &229589660
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +668,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1432804015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &289310855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &289310856 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3948859573666959055, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &289310860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289310855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
+  downPosY: 0.6
+  upPosY: 3
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  isUp: 0
+  speed: 0.2
 --- !u!4 &323937370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441750, guid: 802bd3dc24c20394ca2037c1b9c882a0, type: 3}
@@ -1035,7 +1082,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -9118470179933084469, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 199691148}
+    - targetCorrespondingSourceObject: {fileID: -1939709636941242517, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2120602608}
+    - targetCorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 289310860}
+    - targetCorrespondingSourceObject: {fileID: 1554076535069152932, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247009217}
+    - targetCorrespondingSourceObject: {fileID: 692834942675609040, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2040431115}
+    - targetCorrespondingSourceObject: {fileID: -8238577963173486302, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1333954196}
   m_SourcePrefab: {fileID: 100100000, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
 --- !u!1 &505097661
 GameObject:
@@ -3561,6 +3626,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199040365}
   m_Mesh: {fileID: -6311916247703921121, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
+--- !u!1 &1247009212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1554076535069152932, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1247009217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247009212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 289310860}
+  liftTransform: {fileID: 289310856}
+  buttonType: 2
+  mode: 2
 --- !u!1 &1256828692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3994,6 +4080,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.4
   m_Center: {x: 0, y: 0.71, z: 0.000000007450581}
+--- !u!1 &1333954191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8238577963173486302, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333954196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333954191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 289310860}
+  liftTransform: {fileID: 289310856}
+  buttonType: 1
+  mode: 0
 --- !u!4 &1372370590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 447850, guid: 91af7a3706671b943974b6ef43812fab, type: 3}
@@ -5831,6 +5938,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1432804015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2040431110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 692834942675609040, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2040431115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040431110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 289310860}
+  liftTransform: {fileID: 289310856}
+  buttonType: 3
+  mode: 1
 --- !u!1 &2058003728
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,6 +6213,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441750, guid: 802bd3dc24c20394ca2037c1b9c882a0, type: 3}
   m_PrefabInstance: {fileID: 519786532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2120602606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1939709636941242517, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2120602608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120602606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dccb61b486e9744c820d4eb9d5f5095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.DoorOpen
+  isOpen: 0
+  leftWing: 0
 --- !u!4 &2139541315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 470464, guid: e3a2b024936fe54498e16bf28bfd0e90, type: 3}
