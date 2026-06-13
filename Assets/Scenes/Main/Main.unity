@@ -119,6 +119,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5989135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1554076535069152932, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5989140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 183689679}
+  buttonType: 2
+  mode: 0
 --- !u!4 &9290806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 470464, guid: e3a2b024936fe54498e16bf28bfd0e90, type: 3}
@@ -129,6 +149,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 482546, guid: 8a13b3dbbf597744192ac4a84ebb93c6, type: 3}
   m_PrefabInstance: {fileID: 1896374523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &35206861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1965424134935237537, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &35206862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4249928835587723462, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &35206866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35206861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
+  delta: 6
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  isUp: 0
+  isMoving: 0
+  speed: 0.003
 --- !u!1001 &71110959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,6 +386,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112137870}
   m_CullTransparentMesh: 1
+--- !u!1 &183689674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3147042486982665575, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &183689679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183689674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
+  delta: 6
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  isUp: 0
+  isMoving: 0
+  speed: 0.003
 --- !u!4 &187420904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 482546, guid: 8a13b3dbbf597744192ac4a84ebb93c6, type: 3}
@@ -673,11 +744,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -3147042486982665575, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
   m_PrefabInstance: {fileID: 451596342}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &289310856 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3948859573666959055, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
-  m_PrefabInstance: {fileID: 451596342}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &289310860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,12 +756,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
-  downPosY: 0.6
-  upPosY: 3
+  delta: 6
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
   isUp: 0
-  speed: 0.2
+  isMoving: 0
+  speed: 0.003
 --- !u!4 &323937370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441750, guid: 802bd3dc24c20394ca2037c1b9c882a0, type: 3}
@@ -826,6 +892,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4452881278709086, guid: caaa7ae63a9ddff43a592237cf4c65fc, type: 3}
   m_PrefabInstance: {fileID: 808872508}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &407934387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1965424134935237537, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &407934388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4249928835587723462, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &407934392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407934387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143e8f3047d84c8dbe5fcdaad72694d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.Lift
+  delta: 6
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  isUp: 0
+  isMoving: 0
+  speed: 0.003
 --- !u!1 &427731265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1175,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4249928835587723462, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1527295754}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -9118470179933084469, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
       insertIndex: -1
@@ -1101,7 +1198,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8238577963173486302, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1333954196}
+    - targetCorrespondingSourceObject: {fileID: -1965424134935237537, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 35206866}
+    - targetCorrespondingSourceObject: {fileID: -7363975504751375662, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1857836640}
+    - targetCorrespondingSourceObject: {fileID: 7925659730620217621, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 457937391}
   m_SourcePrefab: {fileID: 100100000, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+--- !u!1 &457937386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7925659730620217621, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &457937391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457937386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 35206866}
+  buttonType: 1
+  mode: 0
 --- !u!1 &505097661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,21 +1689,23 @@ PrefabInstance:
     - {fileID: 4877233102732440514, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
     - {fileID: -384053577559921531, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
     - {fileID: 8018153494642611242, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
+    - {fileID: -5711052370896006010, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
+    - {fileID: 3799851682573740187, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
       insertIndex: 54
       addedObject: {fileID: 1779706064}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
-      insertIndex: 78
+      insertIndex: 76
       addedObject: {fileID: 961995266}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
-      insertIndex: 80
+      insertIndex: 78
       addedObject: {fileID: 1199040366}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
-      insertIndex: 82
+      insertIndex: 80
       addedObject: {fileID: 1759157079}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
-      insertIndex: 100
+      insertIndex: 98
       addedObject: {fileID: 1455941366}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5b46c13daef85346ab335992b00f5ab, type: 3}
       insertIndex: -1
@@ -2015,6 +2143,26 @@ Transform:
   - {fileID: 384914436}
   m_Father: {fileID: 697437487}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &648778048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 692834942675609040, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &648778053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648778048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 183689679}
+  buttonType: 3
+  mode: 0
 --- !u!1001 &676240003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2470,6 +2618,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunController: {fileID: 830808275}
   text: {fileID: 708938910}
+--- !u!1 &754507625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7925659730620217621, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &754507630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754507625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 407934392}
+  buttonType: 0
+  mode: 0
 --- !u!1 &781720763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,6 +2964,135 @@ MonoBehaviour:
   - {fileID: 2205139858756433783, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
   - {fileID: 8749426249802217569, guid: 3c81b162a1af44348b8994f7040514d4, type: 3}
   - {fileID: -2553694917337380723, guid: 9512d3f553c955b49b47f5ecee7c6014, type: 3}
+--- !u!1 &839627899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839627900}
+  - component: {fileID: 839627904}
+  - component: {fileID: 839627903}
+  - component: {fileID: 839627902}
+  - component: {fileID: 839627901}
+  m_Layer: 0
+  m_Name: lift_button_inside.002
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839627900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839627899}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000009270993, y: 0.08641502, z: 0.9962593, w: -0.00000006473624}
+  m_LocalPosition: {x: 0, y: 0.64, z: 1.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 407934388}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839627901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839627899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 407934392}
+  buttonType: 2
+  mode: 0
+--- !u!64 &839627902
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839627899}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7179181120757083049, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+--- !u!23 &839627903
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839627899}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 6337508725281811408, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  - {fileID: -897152881317973837, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &839627904
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839627899}
+  m_Mesh: {fileID: -7179181120757083049, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
 --- !u!1 &887920138
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,7 +3941,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 289310860}
-  liftTransform: {fileID: 289310856}
   buttonType: 2
   mode: 2
 --- !u!1 &1256828692
@@ -3774,6 +4070,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f84828294d23b4d91b2fb695a31c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1290328431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8238577963173486302, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290328436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290328431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 183689679}
+  buttonType: 1
+  mode: 0
 --- !u!1001 &1301349920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4098,7 +4414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 289310860}
-  liftTransform: {fileID: 289310856}
   buttonType: 1
   mode: 0
 --- !u!4 &1372370590 stripped
@@ -4176,7 +4491,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4249928835587723462, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 839627900}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -9118470179933084469, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
       insertIndex: -1
@@ -4184,6 +4502,27 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1939709636941242517, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1385369959}
+    - targetCorrespondingSourceObject: {fileID: -3147042486982665575, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 183689679}
+    - targetCorrespondingSourceObject: {fileID: 1554076535069152932, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5989140}
+    - targetCorrespondingSourceObject: {fileID: 692834942675609040, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648778053}
+    - targetCorrespondingSourceObject: {fileID: -8238577963173486302, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1290328436}
+    - targetCorrespondingSourceObject: {fileID: -1965424134935237537, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 407934392}
+    - targetCorrespondingSourceObject: {fileID: -4394357630430097589, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1996034778}
+    - targetCorrespondingSourceObject: {fileID: 7925659730620217621, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754507630}
   m_SourcePrefab: {fileID: 100100000, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
 --- !u!1 &1385369957 stripped
 GameObject:
@@ -4640,6 +4979,135 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1432804015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1527295753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527295754}
+  - component: {fileID: 1527295758}
+  - component: {fileID: 1527295757}
+  - component: {fileID: 1527295756}
+  - component: {fileID: 1527295755}
+  m_Layer: 0
+  m_Name: lift_button_inside.002
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1527295754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527295753}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.086, y: -0.638, z: 1.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 35206862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1527295755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527295753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 35206866}
+  buttonType: 2
+  mode: 2
+--- !u!64 &1527295756
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527295753}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7179181120757083049, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+--- !u!23 &1527295757
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527295753}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -8048456270900107304, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  - {fileID: 3609018082110429662, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1527295758
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527295753}
+  m_Mesh: {fileID: -7179181120757083049, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
 --- !u!4 &1552350966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420546, guid: a45f923de9555884cbe160883ce87a74, type: 3}
@@ -5464,6 +5932,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91af7a3706671b943974b6ef43812fab, type: 3}
+--- !u!1 &1857836635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7363975504751375662, guid: 68fcacbd55ff1634f8683e6f26a2e637, type: 3}
+  m_PrefabInstance: {fileID: 451596342}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1857836640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857836635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 35206866}
+  buttonType: 3
+  mode: 0
 --- !u!4 &1858372896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4452881278709086, guid: caaa7ae63a9ddff43a592237cf4c65fc, type: 3}
@@ -5876,6 +6364,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caaa7ae63a9ddff43a592237cf4c65fc, type: 3}
+--- !u!1 &1996034773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4394357630430097589, guid: 6bbbecdfea262a64b884cfa41f7a6cf5, type: 3}
+  m_PrefabInstance: {fileID: 1385369956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1996034778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996034773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cf1549d06fae44a061438c79d269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
+  lift: {fileID: 407934392}
+  buttonType: 3
+  mode: 0
 --- !u!1 &2024911037
 GameObject:
   m_ObjectHideFlags: 0
@@ -5956,7 +6464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lift.LiftButton
   lift: {fileID: 289310860}
-  liftTransform: {fileID: 289310856}
   buttonType: 3
   mode: 1
 --- !u!1 &2058003728

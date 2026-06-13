@@ -16,13 +16,17 @@ namespace Lift {
         }
 
         [NonNull] public Lift lift;
-        [NonNull] public Transform liftTransform;
+        [NonNull] private Transform liftTransform;
         [Range(1f, 3f)]
         public int buttonType; //1 -> unten; 2->im lift;3->oben
         [NonNull] public Mode mode;
 
-        
-        
+
+        void Start()
+        {
+            liftTransform = lift.transform;
+
+        }
 
         public string Description =>
             mode switch {
@@ -30,7 +34,7 @@ namespace Lift {
                 _           => "call lift"
             };
 
-        bool IInteractable.CanInteract => true; //WAS MACHT DAS ????
+        bool IInteractable.CanInteract => !lift.isMoving; 
 
         public void Interact() {
            
