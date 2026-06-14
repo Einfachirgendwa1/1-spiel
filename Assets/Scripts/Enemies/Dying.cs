@@ -14,6 +14,7 @@ namespace Enemies {
             animator.SetBool(IsDead, isDead);
 
             if (!isDead) return;
+            animator.SetLayerWeight(1, 0);
             foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
                 component.enabled = false;
             }
