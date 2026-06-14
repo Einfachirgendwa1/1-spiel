@@ -78,6 +78,10 @@ namespace Guns {
         internal bool WantsTransition(State newState) => InputBuffer[newState] > 0;
         internal bool ActiveOrRequested(State s) => State == s || WantsTransition(s);
 
+        internal void Deactivate() {
+            CurrentGun.animator.enabled = false;
+        }
+
         internal void ReadInput(bool input, State newState, float bufferLength = 5) {
             if (input) {
                 InputBuffer[newState] = bufferLength;

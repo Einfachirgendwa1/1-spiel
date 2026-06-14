@@ -19,8 +19,7 @@ namespace Enemies {
             animator.SetLayerWeight(1, 0);
 
             GetComponent<NavMeshAgent>().isStopped = true;
-            GetComponent<GunController>().enabled = false;
-            GetComponentsInChildren<Collider>().ForEach(coll => coll.enabled = false);
+            GetComponent<GunController>().Deactivate();
         }
     }
 }
