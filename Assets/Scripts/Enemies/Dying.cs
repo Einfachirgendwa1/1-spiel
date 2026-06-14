@@ -1,5 +1,6 @@
 ﻿using Targeting;
 using UnityEngine;
+using UnityEngine.AI;
 using Validation;
 
 namespace Enemies {
@@ -18,6 +19,8 @@ namespace Enemies {
             foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
                 component.enabled = false;
             }
+
+            GetComponent<NavMeshAgent>().isStopped = true;
         }
     }
 }
