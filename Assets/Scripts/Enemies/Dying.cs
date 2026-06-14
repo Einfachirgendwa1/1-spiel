@@ -16,10 +16,11 @@ namespace Enemies {
             animator.SetBool(IsDead, isDead);
 
             if (!isDead) return;
-            animator.SetLayerWeight(1, 0);
 
+            animator.SetLayerWeight(1, 0);
             GetComponent<NavMeshAgent>().isStopped = true;
             GetComponent<GunController>().Deactivate();
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }

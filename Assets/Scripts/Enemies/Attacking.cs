@@ -1,5 +1,6 @@
 ﻿using System;
 using Guns;
+using Targeting;
 using UnityEngine;
 using UnityEngine.Scripting;
 using Validation;
@@ -29,7 +30,10 @@ namespace Enemies {
                 _   => transform.position
             };
 
-            transform.LookAt(Player.transform);
+            if (GetComponent<Health>().health > 0) {
+                transform.LookAt(Player.transform);
+            }
+
             gunController.InputBuffer[State.Shoot] = 1;
         }
 
