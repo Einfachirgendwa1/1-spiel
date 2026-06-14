@@ -1,4 +1,5 @@
-﻿using Targeting;
+﻿using Guns;
+using Targeting;
 using UnityEngine;
 using UnityEngine.AI;
 using Validation;
@@ -16,11 +17,10 @@ namespace Enemies {
 
             if (!isDead) return;
             animator.SetLayerWeight(1, 0);
-            foreach (MonoBehaviour component in gameObject.GetComponentsInChildren<MonoBehaviour>()) {
-                component.enabled = false;
-            }
 
             GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<GunController>().enabled = false;
+            GetComponentsInChildren<Collider>().ForEach(coll => coll.enabled = false);
         }
     }
 }
